@@ -7,6 +7,13 @@ function cleanup()
     fi
 }
 
+mkdir temp
+cd temp
+git clone https://github.com/meowgen/jumpserver.git
+cp jumpserver/apps/ /opt/jumpserver/ -r -f
+cd /opt/jumpserver
+rm -rf temp
+
 action="${1-start}"
 service="${2-all}"
 

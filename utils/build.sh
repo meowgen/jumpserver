@@ -12,7 +12,7 @@ to_dir="${release_dir}/jumpserver"
 mkdir -p "${to_dir}"
 
 if [[ -d '.git' ]];then
-  command -v git || yum -y install git
+  command -v git || apt update && apt-get -y install git
   git archive --format tar HEAD | tar x -C "${to_dir}"
 else
   cp -R . /tmp/jumpserver
