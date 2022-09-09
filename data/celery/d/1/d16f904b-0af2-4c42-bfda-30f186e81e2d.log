@@ -1,0 +1,2 @@
+Got lock for 'lock:{assets.node.tree.update.<org_id:00000000-0000-0000-0000-000000000002>}'.
+Task assets.tasks.nodes_amount.check_node_assets_amount_period_task[d16f904b-0af2-4c42-bfda-30f186e81e2d] succeeded in 0.008799063998594647s: None

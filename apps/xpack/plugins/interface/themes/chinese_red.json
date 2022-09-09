@@ -1,0 +1,16 @@
+{
+  "name": "chinese_red",
+  "display": {"en": "Chinese Red", "zh": "中国红", "jp": "中国赤"},
+  "version": "v1",
+  "colors": {
+    "--color-primary": "#bd1a2d",
+    "--color-success": "#2793d7",
+    "--color-info": "#1c84c6",
+    "--color-warning": "#f3af34",
+    "--color-danger": "#122b58",
+    "--menu-bg": "#b4312b",
+    "--menu-text": "#f4e7b4",
+    "--menu-active-text": "white",
+    "--menu-active-left": "#f4e7b4"
+  }
+}

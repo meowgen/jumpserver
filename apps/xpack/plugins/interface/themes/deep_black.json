@@ -1,0 +1,16 @@
+{
+  "name": "deep_black",
+  "display": {"en": "Deep black", "zh": "深邃黑", "ja": "深き黒"},
+  "version": "v1",
+  "colors": {
+    "--color-primary": "#0576b9",
+    "--color-success": "#2cb57e",
+    "--color-info": "#1c84c6",
+    "--color-warning": "#f5bd58",
+    "--color-danger": "#f56e50",
+    "--menu-bg": "#121e2d",
+    "--menu-text": "#8fa6bf",
+    "--menu-active-text": "white",
+    "--menu-active-left": "#0576b9"
+  }
+}

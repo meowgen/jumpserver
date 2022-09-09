@@ -1,0 +1,16 @@
+{
+  "name": "noble_purple",
+  "display": {"en": "Noble purple", "zh": "高贵紫", "ja": "ノーブルパープル"},
+  "version": "v1",
+  "colors": {
+    "--color-primary": "#783787",
+    "--color-success": "#1c84c6",
+    "--color-info": "#783787",
+    "--color-warning": "#f5bd58",
+    "--color-danger": "#f56e50",
+    "--menu-bg": "#681b79",
+    "--menu-text": "#d7deea",
+    "--menu-active-text": "white",
+    "--menu-active-left": "white"
+  }
+}

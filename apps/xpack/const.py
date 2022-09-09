@@ -1,0 +1,6 @@
+# -*- coding: utf-8 -*-
+#
+
+PERMISSION_UER = 0
+PERMISSION_ORG_ADMIN = 1
+PERMISSION_SUPER_ADMIN = 4

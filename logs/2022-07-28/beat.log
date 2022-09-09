@@ -1,0 +1,50 @@
+/usr/local/lib/python3.8/site-packages/azure/storage/blob/_upload_chunking.py:403: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if n is 0 or self._buffer.closed:
+/usr/local/lib/python3.8/site-packages/azure/storage/blob/baseblobservice.py:1008: SyntaxWarning: "is not" with a literal. Did you mean "!="?
+  if lease_duration is not -1 and \
+/usr/local/lib/python3.8/site-packages/azure/storage/blob/baseblobservice.py:2607: SyntaxWarning: "is not" with a literal. Did you mean "!="?
+  if lease_duration is not -1 and \
+/usr/local/lib/python3.8/site-packages/azure/storage/common/_connection.py:82: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  self.protocol = self.protocol if parsed_url.scheme is '' else parsed_url.scheme
+beat: Starting...
+DatabaseScheduler: Schedule changed.
+Scheduler: Sending due task terminal.tasks.clean_orphan_session (terminal.tasks.clean_orphan_session)
+Scheduler: Sending due task terminal.tasks.clean_orphan_session (terminal.tasks.clean_orphan_session)
+Scheduler: Sending due task terminal.tasks.clean_orphan_session (terminal.tasks.clean_orphan_session)
+Scheduler: Sending due task terminal.tasks.clean_orphan_session (terminal.tasks.clean_orphan_session)
+Scheduler: Sending due task terminal.tasks.clean_orphan_session (terminal.tasks.clean_orphan_session)
+Scheduler: Sending due task ops.tasks.check_server_performance_period (ops.tasks.check_server_performance_period)
+Scheduler: Sending due task perms.tasks.check_asset_permission_expired (perms.tasks.check_asset_permission_expired)
+Scheduler: Sending due task terminal.tasks.delete_terminal_status_period (terminal.tasks.delete_terminal_status_period)
+Scheduler: Sending due task terminal.tasks.clean_orphan_session (terminal.tasks.clean_orphan_session)
+Scheduler: Sending due task terminal.tasks.clean_orphan_session (terminal.tasks.clean_orphan_session)
+Scheduler: Sending due task terminal.tasks.clean_orphan_session (terminal.tasks.clean_orphan_session)
+Scheduler: Sending due task terminal.tasks.clean_orphan_session (terminal.tasks.clean_orphan_session)
+Scheduler: Sending due task terminal.tasks.clean_orphan_session (terminal.tasks.clean_orphan_session)
+Scheduler: Sending due task terminal.tasks.clean_orphan_session (terminal.tasks.clean_orphan_session)
+Scheduler: Sending due task ops.tasks.check_server_performance_period (ops.tasks.check_server_performance_period)
+Scheduler: Sending due task perms.tasks.check_asset_permission_expired (perms.tasks.check_asset_permission_expired)
+Scheduler: Sending due task terminal.tasks.delete_terminal_status_period (terminal.tasks.delete_terminal_status_period)
+Scheduler: Sending due task terminal.tasks.clean_orphan_session (terminal.tasks.clean_orphan_session)
+Scheduler: Sending due task terminal.tasks.clean_orphan_session (terminal.tasks.clean_orphan_session)
+Scheduler: Sending due task terminal.tasks.clean_orphan_session (terminal.tasks.clean_orphan_session)
+Scheduler: Sending due task terminal.tasks.clean_orphan_session (terminal.tasks.clean_orphan_session)
+Scheduler: Sending due task terminal.tasks.clean_orphan_session (terminal.tasks.clean_orphan_session)
+Scheduler: Sending due task terminal.tasks.clean_orphan_session (terminal.tasks.clean_orphan_session)
+Scheduler: Sending due task ops.tasks.check_server_performance_period (ops.tasks.check_server_performance_period)
+Scheduler: Sending due task perms.tasks.check_asset_permission_expired (perms.tasks.check_asset_permission_expired)
+Scheduler: Sending due task terminal.tasks.delete_terminal_status_period (terminal.tasks.delete_terminal_status_period)
+Scheduler: Sending due task terminal.tasks.clean_orphan_session (terminal.tasks.clean_orphan_session)
+Scheduler: Sending due task terminal.tasks.clean_orphan_session (terminal.tasks.clean_orphan_session)
+Scheduler: Sending due task terminal.tasks.clean_orphan_session (terminal.tasks.clean_orphan_session)
+Scheduler: Sending due task terminal.tasks.clean_orphan_session (terminal.tasks.clean_orphan_session)
+Scheduler: Sending due task terminal.tasks.clean_orphan_session (terminal.tasks.clean_orphan_session)
+Scheduler: Sending due task terminal.tasks.clean_orphan_session (terminal.tasks.clean_orphan_session)
+Scheduler: Sending due task ops.tasks.check_server_performance_period (ops.tasks.check_server_performance_period)
+Scheduler: Sending due task perms.tasks.check_asset_permission_expired (perms.tasks.check_asset_permission_expired)
+Scheduler: Sending due task terminal.tasks.delete_terminal_status_period (terminal.tasks.delete_terminal_status_period)
+Scheduler: Sending due task terminal.tasks.clean_orphan_session (terminal.tasks.clean_orphan_session)
+Scheduler: Sending due task terminal.tasks.clean_orphan_session (terminal.tasks.clean_orphan_session)
+Scheduler: Sending due task terminal.tasks.clean_orphan_session (terminal.tasks.clean_orphan_session)
+Scheduler: Sending due task terminal.tasks.clean_orphan_session (terminal.tasks.clean_orphan_session)
+Scheduler: Sending due task terminal.tasks.clean_orphan_session (terminal.tasks.clean_orphan_session)

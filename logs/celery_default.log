@@ -1,0 +1,270 @@
+Task terminal.tasks.clean_orphan_session[d76883a8-99aa-4c6d-8d92-a7d972908566] received
+Task terminal.tasks.clean_orphan_session[d76883a8-99aa-4c6d-8d92-a7d972908566] succeeded in 0.004210846000205493s: None
+Task ops.tasks.check_server_performance_period[11377085-7c77-452e-98ee-738b21c5a279] received
+Task perms.tasks.check_asset_permission_expired[2a9e65fe-822d-49ff-bd1f-de4b7cf53332] received
+Task perms.tasks.check_asset_permission_expired[2a9e65fe-822d-49ff-bd1f-de4b7cf53332] succeeded in 0.021910011000727536s: None
+Task terminal.tasks.delete_terminal_status_period[c56e9b3e-6a93-433c-b90c-d89c3f1c6388] received
+Task terminal.tasks.delete_terminal_status_period[c56e9b3e-6a93-433c-b90c-d89c3f1c6388] succeeded in 0.008315931998367887s: None
+Task ops.tasks.check_server_performance_period[11377085-7c77-452e-98ee-738b21c5a279] succeeded in 0.04288226000062423s: None
+Task terminal.tasks.clean_orphan_session[00b86e26-6edf-47a8-b137-a0425c075244] received
+Task terminal.tasks.clean_orphan_session[00b86e26-6edf-47a8-b137-a0425c075244] succeeded in 0.0036783429968636483s: None
+Task terminal.tasks.clean_orphan_session[c82bc7b4-ae06-4d40-b000-f8da497df379] received
+Task terminal.tasks.clean_orphan_session[c82bc7b4-ae06-4d40-b000-f8da497df379] succeeded in 0.004194861998257693s: None
+Task terminal.tasks.clean_orphan_session[6134dc1e-502e-473f-b524-dd5e7d5d1fc2] received
+Task terminal.tasks.clean_orphan_session[6134dc1e-502e-473f-b524-dd5e7d5d1fc2] succeeded in 0.004260730001988122s: None
+Task terminal.tasks.clean_orphan_session[12a15ef2-4e18-40ce-a8c2-0963b7d4b399] received
+Task terminal.tasks.clean_orphan_session[12a15ef2-4e18-40ce-a8c2-0963b7d4b399] succeeded in 0.004350313000031747s: None
+Task terminal.tasks.clean_orphan_session[c3505b67-0c89-4099-bf8d-0dd9e91d2f83] received
+Task terminal.tasks.clean_orphan_session[c3505b67-0c89-4099-bf8d-0dd9e91d2f83] succeeded in 0.00417215899869916s: None
+Task terminal.tasks.clean_orphan_session[551f88c9-5f58-4ab2-8b09-cb8ace90f8a0] received
+Task terminal.tasks.clean_orphan_session[551f88c9-5f58-4ab2-8b09-cb8ace90f8a0] succeeded in 0.004478532002394786s: None
+Task ops.tasks.check_server_performance_period[2012343d-939a-4290-8ca0-7e51bc9a28b0] received
+Task perms.tasks.check_asset_permission_expired[4a121822-f861-4476-8445-29cbb976d2a0] received
+Task terminal.tasks.delete_terminal_status_period[1aa84e38-0c28-4a76-a1c0-49acad2bdea6] received
+Task terminal.tasks.delete_terminal_status_period[1aa84e38-0c28-4a76-a1c0-49acad2bdea6] succeeded in 0.014055584000743693s: None
+Task perms.tasks.check_asset_permission_expired[4a121822-f861-4476-8445-29cbb976d2a0] succeeded in 0.023760100000799866s: None
+Task ops.tasks.check_server_performance_period[2012343d-939a-4290-8ca0-7e51bc9a28b0] succeeded in 0.0424284879991319s: None
+Task terminal.tasks.clean_orphan_session[99582219-8472-48b1-8e0f-95ad5cf5b5d6] received
+Task terminal.tasks.clean_orphan_session[99582219-8472-48b1-8e0f-95ad5cf5b5d6] succeeded in 0.0038971559988567606s: None
+Task terminal.tasks.clean_orphan_session[d9285680-f21b-43f4-9c2f-9a05d1f85cb8] received
+Task terminal.tasks.clean_orphan_session[d9285680-f21b-43f4-9c2f-9a05d1f85cb8] succeeded in 0.004098233999684453s: None
+Task terminal.tasks.clean_orphan_session[08e34cd1-c4e4-4f16-8e43-7d01511c8ba6] received
+Task terminal.tasks.clean_orphan_session[08e34cd1-c4e4-4f16-8e43-7d01511c8ba6] succeeded in 0.004549286997644231s: None
+Task terminal.tasks.clean_orphan_session[9d8b6785-4d46-4686-b692-50310ebafac9] received
+Task terminal.tasks.clean_orphan_session[9d8b6785-4d46-4686-b692-50310ebafac9] succeeded in 0.004407795000588521s: None
+Task terminal.tasks.clean_orphan_session[e67d9691-1b3e-4278-819f-ae822a401e52] received
+Task terminal.tasks.clean_orphan_session[e67d9691-1b3e-4278-819f-ae822a401e52] succeeded in 0.004955782998877112s: None
+Task assets.tasks.nodes_amount.check_node_assets_amount_period_task[d16f904b-0af2-4c42-bfda-30f186e81e2d] received
+Got lock for 'lock:{assets.node.tree.update.<org_id:00000000-0000-0000-0000-000000000002>}'.
+Task assets.tasks.nodes_amount.check_node_assets_amount_period_task[d16f904b-0af2-4c42-bfda-30f186e81e2d] succeeded in 0.008799063998594647s: None
+Task terminal.tasks.clean_orphan_session[31cd85d6-b092-4a8e-91ef-8677d964cb23] received
+Task terminal.tasks.clean_orphan_session[31cd85d6-b092-4a8e-91ef-8677d964cb23] succeeded in 0.004060549999849172s: None
+Task ops.tasks.check_server_performance_period[feed0a2f-452b-4428-b26d-fd3a7e680330] received
+Task perms.tasks.check_asset_permission_expired[9d7f4aa9-292d-4724-91e6-2dc2485617df] received
+Task terminal.tasks.delete_terminal_status_period[aea8281c-b1c1-4e7c-a2c1-de544a44e7b1] received
+Task terminal.tasks.delete_terminal_status_period[aea8281c-b1c1-4e7c-a2c1-de544a44e7b1] succeeded in 0.009428792996914126s: None
+Task perms.tasks.check_asset_permission_expired[9d7f4aa9-292d-4724-91e6-2dc2485617df] succeeded in 0.02200703299968154s: None
+Task ops.tasks.check_server_performance_period[feed0a2f-452b-4428-b26d-fd3a7e680330] succeeded in 0.04157179500180064s: None
+Task terminal.tasks.clean_orphan_session[3ed20a41-6750-4ae0-b13a-ff25f306fe0c] received
+Task terminal.tasks.clean_orphan_session[3ed20a41-6750-4ae0-b13a-ff25f306fe0c] succeeded in 0.004714476999652106s: None
+Task terminal.tasks.clean_orphan_session[71b83bdf-25ab-4815-9a03-42fd71d8ad46] received
+Task terminal.tasks.clean_orphan_session[71b83bdf-25ab-4815-9a03-42fd71d8ad46] succeeded in 0.004678043002058985s: None
+Task terminal.tasks.clean_orphan_session[dfad6ea7-a746-43fd-8377-21bd807cf95f] received
+Task terminal.tasks.clean_orphan_session[dfad6ea7-a746-43fd-8377-21bd807cf95f] succeeded in 0.006274941999436123s: None
+Task terminal.tasks.clean_orphan_session[8d3fde5a-5313-4ee2-9eb7-a015e8376962] received
+Task terminal.tasks.clean_orphan_session[8d3fde5a-5313-4ee2-9eb7-a015e8376962] succeeded in 0.0043793420009023976s: None
+Task terminal.tasks.clean_orphan_session[2f01e53c-8372-43b8-b3df-fc2040fdc840] received
+Task terminal.tasks.clean_orphan_session[2f01e53c-8372-43b8-b3df-fc2040fdc840] succeeded in 0.004365879998658784s: None
+Task terminal.tasks.clean_orphan_session[b5c898c5-7df9-4ef1-ad47-745e2b378272] received
+Task terminal.tasks.clean_orphan_session[b5c898c5-7df9-4ef1-ad47-745e2b378272] succeeded in 0.0039939289999892935s: None
+Task ops.tasks.check_server_performance_period[7048f494-26ce-432a-804b-83035587f290] received
+Task perms.tasks.check_asset_permission_expired[db58c7f4-7ed6-46c4-94ad-455a3b3c6bdd] received
+Task terminal.tasks.delete_terminal_status_period[ce96fb1e-2129-460f-8074-600e9880c1e6] received
+Task terminal.tasks.delete_terminal_status_period[ce96fb1e-2129-460f-8074-600e9880c1e6] succeeded in 0.011758814998756861s: None
+Task perms.tasks.check_asset_permission_expired[db58c7f4-7ed6-46c4-94ad-455a3b3c6bdd] succeeded in 0.02786703699894133s: None
+Task ops.tasks.check_server_performance_period[7048f494-26ce-432a-804b-83035587f290] succeeded in 0.036819517001276836s: None
+Task terminal.tasks.clean_orphan_session[cccf21f9-bfa1-4121-9cfd-cbcfa02cc786] received
+Task terminal.tasks.clean_orphan_session[cccf21f9-bfa1-4121-9cfd-cbcfa02cc786] succeeded in 0.00340862300072331s: None
+Task terminal.tasks.clean_orphan_session[11b412c6-9a7d-476b-ab03-8b511424c741] received
+Task terminal.tasks.clean_orphan_session[11b412c6-9a7d-476b-ab03-8b511424c741] succeeded in 0.0040242109971586615s: None
+Task terminal.tasks.clean_orphan_session[b9b47ca6-f0ab-4eae-b58f-0088a0b55ac8] received
+Task terminal.tasks.clean_orphan_session[b9b47ca6-f0ab-4eae-b58f-0088a0b55ac8] succeeded in 0.003795816002821084s: None
+Task terminal.tasks.clean_orphan_session[06a695f4-e1ae-446a-a5df-4240dae5d423] received
+Task terminal.tasks.clean_orphan_session[06a695f4-e1ae-446a-a5df-4240dae5d423] succeeded in 0.006515526001749095s: None
+Task terminal.tasks.clean_orphan_session[c7ddc5c1-d62d-4446-a6eb-777c95e8943b] received
+Task terminal.tasks.clean_orphan_session[c7ddc5c1-d62d-4446-a6eb-777c95e8943b] succeeded in 0.005414575003669597s: None
+Task celery.backend_cleanup[e5a53ff7-944f-40af-8a69-aab68373500a] received
+Task celery.backend_cleanup[e5a53ff7-944f-40af-8a69-aab68373500a] succeeded in 0.0018727350034168921s: None
+Task terminal.tasks.clean_orphan_session[d82d4255-e519-45a4-a18c-db6ecfa284db] received
+Task terminal.tasks.clean_orphan_session[d82d4255-e519-45a4-a18c-db6ecfa284db] succeeded in 0.003989074000855908s: None
+Task ops.tasks.check_server_performance_period[e701ef35-ab77-45e6-93d3-a1b15c27b2ed] received
+Task perms.tasks.check_asset_permission_expired[3b7ca3e8-d24c-43d6-9380-9b78389b278e] received
+Task terminal.tasks.delete_terminal_status_period[5c0c686c-5456-4cae-af99-37c9338a4317] received
+Task terminal.tasks.delete_terminal_status_period[5c0c686c-5456-4cae-af99-37c9338a4317] succeeded in 0.011223706002056133s: None
+Task perms.tasks.check_asset_permission_expired[3b7ca3e8-d24c-43d6-9380-9b78389b278e] succeeded in 0.022061910000047646s: None
+Task ops.tasks.check_server_performance_period[e701ef35-ab77-45e6-93d3-a1b15c27b2ed] succeeded in 0.037231154004985s: None
+Task terminal.tasks.clean_orphan_session[4d156209-b65a-483f-9498-debd03ccbf10] received
+Task terminal.tasks.clean_orphan_session[4d156209-b65a-483f-9498-debd03ccbf10] succeeded in 0.003856875999190379s: None
+Task terminal.tasks.clean_orphan_session[99714458-2d2c-4022-a3e0-feb355cecb6a] received
+Task terminal.tasks.clean_orphan_session[99714458-2d2c-4022-a3e0-feb355cecb6a] succeeded in 0.0036386819992912933s: None
+Task terminal.tasks.clean_orphan_session[fca73ce3-eafb-4873-b6f7-c74d5e46040e] received
+Task terminal.tasks.clean_orphan_session[fca73ce3-eafb-4873-b6f7-c74d5e46040e] succeeded in 0.004144567996263504s: None
+Task terminal.tasks.clean_orphan_session[e663b68f-ce04-4db8-8c58-0b9f43e9f047] received
+Task terminal.tasks.clean_orphan_session[e663b68f-ce04-4db8-8c58-0b9f43e9f047] succeeded in 0.0040963869978440925s: None
+Task terminal.tasks.clean_orphan_session[c650fdce-9a93-444c-8d17-2034e8aec5bf] received
+Task terminal.tasks.clean_orphan_session[c650fdce-9a93-444c-8d17-2034e8aec5bf] succeeded in 0.003971256002841983s: None
+Task terminal.tasks.clean_orphan_session[0e0a4012-0a17-4a97-9ac8-a59763ee6b9e] received
+Task terminal.tasks.clean_orphan_session[0e0a4012-0a17-4a97-9ac8-a59763ee6b9e] succeeded in 0.004110936999495607s: None
+Task ops.tasks.check_server_performance_period[9e361b6c-536a-46c9-a352-c9366ab8655d] received
+Task perms.tasks.check_asset_permission_expired[f946fa5c-3133-47b0-ba23-248fb7cab3e4] received
+Task terminal.tasks.delete_terminal_status_period[a7308ccc-970e-4926-85de-c2a7c1858624] received
+Task terminal.tasks.delete_terminal_status_period[a7308ccc-970e-4926-85de-c2a7c1858624] succeeded in 0.011110168001323473s: None
+Task perms.tasks.check_asset_permission_expired[f946fa5c-3133-47b0-ba23-248fb7cab3e4] succeeded in 0.022543264996784274s: None
+Task ops.tasks.check_server_performance_period[9e361b6c-536a-46c9-a352-c9366ab8655d] succeeded in 0.03719037200062303s: None
+Task terminal.tasks.clean_orphan_session[4f1fd7c3-69f0-47f7-821e-e12005c18fa5] received
+Task terminal.tasks.clean_orphan_session[4f1fd7c3-69f0-47f7-821e-e12005c18fa5] succeeded in 0.003901511001458857s: None
+Task terminal.tasks.clean_orphan_session[6b9199a5-b272-4b6a-86cb-ec3b0877a288] received
+Task terminal.tasks.clean_orphan_session[6b9199a5-b272-4b6a-86cb-ec3b0877a288] succeeded in 0.00473079700168455s: None
+Task terminal.tasks.clean_orphan_session[51a38818-9aa4-43c6-91eb-846c19559b88] received
+Task terminal.tasks.clean_orphan_session[51a38818-9aa4-43c6-91eb-846c19559b88] succeeded in 0.0042326969996793196s: None
+Task terminal.tasks.clean_orphan_session[e32d1cc2-ae1c-4d38-86f8-e3074c27b8cd] received
+Task terminal.tasks.clean_orphan_session[e32d1cc2-ae1c-4d38-86f8-e3074c27b8cd] succeeded in 0.004671286995289847s: None
+Task terminal.tasks.clean_orphan_session[2113f041-7cf7-4115-abb1-4269ce712805] received
+Task terminal.tasks.clean_orphan_session[2113f041-7cf7-4115-abb1-4269ce712805] succeeded in 0.0037844440012122504s: None
+Task terminal.tasks.clean_orphan_session[36d4925b-8adc-489b-a731-71c0c32bd168] received
+Task terminal.tasks.clean_orphan_session[36d4925b-8adc-489b-a731-71c0c32bd168] succeeded in 0.004527842000243254s: None
+Task ops.tasks.check_server_performance_period[a76766dd-fb9d-4d1e-a8be-0ce224212fbf] received
+Task perms.tasks.check_asset_permission_expired[9d4c5c99-ff29-46d0-bba9-bcd687226975] received
+Task terminal.tasks.delete_terminal_status_period[9f707b15-db65-4e92-b78c-f5f134e2d9a4] received
+Task terminal.tasks.delete_terminal_status_period[9f707b15-db65-4e92-b78c-f5f134e2d9a4] succeeded in 0.011863603001984302s: None
+Task perms.tasks.check_asset_permission_expired[9d4c5c99-ff29-46d0-bba9-bcd687226975] succeeded in 0.020916134999424685s: None
+Task ops.tasks.check_server_performance_period[a76766dd-fb9d-4d1e-a8be-0ce224212fbf] succeeded in 0.038856500999827404s: None
+Task terminal.tasks.clean_orphan_session[6df7e21d-620a-4c79-978a-12aa845fd310] received
+Task terminal.tasks.clean_orphan_session[6df7e21d-620a-4c79-978a-12aa845fd310] succeeded in 0.004251394995662849s: None
+Task terminal.tasks.clean_orphan_session[897a2a2b-a62b-4a4d-ad44-d88898dbcd56] received
+Task terminal.tasks.clean_orphan_session[897a2a2b-a62b-4a4d-ad44-d88898dbcd56] succeeded in 0.0051521970017347485s: None
+Task terminal.tasks.clean_orphan_session[6b6d5499-e5e7-488f-9f69-184819cadf67] received
+Task terminal.tasks.clean_orphan_session[6b6d5499-e5e7-488f-9f69-184819cadf67] succeeded in 0.0036994249967392534s: None
+Task terminal.tasks.clean_orphan_session[2506e03c-087b-4074-91bd-20a23cd1fc93] received
+Task terminal.tasks.clean_orphan_session[2506e03c-087b-4074-91bd-20a23cd1fc93] succeeded in 0.005599494994385168s: None
+Task terminal.tasks.clean_orphan_session[a291f978-184b-4607-a1d8-b7fcdf68f4bc] received
+Task terminal.tasks.clean_orphan_session[a291f978-184b-4607-a1d8-b7fcdf68f4bc] succeeded in 0.004272635000234004s: None
+Task terminal.tasks.clean_orphan_session[bd6bd81b-985e-42e0-8405-a158bf8114fd] received
+Task terminal.tasks.clean_orphan_session[bd6bd81b-985e-42e0-8405-a158bf8114fd] succeeded in 0.004082185005245265s: None
+Task ops.tasks.check_server_performance_period[a18bb6fb-eece-4f56-b78a-31c39186b1c2] received
+Task perms.tasks.check_asset_permission_expired[1a59c5ed-a34f-4cd8-8310-29868fe85bc3] received
+Task terminal.tasks.delete_terminal_status_period[cd586d08-a577-4052-9e4e-bae0628a1778] received
+Task terminal.tasks.delete_terminal_status_period[cd586d08-a577-4052-9e4e-bae0628a1778] succeeded in 0.013910578003560659s: None
+Task perms.tasks.check_asset_permission_expired[1a59c5ed-a34f-4cd8-8310-29868fe85bc3] succeeded in 0.02287427300325362s: None
+Task ops.tasks.check_server_performance_period[a18bb6fb-eece-4f56-b78a-31c39186b1c2] succeeded in 0.03784761399583658s: None
+Task terminal.tasks.clean_orphan_session[67cc390e-3e86-42ed-9a75-3d02b7543779] received
+Task terminal.tasks.clean_orphan_session[67cc390e-3e86-42ed-9a75-3d02b7543779] succeeded in 0.0038755479981773533s: None
+Task terminal.tasks.clean_orphan_session[c0f7e515-b7c2-47b0-b35b-669157720b5d] received
+Task terminal.tasks.clean_orphan_session[c0f7e515-b7c2-47b0-b35b-669157720b5d] succeeded in 0.004382428996905219s: None
+Task terminal.tasks.clean_orphan_session[be8ce5c9-7476-403d-a7a9-16d6505f8161] received
+Task terminal.tasks.clean_orphan_session[be8ce5c9-7476-403d-a7a9-16d6505f8161] succeeded in 0.003950525002437644s: None
+Task terminal.tasks.clean_orphan_session[b6091f38-fdc7-4a36-a0b0-2c4e96a49d6d] received
+Task terminal.tasks.clean_orphan_session[b6091f38-fdc7-4a36-a0b0-2c4e96a49d6d] succeeded in 0.004632449003111105s: None
+Task terminal.tasks.clean_orphan_session[806d5bb8-8bde-4dbe-8647-861bcaacb873] received
+Task terminal.tasks.clean_orphan_session[806d5bb8-8bde-4dbe-8647-861bcaacb873] succeeded in 0.004821731999982148s: None
+Task terminal.tasks.clean_orphan_session[79ef57c5-d993-4a3b-b049-7d70687f75b9] received
+Task terminal.tasks.clean_orphan_session[79ef57c5-d993-4a3b-b049-7d70687f75b9] succeeded in 0.004411796995555051s: None
+Task ops.tasks.check_server_performance_period[6e42d09c-00ea-42fd-a98f-3ea43ea1d63b] received
+Task perms.tasks.check_asset_permission_expired[529de1ff-f1c2-45e2-951f-a710429ce3fe] received
+Task terminal.tasks.delete_terminal_status_period[b12bc92b-8279-4a4d-bcc0-f882cd60e628] received
+Task perms.tasks.check_asset_permission_expired[529de1ff-f1c2-45e2-951f-a710429ce3fe] succeeded in 0.02267229800054338s: None
+Task terminal.tasks.delete_terminal_status_period[b12bc92b-8279-4a4d-bcc0-f882cd60e628] succeeded in 0.01790652299678186s: None
+Task ops.tasks.check_server_performance_period[6e42d09c-00ea-42fd-a98f-3ea43ea1d63b] succeeded in 0.04743788699852303s: None
+Task terminal.tasks.clean_orphan_session[19d1f958-b49a-446a-a043-f00ae27bf73c] received
+Task terminal.tasks.clean_orphan_session[19d1f958-b49a-446a-a043-f00ae27bf73c] succeeded in 0.0037717639934271574s: None
+Task terminal.tasks.clean_orphan_session[d3dfea28-2eee-43a3-bc7d-870886eeae69] received
+Task terminal.tasks.clean_orphan_session[d3dfea28-2eee-43a3-bc7d-870886eeae69] succeeded in 0.00432733100024052s: None
+Task terminal.tasks.clean_orphan_session[11b4e3cf-3e3e-443b-a4f5-f2e9558d038a] received
+Task terminal.tasks.clean_orphan_session[11b4e3cf-3e3e-443b-a4f5-f2e9558d038a] succeeded in 0.00389357800304424s: None
+Task terminal.tasks.clean_orphan_session[c35ecf92-b942-43ec-a6f1-02f70795ea84] received
+Task terminal.tasks.clean_orphan_session[c35ecf92-b942-43ec-a6f1-02f70795ea84] succeeded in 0.00447613400319824s: None
+Task terminal.tasks.clean_orphan_session[9fb7f43d-a98c-4e14-b391-869bb8bd4b38] received
+Task terminal.tasks.clean_orphan_session[9fb7f43d-a98c-4e14-b391-869bb8bd4b38] succeeded in 0.005338467999536078s: None
+Task terminal.tasks.clean_orphan_session[544974cd-3b54-4c5c-9aa5-5f74562afaae] received
+Task terminal.tasks.clean_orphan_session[544974cd-3b54-4c5c-9aa5-5f74562afaae] succeeded in 0.00455898699874524s: None
+Task ops.tasks.check_server_performance_period[cefbff50-a099-4eef-97c3-b35d74772ae0] received
+Task perms.tasks.check_asset_permission_expired[00ce067a-bb32-4d87-8947-1cbd4f58a94a] received
+Task terminal.tasks.delete_terminal_status_period[92da4db1-317c-44ab-8e8e-c9488ba157da] received
+Task perms.tasks.check_asset_permission_expired[00ce067a-bb32-4d87-8947-1cbd4f58a94a] succeeded in 0.01582888700067997s: None
+Task terminal.tasks.delete_terminal_status_period[92da4db1-317c-44ab-8e8e-c9488ba157da] succeeded in 0.018808164000802208s: None
+Task ops.tasks.check_server_performance_period[cefbff50-a099-4eef-97c3-b35d74772ae0] succeeded in 0.03711464800289832s: None
+Task terminal.tasks.clean_orphan_session[454d45a3-384a-4881-9760-358af2bcb872] received
+Task terminal.tasks.clean_orphan_session[454d45a3-384a-4881-9760-358af2bcb872] succeeded in 0.004342889995314181s: None
+Task terminal.tasks.clean_orphan_session[3b961605-84e6-4155-8545-2834a230b296] received
+Task terminal.tasks.clean_orphan_session[3b961605-84e6-4155-8545-2834a230b296] succeeded in 0.004006573995866347s: None
+Task terminal.tasks.clean_orphan_session[eba69b8a-5c7d-49dd-8e3e-a98c15510384] received
+Task terminal.tasks.clean_orphan_session[eba69b8a-5c7d-49dd-8e3e-a98c15510384] succeeded in 0.00476772099500522s: None
+Task terminal.tasks.clean_orphan_session[cbdcfd41-3ea2-4cee-b070-8e22469cce95] received
+Task terminal.tasks.clean_orphan_session[cbdcfd41-3ea2-4cee-b070-8e22469cce95] succeeded in 0.00556098400556948s: None
+Task terminal.tasks.clean_orphan_session[4cc7a0f2-f9c3-4628-898e-cccc92d05f26] received
+Task terminal.tasks.clean_orphan_session[4cc7a0f2-f9c3-4628-898e-cccc92d05f26] succeeded in 0.004120812001929153s: None
+Task perms.tasks.check_app_permission_will_expired[bc2b40a0-b252-43fd-add9-57c901908d29] received
+Task users.tasks.check_password_expired[5eabbfaa-f85d-4a3b-8843-7fad2a531599] received
+Task perms.tasks.check_asset_permission_will_expired[1844653f-cfc9-42cf-afb6-0bc6ac1a1e38] received
+Task perms.tasks.check_app_permission_will_expired[bc2b40a0-b252-43fd-add9-57c901908d29] succeeded in 0.010181572004512418s: None
+Task users.tasks.check_password_expired[5eabbfaa-f85d-4a3b-8843-7fad2a531599] succeeded in 0.011578283003473189s: None
+Task perms.tasks.check_asset_permission_will_expired[1844653f-cfc9-42cf-afb6-0bc6ac1a1e38] succeeded in 0.008472899993648753s: None
+Task terminal.tasks.clean_orphan_session[a858e87f-dbc8-49ad-86a6-0851a0ed88b9] received
+Task terminal.tasks.clean_orphan_session[a858e87f-dbc8-49ad-86a6-0851a0ed88b9] succeeded in 0.004368050002085511s: None
+Task ops.tasks.check_server_performance_period[f158b832-5ed5-4a42-9b91-b521decb22ff] received
+Task perms.tasks.check_asset_permission_expired[7ed582b8-97ee-48b7-b493-701c070bd05a] received
+Task terminal.tasks.delete_terminal_status_period[24678a00-3e90-4123-8158-61bc214862e2] received
+Task perms.tasks.check_asset_permission_expired[7ed582b8-97ee-48b7-b493-701c070bd05a] succeeded in 0.020773229996848386s: None
+Task terminal.tasks.delete_terminal_status_period[24678a00-3e90-4123-8158-61bc214862e2] succeeded in 0.015163520998612512s: None
+Task ops.tasks.check_server_performance_period[f158b832-5ed5-4a42-9b91-b521decb22ff] succeeded in 0.03790527399542043s: None
+Task terminal.tasks.clean_orphan_session[47297892-7133-4859-88a4-5746911c5a34] received
+Task terminal.tasks.clean_orphan_session[47297892-7133-4859-88a4-5746911c5a34] succeeded in 0.003551543995854445s: None
+Task terminal.tasks.clean_orphan_session[130732ff-a1be-43d6-842d-278bbd7494c9] received
+Task terminal.tasks.clean_orphan_session[130732ff-a1be-43d6-842d-278bbd7494c9] succeeded in 0.003891227002895903s: None
+Task terminal.tasks.clean_orphan_session[6f5e5afc-69e5-428b-bd75-386e4529e50e] received
+Task terminal.tasks.clean_orphan_session[6f5e5afc-69e5-428b-bd75-386e4529e50e] succeeded in 0.004117026997846551s: None
+Task terminal.tasks.clean_orphan_session[e752d1d6-6d8e-4d18-a90d-60fb270b8fbd] received
+Task terminal.tasks.clean_orphan_session[e752d1d6-6d8e-4d18-a90d-60fb270b8fbd] succeeded in 0.004487728998356033s: None
+Task terminal.tasks.clean_orphan_session[5549ca00-d731-4eb6-8146-b9ca391970d6] received
+Task terminal.tasks.clean_orphan_session[5549ca00-d731-4eb6-8146-b9ca391970d6] succeeded in 0.0038338840022333898s: None
+Task terminal.tasks.clean_orphan_session[3e3d6800-d7d2-40bc-af56-a0e34bdd0be3] received
+Task terminal.tasks.clean_orphan_session[3e3d6800-d7d2-40bc-af56-a0e34bdd0be3] succeeded in 0.0047361299948534s: None
+Task ops.tasks.check_server_performance_period[24bd3683-252c-4bd6-8ced-f18c121c1f99] received
+Task perms.tasks.check_asset_permission_expired[617819cf-bc03-4424-907d-b285819e1ba3] received
+Task terminal.tasks.delete_terminal_status_period[4a5ebd40-a5f7-4d06-81dd-c3c4a353293c] received
+Task terminal.tasks.delete_terminal_status_period[4a5ebd40-a5f7-4d06-81dd-c3c4a353293c] succeeded in 0.017404227997758426s: None
+Task perms.tasks.check_asset_permission_expired[617819cf-bc03-4424-907d-b285819e1ba3] succeeded in 0.024843480001436546s: None
+Task ops.tasks.check_server_performance_period[24bd3683-252c-4bd6-8ced-f18c121c1f99] succeeded in 0.03927008099708473s: None
+Task terminal.tasks.clean_orphan_session[5cfc6c1a-6fb8-4d60-9f9f-bc5110957376] received
+Task terminal.tasks.clean_orphan_session[5cfc6c1a-6fb8-4d60-9f9f-bc5110957376] succeeded in 0.0032380000047851354s: None
+Task terminal.tasks.clean_orphan_session[d7f17f4d-7518-4486-bd6b-40c5dc19a8c5] received
+Task terminal.tasks.clean_orphan_session[d7f17f4d-7518-4486-bd6b-40c5dc19a8c5] succeeded in 0.004244959003699478s: None
+Task terminal.tasks.clean_orphan_session[1d69fc4c-0a5f-4721-a79a-08008de70925] received
+Task terminal.tasks.clean_orphan_session[1d69fc4c-0a5f-4721-a79a-08008de70925] succeeded in 0.004496394001762383s: None
+Task terminal.tasks.clean_orphan_session[0befa2d7-b9f4-495b-b647-0c6493b54412] received
+Task terminal.tasks.clean_orphan_session[0befa2d7-b9f4-495b-b647-0c6493b54412] succeeded in 0.003912674997991417s: None
+Task terminal.tasks.clean_orphan_session[5ae33aae-e423-457a-946d-25f055cd9ab1] received
+Task terminal.tasks.clean_orphan_session[5ae33aae-e423-457a-946d-25f055cd9ab1] succeeded in 0.004240607995598111s: None
+Task terminal.tasks.clean_orphan_session[879cabe2-5969-4747-a457-6b2dd6a383f7] received
+Task terminal.tasks.clean_orphan_session[879cabe2-5969-4747-a457-6b2dd6a383f7] succeeded in 0.003693182996357791s: None
+Task ops.tasks.check_server_performance_period[189e43b2-1326-49f1-af77-3ec6fab695f8] received
+Task perms.tasks.check_asset_permission_expired[10f77e4d-267f-4cd9-abe4-0885ee315f9d] received
+Task terminal.tasks.delete_terminal_status_period[627716b4-7686-412e-bee0-5627bbd3c1c8] received
+Task perms.tasks.check_asset_permission_expired[10f77e4d-267f-4cd9-abe4-0885ee315f9d] succeeded in 0.016112265999254305s: None
+Task terminal.tasks.delete_terminal_status_period[627716b4-7686-412e-bee0-5627bbd3c1c8] succeeded in 0.01444263899611542s: None
+Task ops.tasks.check_server_performance_period[189e43b2-1326-49f1-af77-3ec6fab695f8] succeeded in 0.03799320899997838s: None
+Task terminal.tasks.clean_orphan_session[4968f35f-d91c-478d-89ef-d43164ee3d57] received
+Task terminal.tasks.clean_orphan_session[4968f35f-d91c-478d-89ef-d43164ee3d57] succeeded in 0.003291022003395483s: None
+Task terminal.tasks.clean_orphan_session[b42f25ec-c85a-480a-bbb7-a131aafe0b96] received
+Task terminal.tasks.clean_orphan_session[b42f25ec-c85a-480a-bbb7-a131aafe0b96] succeeded in 0.0038631599963991903s: None
+Task terminal.tasks.clean_orphan_session[d81ec419-c4dd-4301-9f8d-c2a694869b23] received
+Task terminal.tasks.clean_orphan_session[d81ec419-c4dd-4301-9f8d-c2a694869b23] succeeded in 0.8886678839917295s: None
+Task terminal.tasks.clean_orphan_session[a4e8bd55-077a-4dbb-8a1c-7a5edc320f2d] received
+Task terminal.tasks.clean_orphan_session[a4e8bd55-077a-4dbb-8a1c-7a5edc320f2d] succeeded in 0.6332344439870212s: None
+Task terminal.tasks.clean_orphan_session[0f2f55f6-e764-43da-beb2-9efebc4546d2] received
+Task terminal.tasks.clean_orphan_session[0f2f55f6-e764-43da-beb2-9efebc4546d2] succeeded in 0.005365842996980064s: None
+Task terminal.tasks.clean_orphan_session[7122a7b0-4947-487a-a5c6-29ca4763aeb2] received
+Task terminal.tasks.clean_orphan_session[7122a7b0-4947-487a-a5c6-29ca4763aeb2] succeeded in 0.0050154960044892505s: None
+Task ops.tasks.check_server_performance_period[7ef4dd35-dc1b-47de-afeb-c4c9fd79e395] received
+Task perms.tasks.check_asset_permission_expired[d4a77d54-4072-4c1a-b69b-b9c158787b18] received
+Task terminal.tasks.delete_terminal_status_period[aaea4172-bb56-4270-a2c3-c82f7dcc8005] received
+Task perms.tasks.check_asset_permission_expired[d4a77d54-4072-4c1a-b69b-b9c158787b18] succeeded in 0.020993924990762025s: None
+Task terminal.tasks.delete_terminal_status_period[aaea4172-bb56-4270-a2c3-c82f7dcc8005] succeeded in 0.01841859299747739s: None
+Task ops.tasks.check_server_performance_period[7ef4dd35-dc1b-47de-afeb-c4c9fd79e395] succeeded in 0.04613223699561786s: None
+Task terminal.tasks.clean_orphan_session[97d78586-da12-4a92-8a5f-dc299dfeb7dc] received
+Task terminal.tasks.clean_orphan_session[97d78586-da12-4a92-8a5f-dc299dfeb7dc] succeeded in 0.003916118002962321s: None
+Task terminal.tasks.clean_orphan_session[598ab974-75eb-4b39-9f05-8225d6689935] received
+Task terminal.tasks.clean_orphan_session[598ab974-75eb-4b39-9f05-8225d6689935] succeeded in 0.004115825009648688s: None
+Task terminal.tasks.clean_orphan_session[70bfdf8c-47e2-4f6b-9da7-d03d356ea3d8] received
+Task terminal.tasks.clean_orphan_session[70bfdf8c-47e2-4f6b-9da7-d03d356ea3d8] succeeded in 0.004843824994168244s: None
+missed heartbeat from ansible@e1742ac4c82d
+Substantial drift from ansible@e1742ac4c82d may mean clocks are out of sync.  Current drift is 72 seconds.  [orig: 2022-07-29 13:45:51.343606 recv: 2022-07-29 13:44:39.600480]
+missed heartbeat from ansible@e1742ac4c82d
+missed heartbeat from ansible@e1742ac4c82d
+missed heartbeat from ansible@e1742ac4c82d
+missed heartbeat from ansible@e1742ac4c82d
+missed heartbeat from ansible@e1742ac4c82d
+missed heartbeat from ansible@e1742ac4c82d
+missed heartbeat from ansible@e1742ac4c82d
+Task terminal.tasks.clean_orphan_session[c27415e3-af91-4212-89cc-a2acbe0bd1ac] received
+Task terminal.tasks.clean_orphan_session[c27415e3-af91-4212-89cc-a2acbe0bd1ac] succeeded in 0.0976419919898035s: None

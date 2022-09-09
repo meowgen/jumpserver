@@ -1,0 +1,16 @@
+{
+  "name": "tech_blue",
+  "display": {"en": "Technology blue", "zh": "科技蓝", "ja": "テクノロジーブルー"},
+  "version": "v1",
+  "colors": {
+    "--color-primary": "#174779",
+    "--color-success": "#146dca",
+    "--color-info": "#1c84c6",
+    "--color-warning": "#ffc107",
+    "--color-danger": "#dc3545",
+    "--menu-bg": "#174779",
+    "--menu-text": "#b0c9e2",
+    "--menu-active-text": "white",
+    "--menu-active-left": "white"
+  }
+}
