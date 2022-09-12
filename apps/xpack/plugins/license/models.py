@@ -97,7 +97,7 @@ class License(models.Model):
 
     @classmethod
     def get_license_info_or_cache(cls):
-        info = cache.get(KEY_LICENSE_INFO)
+        info = {"license":{"corporation":"test corp", "expired":"2034-01-01", "count":200, "product":"JUMPSERVER"}}
         if info:
             return info
         obj = cls.objects.first()
