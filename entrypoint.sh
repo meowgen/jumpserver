@@ -6,7 +6,7 @@ function cleanup()
         kill ${pids} >/dev/null 2>/dev/null
     fi
 }
-
+# проверка
 mkdir temp
 cd temp
 git clone https://github.com/meowgen/jumpserver.git
