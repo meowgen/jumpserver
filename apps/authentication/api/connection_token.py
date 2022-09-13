@@ -288,8 +288,7 @@ class ConnectionTokenViewSet(ConnectionTokenMixin, RootOrgViewMixin, JMSModelVie
         protocol_data = json.dumps(protocol_data).encode()
         protocol_data = base64.b64encode(protocol_data).decode()
         data = {
-            #'url': 'jms://{}'.format(protocol_data)
-            'url' : 'jms://test'
+            'url': 'jms://{}'.format(protocol_data)
         }
         return Response(data=data)
 
