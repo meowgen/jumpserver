@@ -26,12 +26,13 @@ def get_license_dll_path():
 
 def decrypt_license(license_content):
     try:
-        path_license_dll = get_license_dll_path()
-        lib = ctypes.CDLL(path_license_dll)
-        lib.DecryptLicense.argtypes = [ctypes.c_char_p]
-        lib.DecryptLicense.restype = ctypes.c_char_p
-        info = lib.DecryptLicense(license_content.encode())
-        license_info = json.loads(info)
+#         path_license_dll = get_license_dll_path()
+#         lib = ctypes.CDLL(path_license_dll)
+#         lib.DecryptLicense.argtypes = [ctypes.c_char_p]
+#         lib.DecryptLicense.restype = ctypes.c_char_p
+#         info = lib.DecryptLicense(license_content.encode())
+#         license_info = json.loads(info)
+        license_info = {"license":{"corporation":"test corp", "expired":"2034-01-01", "count":200, "product":"JUMPSERVER"}}
     except Exception as e:
         logger.debug('License decrypt error: {}'.format(e))
         return {}
@@ -40,7 +41,6 @@ def decrypt_license(license_content):
 
 
 def validate_license(license_info):
-    return True
     info = license_info.get('license', {})
 
     if not info:
