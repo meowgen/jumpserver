@@ -102,5 +102,5 @@ ENV LANG=zh_CN.UTF-8
 
 EXPOSE 8070
 EXPOSE 8080
-RUN chmod +x entrypoint.sh
+EXPOSE 2222
 ENTRYPOINT ["./entrypoint.sh"]
