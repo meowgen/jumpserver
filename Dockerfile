@@ -65,7 +65,6 @@ RUN mkdir -p /opt/oracle/ \
 WORKDIR /tmp/build
 COPY ./requirements ./requirements
 
-# 因为以 jms 或者 jumpserver 开头的 mirror 上可能没有
 RUN pip install --upgrade pip==20.2.4 setuptools==49.6.0 wheel==0.34.2 \
     && pip install --no-cache-dir $(grep -E 'jms|jumpserver' requirements/requirements.txt) \
     && pip install --no-cache-dir -r requirements/requirements.txt \
@@ -85,6 +84,7 @@ WORKDIR /opt/jumpserver
 VOLUME /opt/jumpserver/data
 VOLUME /opt/jumpserver/logs
 
+WORKDIR /opt
 RUN apt install git -y && apt install build-essential -y \
     && apt install nano \
     && apt install wget -y \
