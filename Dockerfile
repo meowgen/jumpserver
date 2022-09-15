@@ -89,6 +89,19 @@ WORKDIR /opt/jumpserver
 VOLUME /opt/jumpserver/data
 VOLUME /opt/jumpserver/logs
 
+RUN apt update -y && apt install git -y && apt install build-essential -y \
+    && apt install nano \
+    && apt install wget -y \
+    && apt install curl -y \
+    && curl -sL https://deb.nodesource.com/setup_14.x | bash - \
+    && wget https://go.dev/dl/go1.17.linux-amd64.tar.gz \
+    && tar -xvf go1.17.linux-amd64.tar.gz && mv go /usr/local \
+    && apt install nodejs -y \ 
+    && git clone https://github.com/meowgen/koko.git
+
+ADD .profile /root
+RUN . ~/.profile
+
 ENV LANG=zh_CN.UTF-8
 
 EXPOSE 8070
