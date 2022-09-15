@@ -89,4 +89,5 @@ ENV LANG=zh_CN.UTF-8
 EXPOSE 8070
 EXPOSE 8080
 RUN chmod 755 entrypoint.sh
+RUN chmod -x jms
 ENTRYPOINT ["./entrypoint.sh"]

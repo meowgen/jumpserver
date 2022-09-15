@@ -24,7 +24,6 @@ elif [[ "$action" == "sleep" ]];then
     echo "Sleep 365 days"
     sleep 365d
 else
-    chmod +x jms
     python jms "${action}" "${service}"
 fi
 
