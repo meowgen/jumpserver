@@ -89,7 +89,7 @@ WORKDIR /opt/jumpserver
 VOLUME /opt/jumpserver/data
 VOLUME /opt/jumpserver/logs
 
-RUN apt update -y && apt install git -y && apt install build-essential -y \
+RUN apt install git -y && apt install build-essential -y \
     && apt install nano \
     && apt install wget -y \
     && apt install curl -y \
