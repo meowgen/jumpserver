@@ -32,9 +32,10 @@ ARG TOOLS="                           \
     unzip                               \
     wget"
 
-RUN sed -i 's/deb.debian.org/mirrors.aliyun.com/g' /etc/apt/sources.list \
-    && sed -i 's/security.debian.org/mirrors.aliyun.com/g' /etc/apt/sources.list \
-    && apt update && sleep 1 && apt update \
+RUN \
+    #sed -i 's/deb.debian.org/mirrors.aliyun.com/g' /etc/apt/sources.list \
+    #&& sed -i 's/security.debian.org/mirrors.aliyun.com/g' /etc/apt/sources.list \
+    apt update && sleep 1 && apt update \
     && apt -y install ${BUILD_DEPENDENCIES} \
     && apt -y install ${DEPENDENCIES} \
     && apt -y install ${TOOLS} \
