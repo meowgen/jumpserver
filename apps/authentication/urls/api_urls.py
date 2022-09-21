@@ -18,8 +18,6 @@ urlpatterns = [
     path('wecom/qr/unbind/', api.WeComQRUnBindForUserApi.as_view(), name='wecom-qr-unbind'),
     path('wecom/qr/unbind/<uuid:user_id>/', api.WeComQRUnBindForAdminApi.as_view(), name='wecom-qr-unbind-for-admin'),
 
-    path('dingtalk/qr/unbind/', api.DingTalkQRUnBindForUserApi.as_view(), name='dingtalk-qr-unbind'),
-    path('dingtalk/qr/unbind/<uuid:user_id>/', api.DingTalkQRUnBindForAdminApi.as_view(), name='dingtalk-qr-unbind-for-admin'),
 
     path('feishu/qr/unbind/', api.FeiShuQRUnBindForUserApi.as_view(), name='feishu-qr-unbind'),
     path('feishu/qr/unbind/<uuid:user_id>/', api.FeiShuQRUnBindForAdminApi.as_view(), name='feishu-qr-unbind-for-admin'),

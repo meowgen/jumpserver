@@ -28,20 +28,6 @@ class WeComAuthentication(JMSModelBackend):
     def authenticate(self, request, **kwargs):
         pass
 
-
-class DingTalkAuthentication(JMSModelBackend):
-    """
-    什么也不做呀😺
-    """
-
-    @staticmethod
-    def is_enabled():
-        return settings.AUTH_DINGTALK
-
-    def authenticate(self, request, **kwargs):
-        pass
-
-
 class FeiShuAuthentication(JMSModelBackend):
     """
     什么也不做呀😺

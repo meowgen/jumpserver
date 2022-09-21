@@ -122,10 +122,7 @@ WECOM_AGENTID = CONFIG.WECOM_AGENTID
 WECOM_SECRET = CONFIG.WECOM_SECRET
 
 # DingDing auth
-AUTH_DINGTALK = CONFIG.AUTH_DINGTALK
-DINGTALK_AGENTID = CONFIG.DINGTALK_AGENTID
-DINGTALK_APPKEY = CONFIG.DINGTALK_APPKEY
-DINGTALK_APPSECRET = CONFIG.DINGTALK_APPSECRET
+
 
 # FeiShu auth
 AUTH_FEISHU = CONFIG.AUTH_FEISHU
@@ -166,7 +163,6 @@ AUTH_BACKEND_RADIUS = 'authentication.backends.radius.RadiusBackend'
 AUTH_BACKEND_CAS = 'authentication.backends.cas.CASBackend'
 AUTH_BACKEND_SSO = 'authentication.backends.sso.SSOAuthentication'
 AUTH_BACKEND_WECOM = 'authentication.backends.sso.WeComAuthentication'
-AUTH_BACKEND_DINGTALK = 'authentication.backends.sso.DingTalkAuthentication'
 AUTH_BACKEND_FEISHU = 'authentication.backends.sso.FeiShuAuthentication'
 AUTH_BACKEND_AUTH_TOKEN = 'authentication.backends.sso.AuthorizationTokenAuthentication'
 AUTH_BACKEND_SAML2 = 'authentication.backends.saml2.SAML2Backend'
@@ -181,7 +177,7 @@ AUTHENTICATION_BACKENDS = [
     # 跳转形式
     AUTH_BACKEND_CAS, AUTH_BACKEND_OIDC_PASSWORD, AUTH_BACKEND_OIDC_CODE, AUTH_BACKEND_SAML2,
     # 扫码模式
-    AUTH_BACKEND_WECOM, AUTH_BACKEND_DINGTALK, AUTH_BACKEND_FEISHU,
+    AUTH_BACKEND_WECOM,  AUTH_BACKEND_FEISHU,
     # Token模式
     AUTH_BACKEND_AUTH_TOKEN, AUTH_BACKEND_SSO, AUTH_BACKEND_TEMP_TOKEN
 ]

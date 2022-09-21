@@ -22,9 +22,6 @@ def init_user_msg_subscription(apps, schema_editor):
         if user.wecom_id:
             receive_backends.append('wecom')
 
-        if user.dingtalk_id:
-            receive_backends.append('dingtalk')
-
         if user.feishu_id:
             receive_backends.append('feishu')
 

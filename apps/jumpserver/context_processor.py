@@ -18,7 +18,6 @@ default_context = {
     'DEFAULT_PK': '00000000-0000-0000-0000-000000000000',
     'LOGIN_CAS_logo_logout': static('img/login_cas_logo.png'),
     'LOGIN_WECOM_logo_logout': static('img/login_wecom_logo.png'),
-    'LOGIN_DINGTALK_logo_logout': static('img/login_dingtalk_logo.png'),
     'LOGIN_FEISHU_logo_logout': static('img/login_feishu_logo.png'),
     'COPYRIGHT': 'FIT2CLOUD 飞致云' + ' © 2014-2022',
     'INTERFACE': default_interface,

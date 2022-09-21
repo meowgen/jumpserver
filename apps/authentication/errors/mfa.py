@@ -23,11 +23,6 @@ class WeComNotBound(JMSException):
     default_detail = _('WeCom is not bound')
 
 
-class DingTalkNotBound(JMSException):
-    default_code = 'dingtalk_not_bound'
-    default_detail = _('DingTalk is not bound')
-
-
 class FeiShuNotBound(JMSException):
     default_code = 'feishu_not_bound'
     default_detail = _('FeiShu is not bound')

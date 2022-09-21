@@ -70,12 +70,6 @@ class UserLoginContextMixin:
                 'logo': static('img/login_wecom_logo.png'),
             },
             {
-                'name': _('DingTalk'),
-                'enabled': settings.AUTH_DINGTALK,
-                'url': reverse('authentication:dingtalk-qr-login'),
-                'logo': static('img/login_dingtalk_logo.png')
-            },
-            {
                 'name': _('FeiShu'),
                 'enabled': settings.AUTH_FEISHU,
                 'url': reverse('authentication:feishu-qr-login'),

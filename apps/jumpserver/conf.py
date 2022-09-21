@@ -274,10 +274,7 @@ class Config(dict):
         'WECOM_SECRET': '',
 
         # 钉钉
-        'AUTH_DINGTALK': False,
-        'DINGTALK_AGENTID': '',
-        'DINGTALK_APPKEY': '',
-        'DINGTALK_APPSECRET': '',
+
 
         # 飞书
         'AUTH_FEISHU': False,

@@ -30,14 +30,6 @@ urlpatterns = [
     path('wecom/oauth/login/', views.WeComOAuthLoginView.as_view(), name='wecom-oauth-login'),
     path('wecom/oauth/login/callback/', views.WeComOAuthLoginCallbackView.as_view(), name='wecom-oauth-login-callback'),
 
-    path('dingtalk/bind/start/', views.DingTalkEnableStartView.as_view(), name='dingtalk-bind-start'),
-    path('dingtalk/qr/bind/', views.DingTalkQRBindView.as_view(), name='dingtalk-qr-bind'),
-    path('dingtalk/qr/login/', views.DingTalkQRLoginView.as_view(), name='dingtalk-qr-login'),
-    path('dingtalk/qr/bind/<uuid:user_id>/callback/', views.DingTalkQRBindCallbackView.as_view(), name='dingtalk-qr-bind-callback'),
-    path('dingtalk/qr/login/callback/', views.DingTalkQRLoginCallbackView.as_view(), name='dingtalk-qr-login-callback'),
-    path('dingtalk/oauth/login/', views.DingTalkOAuthLoginView.as_view(), name='dingtalk-oauth-login'),
-    path('dingtalk/oauth/login/callback/', views.DingTalkOAuthLoginCallbackView.as_view(), name='dingtalk-oauth-login-callback'),
-
     path('feishu/bind/start/', views.FeiShuEnableStartView.as_view(), name='feishu-bind-start'),
     path('feishu/qr/bind/', views.FeiShuQRBindView.as_view(), name='feishu-qr-bind'),
     path('feishu/qr/login/', views.FeiShuQRLoginView.as_view(), name='feishu-qr-login'),

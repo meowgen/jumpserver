@@ -103,7 +103,7 @@ class Message(metaclass=MessageType):
         users = User.objects.filter(username='admin')
         backends = []
         if ding:
-            backends.append(BACKEND.DINGTALK)
+            pass
         if wecom:
             backends.append(BACKEND.WECOM)
         msg.send_msg(users, backends)
@@ -177,19 +177,6 @@ class Message(metaclass=MessageType):
     @lazyproperty
     def signature(self):
         return get_login_title()
-
-    # --------------------------------------------------------------
-    # 支持不同发送消息的方式定义自己的消息内容，比如有些支持 html 标签
-    def get_dingtalk_msg(self) -> dict:
-        # 钉钉相同的消息一天只能发一次，所以给所有消息添加基于时间的序号，使他们不相同
-        message = self.markdown_msg['message']
-        time = local_now().strftime('%Y-%m-%d %H:%M:%S')
-        suffix = '\n{}: {}'.format(_('Time'), time)
-
-        return {
-            'subject': self.markdown_msg['subject'],
-            'message': message + suffix
-        }
 
     def get_wecom_msg(self) -> dict:
         return self.markdown_msg

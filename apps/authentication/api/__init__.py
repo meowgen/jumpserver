@@ -9,7 +9,6 @@ from .confirm import *
 from .login_confirm import *
 from .sso import *
 from .wecom import *
-from .dingtalk import *
 from .feishu import *
 from .password import *
 from .temp_token import *
