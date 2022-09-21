@@ -634,7 +634,6 @@ class User(AuthMixin, TokenMixin, RoleMixin, MFAMixin, AbstractUser):
             settings.AUTH_BACKEND_MODEL,
             settings.AUTH_BACKEND_PUBKEY,
             settings.AUTH_BACKEND_WECOM,
-            settings.AUTH_BACKEND_DINGTALK,
         ],
         Source.ldap: [
             settings.AUTH_BACKEND_LDAP
@@ -718,7 +717,6 @@ class User(AuthMixin, TokenMixin, RoleMixin, MFAMixin, AbstractUser):
         default=False, verbose_name=_('Need update password')
     )
     wecom_id = models.CharField(null=True, default=None, unique=True, max_length=128, verbose_name=_('WeCom'))
-    dingtalk_id = models.CharField(null=True, default=None, unique=True, max_length=128, verbose_name=_('DingTalk'))
     feishu_id = models.CharField(null=True, default=None, unique=True, max_length=128, verbose_name=_('FeiShu'))
 
     DATE_EXPIRED_WARNING_DAYS = 5
@@ -740,10 +738,6 @@ class User(AuthMixin, TokenMixin, RoleMixin, MFAMixin, AbstractUser):
     @property
     def is_wecom_bound(self):
         return bool(self.wecom_id)
-
-    @property
-    def is_dingtalk_bound(self):
-        return bool(self.dingtalk_id)
 
     @property
     def is_feishu_bound(self):

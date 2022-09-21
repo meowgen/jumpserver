@@ -6,7 +6,7 @@ from .email import EmailSettingSerializer, EmailContentSettingSerializer
 from .auth import (
     LDAPSettingSerializer, OIDCSettingSerializer, KeycloakSettingSerializer,
     CASSettingSerializer, RadiusSettingSerializer, FeiShuSettingSerializer,
-    WeComSettingSerializer, DingTalkSettingSerializer, AlibabaSMSSettingSerializer,
+    WeComSettingSerializer, AlibabaSMSSettingSerializer,
     TencentSMSSettingSerializer,
 )
 from .terminal import TerminalSettingSerializer
@@ -25,7 +25,6 @@ class SettingsSerializer(
     TerminalSettingSerializer,
     SecuritySettingSerializer,
     WeComSettingSerializer,
-    DingTalkSettingSerializer,
     FeiShuSettingSerializer,
     EmailSettingSerializer,
     EmailContentSettingSerializer,

@@ -14,7 +14,6 @@ urlpatterns = [
     path('ldap/users/import/', api.LDAPUserImportAPI.as_view(), name='ldap-user-import'),
     path('ldap/cache/refresh/', api.LDAPCacheRefreshAPI.as_view(), name='ldap-cache-refresh'),
     path('wecom/testing/', api.WeComTestingAPI.as_view(), name='wecom-testing'),
-    path('dingtalk/testing/', api.DingTalkTestingAPI.as_view(), name='dingtalk-testing'),
     path('feishu/testing/', api.FeiShuTestingAPI.as_view(), name='feishu-testing'),
     path('alibaba/testing/', api.AlibabaSMSTestingAPI.as_view(), name='alibaba-sms-testing'),
     path('tencent/testing/', api.TencentSMSTestingAPI.as_view(), name='tencent-sms-testing'),

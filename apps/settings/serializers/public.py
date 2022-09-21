@@ -30,7 +30,6 @@ class PrivateSettingSerializer(PublicSettingSerializer):
     HELP_SUPPORT_URL = serializers.CharField()
 
     AUTH_WECOM = serializers.BooleanField()
-    AUTH_DINGTALK = serializers.BooleanField()
     AUTH_FEISHU = serializers.BooleanField()
     AUTH_TEMP_TOKEN = serializers.BooleanField()
 
