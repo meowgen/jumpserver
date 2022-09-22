@@ -270,21 +270,6 @@ class Config(dict):
         'LOGIN_REDIRECT_TO_BACKEND': '',  # 'OPENID / CAS / SAML2
         'LOGIN_REDIRECT_MSG_ENABLED': True,
 
-        'SMS_ENABLED': False,
-        'SMS_BACKEND': '',
-        'SMS_TEST_PHONE': '',
-
-        'ALIBABA_ACCESS_KEY_ID': '',
-        'ALIBABA_ACCESS_KEY_SECRET': '',
-        'ALIBABA_VERIFY_SIGN_NAME': '',
-        'ALIBABA_VERIFY_TEMPLATE_CODE': '',
-
-        'TENCENT_SECRET_ID': '',
-        'TENCENT_SECRET_KEY': '',
-        'TENCENT_SDKAPPID': '',
-        'TENCENT_VERIFY_SIGN_NAME': '',
-        'TENCENT_VERIFY_TEMPLATE_CODE': '',
-
         # Email
         'EMAIL_CUSTOM_USER_CREATED_SUBJECT': _('Create account successfully'),
         'EMAIL_CUSTOM_USER_CREATED_HONORIFIC': _('Hello'),

@@ -199,7 +199,6 @@ class UserLoginView(mixins.AuthMixin, UserLoginContextMixin, FormView):
                 errors.MFAFailedError,
                 errors.BlockMFAError,
                 errors.MFACodeRequiredError,
-                errors.SMSCodeRequiredError,
                 errors.UserPhoneNotSet,
                 errors.BlockGlobalIpLoginError
         ) as e:

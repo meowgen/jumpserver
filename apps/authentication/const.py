@@ -2,7 +2,7 @@ from django.db.models import TextChoices
 
 from authentication.confirm import CONFIRM_BACKENDS
 from .confirm import ConfirmMFA, ConfirmPassword, ConfirmReLogin
-from .mfa import MFAOtp, MFASms, MFARadius
+from .mfa import MFAOtp, MFARadius
 
 RSA_PRIVATE_KEY = 'rsa_private_key'
 RSA_PUBLIC_KEY = 'rsa_public_key'

@@ -125,7 +125,7 @@ xpack_nodes = [
     "rbac.orgrole", "rbac.orgrolebinding",
     'assets.gathereduser',
 
-    'settings.change_interface', 'settings.change_sms',
+    'settings.change_interface',
     'users.invite_user', 'users.remove_user',
 ]
 
