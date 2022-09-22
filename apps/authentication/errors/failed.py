@@ -157,11 +157,6 @@ class MFACodeRequiredError(AuthFailedError):
     msg = _("Please enter MFA code")
 
 
-class SMSCodeRequiredError(AuthFailedError):
-    error = 'sms_code_required'
-    msg = _("Please enter SMS code")
-
-
 class UserPhoneNotSet(AuthFailedError):
     error = 'phone_not_set'
     msg = _('Phone not set')

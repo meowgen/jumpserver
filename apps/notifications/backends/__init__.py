@@ -9,7 +9,6 @@ client_name_mapper = {}
 class BACKEND(models.TextChoices):
     EMAIL = 'email', _('Email')
     SITE_MSG = 'site_msg', _('Site message')
-    # SMS = 'sms', _('SMS')
 
     @property
     def client(self):

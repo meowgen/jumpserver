@@ -13,9 +13,6 @@ urlpatterns = [
     path('ldap/users/', api.LDAPUserListApi.as_view(), name='ldap-user-list'),
     path('ldap/users/import/', api.LDAPUserImportAPI.as_view(), name='ldap-user-import'),
     path('ldap/cache/refresh/', api.LDAPCacheRefreshAPI.as_view(), name='ldap-cache-refresh'),
-    path('alibaba/testing/', api.AlibabaSMSTestingAPI.as_view(), name='alibaba-sms-testing'),
-    path('tencent/testing/', api.TencentSMSTestingAPI.as_view(), name='tencent-sms-testing'),
-    path('sms/backend/', api.SMSBackendAPI.as_view(), name='sms-backend'),
 
     path('setting/', api.SettingsApi.as_view(), name='settings-setting'),
     path('public/', api.PublicSettingApi.as_view(), name='public-setting'),

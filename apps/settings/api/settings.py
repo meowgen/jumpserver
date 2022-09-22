@@ -33,9 +33,6 @@ class SettingsApi(generics.RetrieveUpdateAPIView):
         'saml2': serializers.SAML2SettingSerializer,
         'clean': serializers.CleaningSerializer,
         'other': serializers.OtherSettingSerializer,
-        'sms': serializers.SMSSettingSerializer,
-        'alibaba': serializers.AlibabaSMSSettingSerializer,
-        'tencent': serializers.TencentSMSSettingSerializer,
     }
 
     rbac_category_permissions = {
@@ -54,9 +51,6 @@ class SettingsApi(generics.RetrieveUpdateAPIView):
         'saml2': 'settings.change_auth',
         'clean': 'settings.change_clean',
         'other': 'settings.change_other',
-        'sms': 'settings.change_sms',
-        'alibaba': 'settings.change_sms',
-        'tencent': 'settings.change_sms',
     }
 
     def get_queryset(self):

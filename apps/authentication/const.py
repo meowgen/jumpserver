@@ -33,5 +33,4 @@ class ConfirmType(TextChoices):
 
 class MFAType(TextChoices):
     OTP = MFAOtp.name, MFAOtp.display_name
-    SMS = MFASms.name, MFASms.display_name
     Radius = MFARadius.name, MFARadius.display_name
