@@ -19,12 +19,6 @@ def init_user_msg_subscription(apps, schema_editor):
         if user.email:
             receive_backends.append('email')
 
-        if user.wecom_id:
-            receive_backends.append('wecom')
-
-        if user.feishu_id:
-            receive_backends.append('feishu')
-
         to_create.append(UserMsgSubscription(user=user, receive_backends=receive_backends))
     UserMsgSubscription.objects.bulk_create(to_create)
     print(f'\n  Init user message subscription: {len(to_create)}')

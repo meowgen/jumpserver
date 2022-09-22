@@ -22,20 +22,6 @@ urlpatterns = [
     path('password/reset/', users_view.UserResetPasswordView.as_view(), name='reset-password'),
     path('password/verify/', users_view.UserVerifyPasswordView.as_view(), name='user-verify-password'),
 
-    path('wecom/bind/start/', views.WeComEnableStartView.as_view(), name='wecom-bind-start'),
-    path('wecom/qr/bind/', views.WeComQRBindView.as_view(), name='wecom-qr-bind'),
-    path('wecom/qr/login/', views.WeComQRLoginView.as_view(), name='wecom-qr-login'),
-    path('wecom/qr/bind/<uuid:user_id>/callback/', views.WeComQRBindCallbackView.as_view(), name='wecom-qr-bind-callback'),
-    path('wecom/qr/login/callback/', views.WeComQRLoginCallbackView.as_view(), name='wecom-qr-login-callback'),
-    path('wecom/oauth/login/', views.WeComOAuthLoginView.as_view(), name='wecom-oauth-login'),
-    path('wecom/oauth/login/callback/', views.WeComOAuthLoginCallbackView.as_view(), name='wecom-oauth-login-callback'),
-
-    path('feishu/bind/start/', views.FeiShuEnableStartView.as_view(), name='feishu-bind-start'),
-    path('feishu/qr/bind/', views.FeiShuQRBindView.as_view(), name='feishu-qr-bind'),
-    path('feishu/qr/login/', views.FeiShuQRLoginView.as_view(), name='feishu-qr-login'),
-    path('feishu/qr/bind/callback/', views.FeiShuQRBindCallbackView.as_view(), name='feishu-qr-bind-callback'),
-    path('feishu/qr/login/callback/', views.FeiShuQRLoginCallbackView.as_view(), name='feishu-qr-login-callback'),
-
     # Profile
     path('profile/pubkey/generate/', users_view.UserPublicKeyGenerateView.as_view(), name='user-pubkey-generate'),
     path('profile/mfa/', users_view.MFASettingView.as_view(), name='user-mfa-setting'),

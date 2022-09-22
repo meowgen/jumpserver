@@ -116,8 +116,7 @@ class UserSerializer(RolesSerializerMixin, CommonBulkSerializerMixin, serializer
             'mfa_enabled', 'is_service_account', 'is_valid', 'is_expired', 'is_active',  # 布尔字段
             'date_expired', 'date_joined', 'last_login',  # 日期字段
             'created_by', 'comment',  # 通用字段
-            'is_wecom_bound', 'is_feishu_bound', 'is_otp_secret_key_bound',
-            'wecom_id', 'feishu_id'
+            'is_otp_secret_key_bound',
         ]
         # 包含不太常用的字段，可以没有
         fields_verbose = fields_small + [
@@ -137,7 +136,6 @@ class UserSerializer(RolesSerializerMixin, CommonBulkSerializerMixin, serializer
 
         read_only_fields = [
             'date_joined', 'last_login', 'created_by', 'is_first_login',
-            'wecom_id', 'feishu_id'
         ]
         disallow_self_update_fields = ['is_active']
         extra_kwargs = {
@@ -156,8 +154,6 @@ class UserSerializer(RolesSerializerMixin, CommonBulkSerializerMixin, serializer
             'role_display': {'label': _('Super role name')},
             'total_role_display': {'label': _('Total role name')},
             'role': {'default': "User"},
-            'is_wecom_bound': {'label': _('Is wecom bound')},
-            'is_feishu_bound': {'label': _('Is feishu bound')},
             'is_otp_secret_key_bound': {'label': _('Is OTP bound')},
             'phone': {'validators': [PhoneValidator()]},
             'system_role_display': {'label': _('System role name')},

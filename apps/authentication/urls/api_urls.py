@@ -15,14 +15,6 @@ router.register('super-connection-token', api.SuperConnectionTokenViewSet, 'supe
 
 
 urlpatterns = [
-    path('wecom/qr/unbind/', api.WeComQRUnBindForUserApi.as_view(), name='wecom-qr-unbind'),
-    path('wecom/qr/unbind/<uuid:user_id>/', api.WeComQRUnBindForAdminApi.as_view(), name='wecom-qr-unbind-for-admin'),
-
-
-    path('feishu/qr/unbind/', api.FeiShuQRUnBindForUserApi.as_view(), name='feishu-qr-unbind'),
-    path('feishu/qr/unbind/<uuid:user_id>/', api.FeiShuQRUnBindForAdminApi.as_view(), name='feishu-qr-unbind-for-admin'),
-    path('feishu/event/subscription/callback/', api.FeiShuEventSubscriptionCallback.as_view(), name='feishu-event-subscription-callback'),
-
     path('auth/', api.TokenCreateApi.as_view(), name='user-auth'),
     path('confirm/', api.ConfirmApi.as_view(), name='user-confirm'),
     path('confirm-oauth/', api.ConfirmBindORUNBindOAuth.as_view(), name='confirm-oauth'),

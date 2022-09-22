@@ -94,7 +94,7 @@ class Message(metaclass=MessageType):
                 traceback.print_exc()
 
     @classmethod
-    def send_test_msg(cls, ding=True, wecom=False):
+    def send_test_msg(cls):
         msg = cls.gen_test_msg()
         if not msg:
             return
@@ -102,10 +102,6 @@ class Message(metaclass=MessageType):
         from users.models import User
         users = User.objects.filter(username='admin')
         backends = []
-        if ding:
-            pass
-        if wecom:
-            backends.append(BACKEND.WECOM)
         msg.send_msg(users, backends)
 
     @staticmethod
@@ -178,12 +174,6 @@ class Message(metaclass=MessageType):
     def signature(self):
         return get_login_title()
 
-    def get_wecom_msg(self) -> dict:
-        return self.markdown_msg
-
-    def get_feishu_msg(self) -> dict:
-        return self.text_msg
-
     def get_email_msg(self) -> dict:
         return self.html_msg_with_sign
 
@@ -209,12 +199,12 @@ class Message(metaclass=MessageType):
         return messages_cls
 
     @classmethod
-    def test_all_messages(cls, ding=True, wecom=False):
+    def test_all_messages(cls):
         messages_cls = cls.get_all_sub_messages()
 
         for _cls in messages_cls:
             try:
-                _cls.send_test_msg(ding=ding, wecom=wecom)
+                _cls.send_test_msg()
             except NotImplementedError:
                 continue
 

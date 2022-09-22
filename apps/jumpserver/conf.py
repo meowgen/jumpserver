@@ -267,20 +267,6 @@ class Config(dict):
 
         'AUTH_TEMP_TOKEN': False,
 
-        # 企业微信
-        'AUTH_WECOM': False,
-        'WECOM_CORPID': '',
-        'WECOM_AGENTID': '',
-        'WECOM_SECRET': '',
-
-        # 钉钉
-
-
-        # 飞书
-        'AUTH_FEISHU': False,
-        'FEISHU_APP_ID': '',
-        'FEISHU_APP_SECRET': '',
-
         'LOGIN_REDIRECT_TO_BACKEND': '',  # 'OPENID / CAS / SAML2
         'LOGIN_REDIRECT_MSG_ENABLED': True,
 

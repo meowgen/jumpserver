@@ -2,5 +2,3 @@
 #
 from .login import *
 from .mfa import *
-from .wecom import *
-from .feishu import *

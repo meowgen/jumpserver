@@ -2,8 +2,6 @@ from .cas import *
 from .ldap import *
 from .oidc import *
 from .radius import *
-from .feishu import *
-from .wecom import *
 from .sso import *
 from .base import *
 from .sms import *

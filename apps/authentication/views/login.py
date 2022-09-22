@@ -63,18 +63,6 @@ class UserLoginContextMixin:
                 'logo': static('img/login_saml2_logo.png'),
                 'auto_redirect': True
             },
-            {
-                'name': _('WeCom'),
-                'enabled': settings.AUTH_WECOM,
-                'url': reverse('authentication:wecom-qr-login'),
-                'logo': static('img/login_wecom_logo.png'),
-            },
-            {
-                'name': _('FeiShu'),
-                'enabled': settings.AUTH_FEISHU,
-                'url': reverse('authentication:feishu-qr-login'),
-                'logo': static('img/login_feishu_logo.png')
-            }
         ]
         return [method for method in auth_methods if method['enabled']]
 
