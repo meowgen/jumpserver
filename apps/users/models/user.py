@@ -672,9 +672,6 @@ class User(AuthMixin, TokenMixin, RoleMixin, MFAMixin, AbstractUser):
     avatar = models.ImageField(
         upload_to="avatar", null=True, verbose_name=_('Avatar')
     )
-    wechat = models.CharField(
-        max_length=128, blank=True, verbose_name=_('Wechat')
-    )
     phone = models.CharField(
         max_length=20, blank=True, null=True, verbose_name=_('Phone')
     )

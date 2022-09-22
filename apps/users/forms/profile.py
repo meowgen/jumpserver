@@ -36,8 +36,7 @@ class UserProfileForm(forms.ModelForm):
     class Meta:
         model = User
         fields = [
-            'username', 'name', 'email',
-            'wechat', 'phone',
+            'username', 'name', 'email', 'phone',
         ]
 
 
