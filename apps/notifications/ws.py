@@ -16,6 +16,7 @@ class SiteMsgWebsocket(JsonWebsocketConsumer):
 
     def connect(self):
         user = self.scope["user"]
+        logger.debug(user)
         if user.is_authenticated:
             self.accept()
             self.sub = self.watch_recv_new_site_msg()
