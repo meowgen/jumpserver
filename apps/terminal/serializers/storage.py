@@ -3,7 +3,7 @@
 from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
 from urllib.parse import urlparse
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.db.models import TextChoices
 
 from common.drf.serializers import MethodSerializer

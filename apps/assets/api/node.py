@@ -6,7 +6,7 @@ from rest_framework import status
 from rest_framework.serializers import ValidationError
 from rest_framework.response import Response
 from rest_framework.decorators import action
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.shortcuts import get_object_or_404, Http404
 from django.db.models.signals import m2m_changed
 

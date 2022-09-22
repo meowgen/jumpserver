@@ -11,7 +11,7 @@ from django.db import transaction
 from django.utils import timezone
 from django.utils.functional import LazyObject
 from django.contrib.auth import BACKEND_SESSION_KEY
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.utils import translation
 from rest_framework.renderers import JSONRenderer
 from rest_framework.request import Request

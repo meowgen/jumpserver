@@ -1,4 +1,4 @@
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 
 from perms.models import AssetPermission
 from orgs.utils import tmp_to_org, tmp_to_root_org

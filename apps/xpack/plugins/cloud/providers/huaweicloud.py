@@ -2,7 +2,7 @@
 import uuid
 from hashlib import md5
 
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from openstack import connection
 
 from common.utils import lazyproperty

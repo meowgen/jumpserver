@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 from django.conf import settings
 from rest_framework_bulk import BulkModelViewSet
 from rest_framework.generics import RetrieveAPIView

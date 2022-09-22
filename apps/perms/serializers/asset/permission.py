@@ -2,7 +2,7 @@
 #
 
 from rest_framework import serializers
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.db.models import Q
 
 from orgs.mixins.serializers import BulkOrgResourceModelSerializer

@@ -9,7 +9,7 @@ from django.utils.http import urlencode
 from django.core.cache import cache
 from django.conf import settings
 from django.contrib import auth
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 from rest_framework.request import Request
 from django.contrib.auth import (
     BACKEND_SESSION_KEY, load_backend,

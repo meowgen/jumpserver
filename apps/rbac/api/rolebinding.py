@@ -1,4 +1,4 @@
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 from django.db.models import F, Value
 from django.db.models.functions import Concat
 

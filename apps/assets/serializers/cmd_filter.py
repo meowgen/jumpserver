@@ -3,7 +3,7 @@
 import re
 from rest_framework import serializers
 
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from ..models import CommandFilter, CommandFilterRule
 from orgs.mixins.serializers import BulkOrgResourceModelSerializer
 from orgs.utils import tmp_to_root_org

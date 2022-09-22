@@ -1,5 +1,5 @@
 from django.db.models import Q
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import Permission as DjangoPermission
 from django.contrib.auth.models import ContentType as DjangoContentType
 

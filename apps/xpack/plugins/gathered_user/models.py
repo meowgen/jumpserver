@@ -6,7 +6,7 @@ import time
 from celery import current_task
 from django.db import models
 from django.utils import timezone
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from orgs.mixins.models import OrgModelMixin
 from common.utils import get_logger, group_obj_by_count

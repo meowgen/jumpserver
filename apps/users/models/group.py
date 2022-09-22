@@ -2,7 +2,7 @@
 import uuid
 
 from django.db import models, IntegrityError
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from common.utils import lazyproperty
 from orgs.mixins.models import OrgModelMixin

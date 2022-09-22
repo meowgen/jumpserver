@@ -4,7 +4,7 @@
 from django.shortcuts import get_object_or_404
 from rest_framework import status, mixins, viewsets
 from rest_framework.response import Response
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from common.utils import get_object_or_none
 from orgs.mixins.api import OrgBulkModelViewSet, OrgGenericViewSet

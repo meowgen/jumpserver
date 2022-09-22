@@ -14,7 +14,7 @@ from django.utils import timezone
 from django.core.cache import cache
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.hashers import check_password
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.shortcuts import reverse
 
 from orgs.utils import current_org

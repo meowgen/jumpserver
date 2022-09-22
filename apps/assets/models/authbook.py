@@ -3,7 +3,7 @@
 
 from django.db import models
 from django.db.models import F
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from simple_history.models import HistoricalRecords
 
 from common.utils import lazyproperty, get_logger

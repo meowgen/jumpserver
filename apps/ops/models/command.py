@@ -5,8 +5,8 @@ import json
 
 from celery.exceptions import SoftTimeLimitExceeded
 from django.utils import timezone
-from django.utils.translation import ugettext_lazy as _
-from django.utils.translation import ugettext
+from django.utils.translation import gettext_lazy as _
+from django.utils.translation import gettext
 from django.db import models
 
 from terminal.notifications import CommandExecutionAlert
@@ -110,7 +110,7 @@ class CommandExecution(OrgModelMixin):
         return allow_assets
 
     def run(self):
-        print('-' * 10 + ' ' + ugettext('Task start') + ' ' + '-' * 10)
+        print('-' * 10 + ' ' + gettext('Task start') + ' ' + '-' * 10)
         org = Organization.get_instance(self.run_as.org_id)
         org.change_to()
         self.date_start = timezone.now()
@@ -157,7 +157,7 @@ class CommandExecution(OrgModelMixin):
         self.is_finished = True
         self.date_finished = timezone.now()
         self.save()
-        print('-' * 10 + ' ' + ugettext('Task end') + ' ' + '-' * 10)
+        print('-' * 10 + ' ' + gettext('Task end') + ' ' + '-' * 10)
         return self.result
 
     class Meta:

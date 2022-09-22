@@ -5,7 +5,7 @@ import uuid
 from hashlib import md5
 from celery import current_task
 from django.db import models
-from django.utils.translation import ugettext_noop, ugettext_lazy as _
+from django.utils.translation import gettext_noop, gettext_lazy as _
 from django.conf import settings
 
 from assets.models import Asset, Node
@@ -248,25 +248,25 @@ class ChangeAuthPlanTask(BaseChangeAuthPlanTask):
         error = None
         if settings.CHANGE_AUTH_PLAN_SECURE_MODE_ENABLED:
             if not self.asset.admin_user:
-                error = ugettext_noop(
+                error = gettext_noop(
                     'This asset does not have a privileged user set: '
                 ) + str(self.asset)
                 return error
 
             if self.username.lower() == self.asset.admin_user.username.lower():
-                error = ugettext_noop(
+                error = gettext_noop(
                     "The password and key of the current asset privileged user cannot be changed: "
                 ) + str(self.asset)
                 return error
 
         if self.execution.is_password and (not self.password or not self.password.strip()):
-            error = ugettext_noop('Password cannot be set to blank, exit. ')
+            error = gettext_noop('Password cannot be set to blank, exit. ')
             return error
 
         if self.execution.is_ssh_key and \
                 self.execution.ssh_key_strategy == ChangeAuthPlan.SSHKeyStrategy.set and \
                 (not self.public_key or not self.public_key.strip()):
-            error = ugettext_noop('Public key cannot be set to null, exit. ')
+            error = gettext_noop('Public key cannot be set to null, exit. ')
             return error
         return error
 

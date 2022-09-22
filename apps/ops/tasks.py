@@ -8,7 +8,7 @@ from celery import shared_task, subtask
 
 from celery.exceptions import SoftTimeLimitExceeded
 from django.utils import timezone
-from django.utils.translation import ugettext_lazy as _, gettext
+from django.utils.translation import gettext_lazy as _, gettext
 
 from common.utils import get_logger, get_object_or_none, get_log_keep_day
 from orgs.utils import tmp_to_root_org, tmp_to_org

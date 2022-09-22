@@ -4,7 +4,7 @@
 from django.db.models import F
 from django.shortcuts import get_object_or_404
 from rest_framework.views import APIView, Response
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from common.utils import get_logger, is_uuid
 from orgs.mixins.api import OrgBulkModelViewSet

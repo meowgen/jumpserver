@@ -3,7 +3,7 @@
 from itertools import groupby
 from celery import shared_task
 from common.db.utils import get_object_if_need, get_objects
-from django.utils.translation import ugettext as _, gettext_noop
+from django.utils.translation import gettext as _, gettext_noop
 from django.db.models import Empty
 
 from common.utils import encrypt_password, get_logger

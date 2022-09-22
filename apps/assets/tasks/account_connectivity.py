@@ -1,7 +1,7 @@
 # ~*~ coding: utf-8 ~*~
 
 from celery import shared_task
-from django.utils.translation import ugettext as _, gettext_noop
+from django.utils.translation import gettext as _, gettext_noop
 
 from common.utils import get_logger
 from orgs.utils import org_aware_func

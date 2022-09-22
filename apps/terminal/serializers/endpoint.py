@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from common.drf.serializers import BulkModelSerializer
 from acls.serializers.rules import ip_group_child_validator, ip_group_help_text
 from ..models import Endpoint, EndpointRule

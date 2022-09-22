@@ -5,7 +5,7 @@ from rest_framework import viewsets, generics, status
 from rest_framework.response import Response
 from rest_framework.request import Request
 from rest_framework.decorators import action
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django_filters import utils
 
 from terminal import const

@@ -3,7 +3,7 @@
 
 import uuid
 from django.db import models
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.templatetags.static import static
 
 from jumpserver.context_processor import default_interface

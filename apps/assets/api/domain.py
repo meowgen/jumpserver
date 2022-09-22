@@ -1,7 +1,7 @@
 # ~*~ coding: utf-8 ~*~
 
 from django.views.generic.detail import SingleObjectMixin
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 from rest_framework.views import APIView, Response
 from rest_framework.serializers import ValidationError
 

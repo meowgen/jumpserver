@@ -2,7 +2,7 @@
 #
 
 from rest_framework import serializers
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.core.exceptions import ObjectDoesNotExist
 
 from common.utils import get_logger, is_uuid, get_object_or_none

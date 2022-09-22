@@ -6,7 +6,7 @@ from django.core.cache import cache
 from django.shortcuts import reverse
 from django.template.loader import render_to_string
 from django.forms import model_to_dict
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from notifications.notifications import UserMessage
 from common.utils import get_logger, random_string

@@ -4,7 +4,7 @@
 import os
 import re
 
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 from rest_framework import viewsets
 from celery.result import AsyncResult
 from rest_framework import generics

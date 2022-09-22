@@ -5,7 +5,7 @@ import tarfile
 
 from django.db.models import F
 from django.shortcuts import get_object_or_404, reverse
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 from django.utils.encoding import escape_uri_path
 from django.http import FileResponse
 from django.core.files.storage import default_storage

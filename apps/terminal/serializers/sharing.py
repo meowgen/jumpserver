@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from orgs.mixins.serializers import OrgResourceModelSerializerMixin
 from common.utils.random import random_string
 from common.utils.common import pretty_string

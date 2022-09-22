@@ -17,7 +17,7 @@ from django.db import transaction
 from django.db.models import *
 from django.db.models import QuerySet
 from django.db.models.functions import Concat
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 
 class Choice(str):

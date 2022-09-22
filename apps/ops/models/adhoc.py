@@ -9,7 +9,7 @@ from celery import current_task
 from django.db import models
 from django.conf import settings
 from django.utils import timezone
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from common.utils import get_logger, lazyproperty
 from common.utils.translate import translate_value

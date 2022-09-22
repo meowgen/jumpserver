@@ -2604,8 +2604,8 @@ msgid "%(name)s was updated successfully"
 msgstr "%(name)s は正常に更新されました"
 
 #: common/db/encoder.py:11
-msgid "ugettext_lazy"
-msgstr "ugettext_lazy"
+msgid "gettext_lazy"
+msgstr "gettext_lazy"
 
 #: common/db/fields.py:80
 msgid "Marshal dict data to char field"

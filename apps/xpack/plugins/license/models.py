@@ -7,7 +7,7 @@ import json
 from hashlib import md5
 from django.db import models
 from django.core.cache import cache
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from .utils import validate_license, decrypt_license, date_to_timestamp
 

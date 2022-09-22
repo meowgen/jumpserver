@@ -20,7 +20,7 @@ from ldap3.core.exceptions import (
 )
 from django.conf import settings
 from django.core.cache import cache
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from copy import deepcopy
 from collections import defaultdict
 from orgs.utils import tmp_to_org

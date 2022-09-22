@@ -4,7 +4,7 @@ import json
 
 from django.db import transaction
 from django.utils import translation
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 
 from termcolor import colored
 from common.utils import get_logger, get_object_or_none

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.http.response import JsonResponse
 from rest_framework import permissions

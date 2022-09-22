@@ -5,7 +5,7 @@ import ipaddress
 
 import geoip2.database
 from geoip2.errors import GeoIP2Error
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.conf import settings
 
 __all__ = ['get_ip_city_by_geoip']

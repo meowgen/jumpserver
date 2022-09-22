@@ -3,7 +3,7 @@
 from __future__ import unicode_literals
 from django.views.generic import RedirectView
 from django.shortcuts import reverse, redirect
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 from django.views.generic.base import TemplateView
 from django.conf import settings
 from django.urls import reverse_lazy

@@ -4,7 +4,7 @@
 import time
 
 from django.utils import timezone
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 
 from common.utils import get_logger
 from common.utils.timezone import local_now_display

@@ -1,7 +1,7 @@
 import uuid
 from django.db import models
 from django.db.models import Count
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from orgs.mixins.models import OrgModelMixin
 from common.utils import lazyproperty, get_logger

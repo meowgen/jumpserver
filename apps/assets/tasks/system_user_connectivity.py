@@ -3,7 +3,7 @@ from itertools import groupby
 from collections import defaultdict
 
 from celery import shared_task
-from django.utils.translation import ugettext as _, gettext_noop
+from django.utils.translation import gettext as _, gettext_noop
 
 from assets.models import Asset
 from common.utils import get_logger

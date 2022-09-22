@@ -2,7 +2,7 @@
 #
 from rest_framework import serializers
 from django.core.validators import RegexValidator
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from orgs.mixins.serializers import BulkOrgResourceModelSerializer
 from ..models import Asset, Node, Platform, SystemUser

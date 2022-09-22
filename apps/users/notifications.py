@@ -2,7 +2,7 @@ from urllib.parse import urljoin
 from collections import defaultdict
 
 from django.utils import timezone
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 from django.conf import settings
 from django.template.loader import render_to_string
 

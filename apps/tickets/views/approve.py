@@ -5,7 +5,7 @@ from __future__ import unicode_literals
 from django.views.generic.base import TemplateView
 from django.shortcuts import redirect, reverse
 from django.core.cache import cache
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 
 from orgs.utils import tmp_to_root_org
 from tickets.models import (

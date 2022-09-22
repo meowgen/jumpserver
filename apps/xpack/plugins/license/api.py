@@ -5,7 +5,7 @@ import codecs
 from rest_framework import generics
 from rest_framework.response import Response
 from common.utils import get_logger
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 from settings.models import Setting
 from .utils import validate_license, decrypt_license
 from .serializers import LicenseDetailSerializer, LicenseImportSerializer

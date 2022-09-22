@@ -5,7 +5,7 @@ from typing import Callable
 
 from django.db import models
 from django.db.models import Q
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.db.utils import IntegrityError
 from django.db.models.fields import related
 from django.forms import model_to_dict

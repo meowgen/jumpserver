@@ -11,7 +11,7 @@ from django.contrib.auth import login as auth_login, logout as auth_logout
 from django.http import HttpResponse, HttpRequest
 from django.shortcuts import reverse, redirect
 from django.utils.decorators import method_decorator
-from django.utils.translation import ugettext as _, get_language
+from django.utils.translation import gettext as _, get_language
 from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.debug import sensitive_post_parameters

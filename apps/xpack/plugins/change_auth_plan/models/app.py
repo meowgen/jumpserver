@@ -4,7 +4,7 @@ import itertools
 import uuid
 from celery import current_task
 from django.db import models
-from django.utils.translation import ugettext_noop, ugettext_lazy as _
+from django.utils.translation import gettext_noop, gettext_lazy as _
 
 from applications.const import AppType, AppCategory
 from common.utils import lazyproperty
@@ -177,5 +177,5 @@ class ApplicationChangeAuthPlanTask(BaseChangeAuthPlanTask):
     def pre_start_check(self):
         error = None
         if not self.password or not self.password.strip():
-            error = ugettext_noop('Password cannot be set to blank, exit. ')
+            error = gettext_noop('Password cannot be set to blank, exit. ')
         return error

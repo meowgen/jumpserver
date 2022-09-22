@@ -5,7 +5,7 @@ import uuid
 import time
 
 from django.core.cache import cache
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 from six import text_type
 from django.contrib.auth import get_user_model
 

@@ -1,4 +1,4 @@
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from rest_framework import serializers
 from orgs.utils import tmp_to_root_org
 from common.utils import get_object_or_none, lazyproperty

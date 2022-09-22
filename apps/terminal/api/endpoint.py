@@ -3,7 +3,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.request import Request
 from common.drf.api import JMSBulkModelViewSet
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.shortcuts import get_object_or_404
 from assets.models import Asset
 from orgs.utils import tmp_to_root_org
