@@ -43,11 +43,6 @@ class Migration(migrations.Migration):
         ),
         migrations.AlterField(
             model_name='user',
-            name='wechat',
-            field=models.CharField(blank=True, max_length=128, verbose_name='Wechat'),
-        ),
-        migrations.AlterField(
-            model_name='user',
             name='is_first_login',
             field=models.BooleanField(default=True),
         ),

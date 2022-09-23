@@ -57,7 +57,6 @@ class Migration(migrations.Migration):
                 ('email', models.EmailField(max_length=30, unique=True, verbose_name='Email')),
                 ('role', models.CharField(blank=True, choices=[('Admin', 'Administrator'), ('User', 'User'), ('App', 'Application')], default='User', max_length=10, verbose_name='Role')),
                 ('avatar', models.ImageField(null=True, upload_to='avatar', verbose_name='Avatar')),
-                ('wechat', models.CharField(blank=True, max_length=30, verbose_name='Wechat')),
                 ('phone', models.CharField(blank=True, max_length=20, null=True, verbose_name='Phone')),
                 ('enable_otp', models.BooleanField(default=False, verbose_name='Enable OTP')),
                 ('secret_key_otp', models.CharField(blank=True, max_length=16)),

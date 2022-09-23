@@ -10,14 +10,4 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.AddField(
-            model_name='user',
-            name='dingtalk_id',
-            field=models.CharField(default=None, max_length=128, null=True, unique=True, verbose_name='DingTalk'),
-        ),
-        migrations.AddField(
-            model_name='user',
-            name='wecom_id',
-            field=models.CharField(default=None, max_length=128, null=True, unique=True, verbose_name='WeCom'),
-        ),
     ]

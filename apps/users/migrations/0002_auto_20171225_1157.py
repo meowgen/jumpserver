@@ -27,9 +27,4 @@ class Migration(migrations.Migration):
             name='username',
             field=models.CharField(max_length=128, unique=True, verbose_name='Username'),
         ),
-        migrations.AlterField(
-            model_name='user',
-            name='wechat',
-            field=models.CharField(blank=True, max_length=128, verbose_name='Wechat'),
-        ),
     ]
