@@ -3,5 +3,6 @@ __pycache__/
 *.log
 *.pid
 *.yml
+*.zip
 *.txt
 /jumpserver/tmp
