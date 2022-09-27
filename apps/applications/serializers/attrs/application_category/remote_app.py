@@ -20,10 +20,8 @@ class ExistAssetPrimaryKeyRelatedField(serializers.PrimaryKeyRelatedField):
         return str(instance.id)
 
     def to_representation(self, _id):
-        # _id 是 instance.id
         if self.pk_field is not None:
             return self.pk_field.to_representation(_id)
-        # 解决删除资产后，远程应用更新页面会显示资产ID的问题
         asset = get_object_or_none(Asset, id=_id)
         if not asset:
             return None

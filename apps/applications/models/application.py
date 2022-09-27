@@ -135,13 +135,11 @@ class ApplicationTreeNodeMixin:
         counts = cls.get_tree_node_counts(queryset)
         tree_nodes = []
 
-        # 类别的节点
         tree_nodes += cls.create_category_tree_nodes(
             pid, counts, show_empty=show_empty,
             show_count=show_count
         )
 
-        # 类型的节点
         tree_nodes += cls.create_types_tree_nodes(
             pid, counts, show_empty=show_empty,
             show_count=show_count
@@ -152,7 +150,6 @@ class ApplicationTreeNodeMixin:
     def create_tree_nodes(cls, queryset, root_node=None, show_empty=True, show_count=True):
         tree_nodes = []
 
-        # 根节点有可能是组织名称
         if root_node is None:
             root_node = cls.create_root_tree_node(queryset, show_count=show_count)
             tree_nodes.append(root_node)
@@ -161,7 +158,6 @@ class ApplicationTreeNodeMixin:
             queryset, root_node.id, show_empty=show_empty, show_count=show_count
         )
 
-        # 应用的节点
         for app in queryset:
             if not settings.XPACK_ENABLED and const.AppType.is_xpack(app.type):
                 continue
@@ -305,7 +301,7 @@ class Application(CommonModelMixin, OrgModelMixin, ApplicationTreeNodeMixin):
         return target_ip
 
     def get_target_protocol_for_oracle(self):
-        """ Oracle 类型需要单独处理，因为要携带版本号 """
+        """ С типами Oracle нужно работать отдельно, потому что они содержат номер версии. """
         if not self.is_type(self.APP_TYPE.oracle):
             return
         version = self.attrs.get('version', OracleVersion.version_12c)

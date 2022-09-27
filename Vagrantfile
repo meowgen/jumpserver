@@ -23,20 +23,17 @@ Vagrant.configure("2") do |config|
     rsync__exclude: ['.git*', 'node_modules*','*.log','*.box','Vagrantfile']
 
   config.vm.provision "shell", inline: <<-SHELL
-## 设置yum的阿里云源
 sudo curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
 sudo sed -i -e '/mirrors.cloud.aliyuncs.com/d' -e '/mirrors.aliyuncs.com/d' /etc/yum.repos.d/CentOS-Base.repo
 sudo curl -o /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-7.repo
 sudo yum makecache
 
-## 安装依赖包
 sudo yum install -y python36 python36-devel python36-pip \
 		 libtiff-devel libjpeg-devel libzip-devel freetype-devel \
      lcms2-devel libwebp-devel tcl-devel tk-devel sshpass \
      openldap-devel mariadb-devel mysql-devel libffi-devel \
      openssh-clients telnet openldap-clients gcc
 
-## 配置pip阿里云源
 mkdir /home/vagrant/.pip
 cat << EOF | sudo tee -a /home/vagrant/.pip/pip.conf
 [global]
