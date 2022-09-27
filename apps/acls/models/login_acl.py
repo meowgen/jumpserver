@@ -19,14 +19,11 @@ class LoginACL(BaseACL):
         allow = 'allow', _('Allow')
         confirm = 'confirm', _('Login confirm')
 
-    # 用户
     user = models.ForeignKey(
         'users.User', on_delete=models.CASCADE, verbose_name=_('User'),
         related_name='login_acls'
     )
-    # 规则
     rules = models.JSONField(default=dict, verbose_name=_('Rule'))
-    # 动作
     action = models.CharField(
         max_length=64, verbose_name=_('Action'),
         choices=ActionChoices.choices, default=ActionChoices.reject
@@ -84,13 +81,10 @@ class LoginACL(BaseACL):
 
         reject_type = ''
         if is_contain_ip and is_contain_time_period:
-            # 满足条件
             allow = acl.action_allow
             if not allow:
                 reject_type = 'ip' if is_contain_ip else 'time'
         else:
-            # 不满足条件
-            # 如果acl本身允许，那就拒绝；如果本身拒绝，那就允许
             allow = not acl.action_allow
             if not allow:
                 reject_type = 'ip' if not is_contain_ip else 'time'
