@@ -149,7 +149,6 @@ class MyGrantedAssetSystemUsersApi(UserGrantedAssetSystemUsersForAdminApi):
         return self.request.user
 
 
-# TODO 删除
 class UserAssetPermissionsCacheApi(DestroyAPIView):
     def destroy(self, request, *args, **kwargs):
         return Response(status=204)

@@ -7,9 +7,6 @@ from ..base import BasePermissionViewSet
 
 
 class ApplicationPermissionViewSet(BasePermissionViewSet):
-    """
-    应用授权列表的增删改查API
-    """
     model = ApplicationPermission
     serializer_class = serializers.ApplicationPermissionSerializer
     filterset_fields = {

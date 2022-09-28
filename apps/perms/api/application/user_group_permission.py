@@ -14,9 +14,6 @@ __all__ = [
 
 
 class UserGroupGrantedApplicationsApi(CommonApiMixin, ListAPIView):
-    """
-    获取用户组直接授权的应用
-    """
     serializer_class = serializers.AppGrantedSerializer
     only_fields = serializers.AppGrantedSerializer.Meta.only_fields
     filterset_fields = ['id', 'name', 'category', 'type', 'comment']

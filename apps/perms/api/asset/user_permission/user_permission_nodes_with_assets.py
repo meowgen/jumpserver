@@ -66,14 +66,6 @@ class MyGrantedNodesWithAssetsAsTreeApi(SerializeToTreeNodeMixin, ListAPIView):
         data.extend(self.serialize_assets(all_assets))
 
     def list(self, request: Request, *args, **kwargs):
-        """
-        此算法依赖 UserGrantedMappingNode
-        获取所有授权的节点和资产
-
-        Node = UserGrantedMappingNode + 授权节点的子节点
-        Asset = 授权节点的资产 + 直接授权的资产
-        """
-
         user = request.user
         data = []
         asset_perm_ids = get_user_all_asset_perm_ids(user)
@@ -91,7 +83,6 @@ class MyGrantedNodesWithAssetsAsTreeApi(SerializeToTreeNodeMixin, ListAPIView):
         self.add_favorite_resource(data, nodes_query_utils, assets_query_utils)
 
         if system_user_id:
-            # 有系统用户筛选的需要重新计算树结构
             self.add_node_filtered_by_system_user(data, user, asset_perm_ids)
         else:
             all_nodes = nodes_query_utils.get_whole_tree_nodes(with_special=False)
@@ -103,9 +94,6 @@ class MyGrantedNodesWithAssetsAsTreeApi(SerializeToTreeNodeMixin, ListAPIView):
 
 class GrantedNodeChildrenWithAssetsAsTreeApiMixin(SerializeToTreeNodeMixin,
                                                   ListAPIView):
-    """
-    带资产的授权树
-    """
     user: None
 
     def ensure_key(self):

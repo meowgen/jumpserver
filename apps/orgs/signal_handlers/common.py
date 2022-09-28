@@ -57,10 +57,8 @@ def subscribe_orgs_mapping_expire(sender, **kwargs):
     t.start()
 
 
-# 创建对应的root
 @receiver(post_save, sender=Organization)
 def on_org_create_or_update(sender, instance, created=False, **kwargs):
-    # 必须放到最开始, 因为下面调用Node.save方法时会获取当前组织的org_id(即instance.org_id), 如果不过期会找不到
     expire_orgs_mapping_for_memory(instance.id)
     old_org = get_current_org()
     set_current_org(instance)
@@ -75,7 +73,6 @@ def on_org_create_or_update(sender, instance, created=False, **kwargs):
 def on_org_delete(sender, instance, **kwargs):
     expire_orgs_mapping_for_memory(instance.id)
 
-    # 删除该组织下所有 节点
     with tmp_to_org(instance):
         root_node = Node.org_root()
         if root_node:
@@ -130,9 +127,6 @@ def _remove_users(model, users, org, user_field_name='users'):
 
 
 def _clear_users_from_org(org, users):
-    """
-    清理用户在该组织下的相关数据
-    """
     if not users:
         return
 

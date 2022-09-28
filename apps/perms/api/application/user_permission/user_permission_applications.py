@@ -50,9 +50,6 @@ class MyAllGrantedApplicationsApi(AppRoleUserMixin, AllGrantedApplicationsApi):
 
 
 class ApplicationsAsTreeMixin:
-    """
-    将应用序列化成树的结构返回
-    """
     serializer_class = TreeNodeSerializer
     user: None
     filter_queryset: Callable
