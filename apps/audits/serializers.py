@@ -93,9 +93,9 @@ class CommandExecutionSerializer(serializers.ModelSerializer):
         ]
         fields = fields_small + ['hosts', 'hosts_display', 'run_as_display', 'user_display']
         extra_kwargs = {
-            'result': {'label': _('Result')},  # model 上的方法，只能在这修改
+            'result': {'label': _('Result')},
             'is_success': {'label': _('Is success')},
-            'hosts': {'label': _('Hosts')},  # 外键，会生成 sql。不在 model 上修改
+            'hosts': {'label': _('Hosts')},
             'run_as': {'label': _('Run as')},
             'user': {'label': _('User')},
             'run_as_display': {'label': _('Run as display')},

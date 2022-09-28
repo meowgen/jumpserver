@@ -163,7 +163,7 @@ def on_m2m_changed(sender, action, instance, reverse, model, pk_set, **kwargs):
             resource = resource_tmpl.format(**{
                 instance_name: instance_value,
                 model_name: str(obj)
-            })[:128]  # `resource` 字段只有 128 个字符长 😔
+            })[:128]
 
             to_create.append(OperateLog(
                 user=user, action=action, resource_type=resource_type,
@@ -174,7 +174,6 @@ def on_m2m_changed(sender, action, instance, reverse, model, pk_set, **kwargs):
 
 @receiver(post_save)
 def on_object_created_or_update(sender, instance=None, created=False, update_fields=None, **kwargs):
-    # last_login 改变是最后登录日期, 每次登录都会改变
     if instance._meta.object_name == 'User' and \
             update_fields and 'last_login' in update_fields:
         return

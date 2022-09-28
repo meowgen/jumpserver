@@ -23,7 +23,6 @@ class JMSBaseAuthBackend:
         Reject users with is_valid=False. Custom user models that don't have
         that attribute are allowed.
         """
-        # 在 check_user_auth 中进行了校验，可以返回对应的错误信息
         # is_valid = getattr(user, 'is_valid', None)
         # return is_valid or is_valid is None
         return True
@@ -41,7 +40,6 @@ class JMSBaseAuthBackend:
         else:
             allowed_backend_paths = User.get_user_allowed_auth_backend_paths(username)
         if allowed_backend_paths is None:
-            # 特殊值 None 表示没有限制
             return True
         backend_name = self.__class__.__name__
         allowed_backend_names = [path.split('.')[-1] for path in allowed_backend_paths]

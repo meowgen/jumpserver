@@ -45,10 +45,6 @@ class PrivateToken(Token):
 
 
 class SSOToken(models.JMSBaseModel):
-    """
-    类似腾讯企业邮的 [单点登录](https://exmail.qq.com/qy_mng_logic/doc#10036)
-    出于安全考虑，这里的 `token` 使用一次随即过期。但我们保留每一个生成过的 `token`。
-    """
     authkey = models.UUIDField(primary_key=True, default=uuid.uuid4, verbose_name=_('Token'))
     expired = models.BooleanField(default=False, verbose_name=_('Expired'))
     user = models.ForeignKey('users.User', on_delete=models.CASCADE, verbose_name=_('User'), db_constraint=False)
@@ -134,12 +130,10 @@ class ConnectionToken(OrgModelMixin, models.JMSModel):
         return self.type == tp
 
     def renewal(self):
-        """ 续期 Token，将来支持用户自定义创建 token 后，续期策略要修改 """
         self.date_expired = self.get_default_date_expired()
         self.save()
 
-    actions = expired_at = None  # actions 和 expired_at 在 check_valid() 中赋值
-
+    actions = expired_at = None
     def check_valid(self):
         from perms.utils.asset.permission import validate_permission as asset_validate_permission
         from perms.utils.application.permission import validate_permission as app_validate_permission

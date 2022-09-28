@@ -75,7 +75,7 @@ class NodeViewSet(SuggestionMixin, OrgBulkModelViewSet):
 
 class NodeListAsTreeApi(generics.ListAPIView):
     """
-    获取节点列表树
+    Дерево списка нод
     [
       {
         "id": "",
@@ -116,7 +116,6 @@ class NodeChildrenApi(generics.ListCreateAPIView):
             if not value:
                 value = self.instance.get_next_child_preset_name()
             node = self.instance.create_child(value=value, _id=_id)
-            # 避免查询 full value
             node._full_value = node.value
             serializer.instance = node
 
@@ -166,7 +165,7 @@ class NodeChildrenApi(generics.ListCreateAPIView):
 
 class NodeChildrenAsTreeApi(SerializeToTreeNodeMixin, NodeChildrenApi):
     """
-    节点子节点作为树返回，
+    Дочерние ноды в виде дерева
     [
       {
         "id": "",
@@ -216,7 +215,6 @@ class NodeAddChildrenApi(generics.UpdateAPIView):
     instance = None
 
     def update(self, request, *args, **kwargs):
-        """ 同时支持 put 和 patch 方法"""
         instance = self.get_object()
         node_ids = request.data.get("nodes")
         children = Node.objects.filter(id__in=node_ids)
@@ -246,7 +244,6 @@ class NodeRemoveAssetsApi(generics.UpdateAPIView):
         node = self.get_object()
         node.assets.remove(*assets)
 
-        # 把孤儿资产添加到 root 节点
         orphan_assets = Asset.objects.filter(
             id__in=[a.id for a in assets],
             nodes__isnull=True
@@ -268,31 +265,24 @@ class MoveAssetsToNodeApi(generics.UpdateAPIView):
     def remove_old_nodes(self, assets):
         m2m_model = Asset.nodes.through
 
-        # 查询资产与节点关系表，查出要移动资产与节点的所有关系
         relates = m2m_model.objects.filter(asset__in=assets).values_list('asset_id', 'node_id')
         if relates:
-            # 对关系以资产进行分组，用来发 `reverse=False` 信号
             asset_nodes_mapper = defaultdict(set)
             for asset_id, node_id in relates:
                 asset_nodes_mapper[asset_id].add(node_id)
 
-            # 组建一个资产 id -> Asset 的 mapper
             asset_mapper = {asset.id: asset for asset in assets}
 
-            # 创建删除关系信号发送函数
             senders = []
             for asset_id, node_id_set in asset_nodes_mapper.items():
                 senders.append(partial(m2m_changed.send, sender=m2m_model, instance=asset_mapper[asset_id],
                                        reverse=False, model=Node, pk_set=node_id_set))
-            # 发送 pre 信号
             [sender(action=PRE_REMOVE) for sender in senders]
             num = len(relates)
             asset_ids, node_ids = zip(*relates)
-            # 删除之前的关系
             rows, _i = m2m_model.objects.filter(asset_id__in=asset_ids, node_id__in=node_ids).delete()
             if rows != num:
                 raise SomeoneIsDoingThis
-            # 发送 post 信号
             [sender(action=POST_REMOVE) for sender in senders]
 
 

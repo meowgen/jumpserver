@@ -17,7 +17,7 @@ urlpatterns = [
     path('login/guard/', views.UserLoginGuardView.as_view(), name='login-guard'),
     path('logout/', views.UserLogoutView.as_view(), name='logout'),
 
-    # 原来在users中的
+    # users
     path('password/forgot/', users_view.UserForgotPasswordView.as_view(), name='forgot-password'),
     path('password/reset/', users_view.UserResetPasswordView.as_view(), name='reset-password'),
     path('password/verify/', users_view.UserVerifyPasswordView.as_view(), name='user-verify-password'),

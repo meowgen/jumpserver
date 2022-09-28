@@ -44,7 +44,7 @@ class AssetByNodeFilterBackend(filters.BaseFilterBackend):
 
 class FilterAssetByNodeFilterBackend(filters.BaseFilterBackend):
     """
-    需要与 `assets.api.mixin.FilterAssetByNodeMixin` 配合使用
+    Необходимо использовать с `assets.api.mixin.FilterAssetByNodeMixin`
     """
     fields = ['node', 'all']
 

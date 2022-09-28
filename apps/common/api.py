@@ -49,7 +49,6 @@ class LogTailApi(generics.RetrieveAPIView):
 
     def filter_line(self, line):
         """
-        过滤行，可能替换一些信息
         :param line:
         :return:
         """

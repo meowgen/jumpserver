@@ -32,7 +32,6 @@ def _get_backends(return_tuples=False):
     backends = []
     for backend_path in settings.AUTHENTICATION_BACKENDS:
         backend = load_backend(backend_path)
-        # 检查 backend 是否启用
         if not backend.is_enabled():
             continue
         backends.append((backend, backend_path) if return_tuples else backend)
@@ -48,19 +47,13 @@ auth._get_backends = _get_backends
 
 
 def authenticate(request=None, **credentials):
-    """
-    If the given credentials are valid, return a User object.
-    之所以 hack 这个 auticate
-    """
     username = credentials.get('username')
 
     for backend, backend_path in _get_backends(return_tuples=True):
-        # 检查用户名是否允许认证 (预先检查，不浪费认证时间)
         logger.info('Try using auth backend: {}'.format(str(backend)))
         if not backend.username_allow_authenticate(username):
             continue
 
-        # 原生
         backend_signature = inspect.signature(backend.authenticate)
         try:
             backend_signature.bind(request, **credentials)
@@ -75,7 +68,6 @@ def authenticate(request=None, **credentials):
         if user is None:
             continue
 
-        # 检查用户是否允许认证
         if not backend.user_allow_authenticate(user):
             continue
 
@@ -175,7 +167,6 @@ class AuthPreCheckMixin:
         self._check_is_block(username, raise_exception)
 
     def _check_only_allow_exists_user_auth(self, username):
-        # 仅允许预先存在的用户认证
         if not settings.ONLY_ALLOW_EXIST_USER_AUTH:
             return
 
@@ -247,7 +238,6 @@ class MFAMixin:
         if not user.mfa_enabled:
             return
 
-        # 监测 MFA 是不是屏蔽了
         ip = self.get_request_ip()
         self.check_mfa_is_block(user.username, ip)
 
@@ -327,7 +317,6 @@ class AuthACLMixin:
     get_request_ip: Callable
 
     def _check_login_acl(self, user, ip):
-        # ACL 限制用户登录
         is_allowed, limit_type = LoginACL.allow_user_to_login(user, ip)
         if is_allowed:
             return
@@ -412,7 +401,6 @@ class AuthMixin(CommonMixin, AuthPreCheckMixin, AuthACLMixin, MFAMixin, AuthPost
         cache.set(self.key_prefix_captcha.format(ip), 1, 3600)
 
     def check_is_need_captcha(self):
-        # 最近有登录失败时需要填写验证码
         ip = get_request_ip(self.request)
         need = cache.get(self.key_prefix_captcha.format(ip))
         return need
@@ -426,7 +414,6 @@ class AuthMixin(CommonMixin, AuthPreCheckMixin, AuthACLMixin, MFAMixin, AuthPost
         # check auth
         user = self._check_auth_user_is_valid(username, password, public_key)
 
-        # 校验login-acl规则
         self._check_login_acl(user, ip)
 
         # post check
@@ -434,10 +421,8 @@ class AuthMixin(CommonMixin, AuthPreCheckMixin, AuthACLMixin, MFAMixin, AuthPost
         self._check_passwd_is_too_simple(user, password)
         self._check_passwd_need_update(user)
 
-        # 校验login-mfa, 如果登录页面上显示 mfa 的话
         self._check_login_page_mfa_if_need(user)
 
-        # 标记密码验证成功
         self.mark_password_ok(user=user, auto_login=auto_login)
         LoginBlockUtil(user.username, ip).clean_failed_count()
         LoginIpBlockUtil(ip).clean_block_if_need()

@@ -24,18 +24,13 @@ __all__ = [
 ]
 
 
-# MFASelectAPi 原来的名字
 class MFASendCodeApi(AuthMixin, CreateAPIView):
-    """
-    选择 MFA 后对应操作 api，koko 目前在用
-    """
     permission_classes = (AllowAny,)
     serializer_class = serializers.MFASelectTypeSerializer
     username = ''
     ip = ''
 
     def get_user_from_db(self, username):
-        """避免暴力测试用户名"""
         ip = self.get_request_ip()
         self.check_mfa_is_block(username, ip)
         try:

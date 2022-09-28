@@ -22,9 +22,6 @@ __all__ = [
 
 
 class SystemUserSerializer(AuthSerializerMixin, BulkOrgResourceModelSerializer):
-    """
-    系统用户
-    """
     password = EncryptedField(
         label=_('Password'), required=False, allow_blank=True, allow_null=True, max_length=1024,
         trim_whitespace=False, validators=[validate_password_for_ansible],
@@ -202,7 +199,6 @@ class SystemUserSerializer(AuthSerializerMixin, BulkOrgResourceModelSerializer):
         if protocol not in SystemUser.SUPPORT_PUSH_PROTOCOLS:
             return attrs
 
-        # 自动生成
         if auto_gen_key and not self.instance:
             password = SystemUser.gen_password()
             attrs['password'] = password
@@ -210,7 +206,6 @@ class SystemUserSerializer(AuthSerializerMixin, BulkOrgResourceModelSerializer):
                 private_key, public_key = SystemUser.gen_key(username)
                 attrs['private_key'] = private_key
                 attrs['public_key'] = public_key
-        # 如果设置了private key，没有设置public key则生成
         elif attrs.get('private_key'):
             private_key = attrs['private_key']
             password = attrs.get('password')
@@ -275,10 +270,6 @@ class SystemUserWithAuthInfoSerializer(SecretReadableMixin, SystemUserSerializer
 
 
 class SystemUserSimpleSerializer(serializers.ModelSerializer):
-    """
-    系统用户最基本信息的数据结构
-    """
-
     class Meta:
         model = SystemUser
         fields = ('id', 'name', 'username')

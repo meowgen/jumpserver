@@ -7,7 +7,7 @@ from django_cas_ng.utils import (
 
 def get_service_url(request, redirect_to=None):
     """
-    重写 get_service url 方法, CAS_ROOT_PROXIED_AS 为空时, 支持跳转回当前访问的域名地址
+    Поддержка возврата к текущему посещенному адресу доменного имени.
     """
     """Generates application django service URL for CAS"""
     if getattr(django_settings, 'CAS_ROOT_PROXIED_AS', None):

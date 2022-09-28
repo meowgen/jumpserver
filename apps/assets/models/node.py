@@ -324,8 +324,6 @@ class NodeAllAssetsMappingMixin:
 
         lock_key = f'KEY_LOCK_GENERATE_ORG_{org_id}_NODE_ALL_ASSET_ids_MAPPING'
         with DistributedLock(lock_key):
-            # 这里使用无限期锁，原因是如果这里卡住了，就卡在数据库了，说明
-            # 数据库繁忙，所以不应该再有线程执行这个操作，使数据库忙上加忙
 
             _mapping = cls.get_node_all_asset_ids_mapping_from_cache(org_id)
             if _mapping:
@@ -371,7 +369,6 @@ class NodeAllAssetsMappingMixin:
                 char_id=output_as_string('id')
             ).values_list('char_id', 'key')
 
-            # * 直接取出全部. filter(node__org_id=org_id)(大规模下会更慢)
             nodes_asset_ids = Asset.nodes.through.objects.all() \
                 .annotate(char_node_id=output_as_string('node_id')) \
                 .annotate(char_asset_id=output_as_string('asset_id')) \
@@ -413,9 +410,6 @@ class NodeAssetsMixin(NodeAllAssetsMappingMixin):
 
     @classmethod
     def get_node_all_assets_by_key_v2(cls, key):
-        # 最初的写法是：
-        #   Asset.objects.filter(Q(nodes__key__startswith=f'{node.key}:') | Q(nodes__id=node.id))
-        #   可是 startswith 会导致表关联时 Asset 索引失效
         from .asset import Asset
         node_ids = cls.objects.filter(
             Q(key__startswith=f'{key}:') | Q(key=key)
@@ -484,7 +478,6 @@ class SomeNodesMixin:
 
     @classmethod
     def org_root(cls):
-        # 如果使用current_org 在set_current_org时会死循环
         ori_org = get_current_org()
 
         if ori_org and ori_org.is_default():
@@ -588,7 +581,6 @@ class Node(OrgModelMixin, SomeNodesMixin, FamilyMixin, NodeAssetsMixin):
         return self.value
 
     def computed_full_value(self):
-        # 不要在列表中调用该属性
         values = self.__class__.objects.filter(
             key__in=self.get_ancestor_keys()
         ).values_list('key', 'value')
@@ -625,7 +617,6 @@ class Node(OrgModelMixin, SomeNodesMixin, FamilyMixin, NodeAssetsMixin):
         return tree_node
 
     def has_offspring_assets(self):
-        # 拥有后代资产
         return self.get_all_assets().exists()
 
     def delete(self, using=None, keep_parents=False):
@@ -640,8 +631,6 @@ class Node(OrgModelMixin, SomeNodesMixin, FamilyMixin, NodeAssetsMixin):
         nodes_sorted = sorted(list(nodes), key=sort_key_func)
         nodes_mapper = {n.key: n for n in nodes_sorted}
         if not self.is_org_root():
-            # 如果是org_root，那么parent_key为'', parent为自己，所以这种情况不处理
-            # 更新自己时，自己的parent_key获取不到
             nodes_mapper.update({self.parent_key: self.parent})
         for node in nodes_sorted:
             parent = nodes_mapper.get(node.parent_key)

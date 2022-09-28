@@ -133,10 +133,8 @@ class AuthMixin:
             self.password = password
 
     def load_app_more_auth(self, app_id=None, username=None, user_id=None):
-        # 清除认证信息
         self._clean_auth_info_if_manual_login_mode()
 
-        # 先加载临时认证信息
         if self.login_mode == self.LOGIN_MANUAL:
             self._load_tmp_auth_if_has(app_id, user_id)
             return
@@ -150,7 +148,6 @@ class AuthMixin:
             return
 
         # Other app
-        # 更新用户名
         from users.models import User
         user = get_object_or_none(User, pk=user_id) if user_id else None
         if self.username_same_with_user:
@@ -167,20 +164,21 @@ class AuthMixin:
 
     def load_asset_special_auth(self, asset, username=''):
         """
-        AuthBook 的数据状态
+        AuthBook статус данных
             | asset | systemuser | username |
         1   |   *   |     *      |     x    |
         2   |   *   |     x      |     *    |
 
-        当前 AuthBook 只有以上两种状态，systemuser 与 username 不会并存。
-        正常的资产与系统用户关联产生的是第1种状态，改密则产生第2种状态。改密之后
-        只有 username 而没有 systemuser 。
+        В настоящее время AuthBook имеет только два вышеуказанных состояния, системный пользователь и имя пользователя не будут сосуществовать.
+        Связь между обычными активами и пользователями системы создает первое состояние, а изменение пароля создает второе состояние. После шифрования
+        Только имя пользователя и никакого системного пользователя.
 
-        Freq: 关联同一资产的多个系统用户指定同一用户名时，修改用户密码会影响所有系统用户
+        Частота: когда несколько пользователей системы, связанных с одним и тем же активом, указывают 
+        одно и то же имя пользователя, изменение пароля пользователя затронет всех пользователей системы.
 
-        这里有一个不对称的行为，同名系统用户密码覆盖
-        当有相同 username 的多个系统用户时，有改密动作之后，所有的同名系统用户都使用最后
-        一次改动，但如果没有发生过改密，同名系统用户使用的密码还是各自的。
+        Здесь наблюдается асимметричное поведение, переопределение пароля пользователя системы с тем же именем
+        При наличии нескольких системных пользователей с одинаковым именем пользователя после изменения пароля все системные пользователи с одинаковым именем используют последний
+        Одно изменение, но если смены пароля не произошло, пароли, используемые пользователями системы с тем же именем, остаются их собственными.
 
         """
         if username == '':
@@ -206,11 +204,9 @@ class AuthMixin:
     def load_asset_more_auth(self, asset_id=None, username=None, user_id=None):
         from users.models import User
         self._clean_auth_info_if_manual_login_mode()
-        # 加载临时认证信息
         if self.login_mode == self.LOGIN_MANUAL:
             self._load_tmp_auth_if_has(asset_id, user_id)
             return
-        # 更新用户名
         user = get_object_or_none(User, pk=user_id) if user_id else None
         if self.username_same_with_user:
             if user and not username:
@@ -218,7 +214,6 @@ class AuthMixin:
             else:
                 _username = username
             self.username = _username
-        # 加载某个资产的特殊配置认证信息
         asset = get_object_or_none(Asset, pk=asset_id) if asset_id else None
         if not asset:
             logger.debug('Asset not found, pass')
@@ -259,7 +254,7 @@ class SystemUser(ProtocolMixin, AuthMixin, BaseUser):
     home = models.CharField(max_length=4096, default='', verbose_name=_('Home'), blank=True)
     system_groups = models.CharField(default='', max_length=4096, verbose_name=_('System groups'), blank=True)
     ad_domain = models.CharField(default='', max_length=256)
-    # linux su 命令 (switch user)
+    # linux su (switch user)
     su_enabled = models.BooleanField(default=False, verbose_name=_('User switch'))
     su_from = models.ForeignKey('self', on_delete=models.SET_NULL, related_name='su_to', null=True, verbose_name=_("Switch from"))
 
@@ -345,7 +340,7 @@ class SystemUser(ProtocolMixin, AuthMixin, BaseUser):
         ]
 
 
-# Deprecated: 准备废弃
+# legacy
 class AdminUser(BaseUser):
     """
     A privileged user that ansible can use it to push system user and so on

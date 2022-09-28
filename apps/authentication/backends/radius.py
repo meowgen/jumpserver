@@ -33,7 +33,7 @@ class CreateUserMixin:
         return user
 
     def _perform_radius_auth(self, client, packet):
-        # TODO: 等待官方库修复这个BUG
+        # TODO: Баг библиотеки radius, ждём исправления
         try:
             return super()._perform_radius_auth(client, packet)
         except UnicodeError as e:

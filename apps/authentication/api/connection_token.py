@@ -129,29 +129,24 @@ class ConnectionTokenMixin:
             # 'remoteapplicationcmdline:s': '',
         }
 
-        # 设置磁盘挂载
         drives_redirect = is_true(self.request.query_params.get('drives_redirect'))
         if drives_redirect:
             actions = Action.choices_to_value(token.actions)
             if actions & Action.UPDOWNLOAD == Action.UPDOWNLOAD:
                 rdp_options['drivestoredirect:s'] = '*'
 
-        # 设置全屏
         full_screen = is_true(self.request.query_params.get('full_screen'))
         rdp_options['screen mode id:i'] = '2' if full_screen else '1'
 
-        # 设置 RDP Server 地址
         endpoint = self.get_smart_endpoint(
             protocol='rdp', asset=token.asset, application=token.application
         )
         rdp_options['full address:s'] = f'{endpoint.host}:{endpoint.rdp_port}'
 
-        # 设置用户名
         rdp_options['username:s'] = '{}|{}'.format(token.user.username, str(token.id))
         if token.system_user.ad_domain:
             rdp_options['domain:s'] = token.system_user.ad_domain
 
-        # 设置宽高
         height = self.request.query_params.get('height')
         width = self.request.query_params.get('width')
         if width and height:
@@ -159,7 +154,6 @@ class ConnectionTokenMixin:
             rdp_options['desktopheight:i'] = height
             rdp_options['winposstr:s:'] = f'0,1,0,0,{width},{height}'
 
-        # 设置其他选项
         rdp_options['session bpp:i'] = os.getenv('JUMPSERVER_COLOR_DEPTH', '32')
         rdp_options['audiomode:i'] = self.parse_env_bool('JUMPSERVER_DISABLE_AUDIO', 'false', '2', '0')
 
@@ -235,7 +229,6 @@ class ConnectionTokenViewSet(ConnectionTokenMixin, RootOrgViewMixin, JMSModelVie
 
     def get_object(self):
         if self.request.user.is_service_account:
-            # TODO: 组件获取 token 详情，将来放在 Super-connection-token API 中
             obj = get_object_or_404(ConnectionToken, pk=self.kwargs.get('pk'))
         else:
             obj = super(ConnectionTokenViewSet, self).get_object()
@@ -256,7 +249,6 @@ class ConnectionTokenViewSet(ConnectionTokenMixin, RootOrgViewMixin, JMSModelVie
 
     @action(methods=['POST'], detail=False, url_path='secret-info/detail')
     def get_secret_detail(self, request, *args, **kwargs):
-        # 非常重要的 api，在逻辑层再判断一下，双重保险
         perm_required = 'authentication.view_connectiontokensecret'
         if not request.user.has_perm(perm_required):
             raise PermissionDenied('Not allow to view secret')

@@ -57,8 +57,6 @@ def test_system_user_connectivity_util(system_user, assets, task_name):
         return
 
     # hosts = clean_ansible_task_hosts(assets, system_user=system_user)
-    # TODO: 这里不传递系统用户，因为clean_ansible_task_hosts会通过system_user来判断是否可以推送，
-    # 不符合测试可连接性逻辑， 后面需要优化此逻辑
     hosts = clean_ansible_task_hosts(assets)
     if not hosts:
         return {}
@@ -104,7 +102,6 @@ def test_system_user_connectivity_util(system_user, assets, task_name):
         tasks = platform_tasks_map[platform]
         print(_("Start test system user connectivity for platform: [{}]").format(platform))
         print(_("Hosts count: {}").format(len(_hosts)))
-        # 用户名不是动态的，用户名则是一个
         logger.debug("System user not has special auth")
         run_task(tasks, _hosts, system_user.username)
 

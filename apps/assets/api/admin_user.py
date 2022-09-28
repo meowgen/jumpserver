@@ -11,11 +11,7 @@ logger = get_logger(__file__)
 __all__ = ['AdminUserViewSet']
 
 
-# 兼容一下老的 api
 class AdminUserViewSet(OrgBulkModelViewSet):
-    """
-    Admin user api set, for add,delete,update,list,retrieve resource
-    """
     model = SystemUser
     filterset_fields = ("name", "username")
     search_fields = filterset_fields

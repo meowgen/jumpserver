@@ -23,7 +23,6 @@ def migrate_old_authbook_to_history(apps, schema_editor):
             break
         historys = []
         authbook_ids = []
-        # Todo: 或许能优化成更新那样
         for authbook in authbooks:
             authbook_ids.append(authbook.id)
             history = history_model()

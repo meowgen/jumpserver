@@ -71,10 +71,6 @@ class AssetSerializer(BulkOrgResourceModelSerializer):
         child=serializers.CharField(), label=_('Labels name'), required=False, read_only=True
     )
 
-    """
-    资产的数据结构
-    """
-
     class Meta:
         model = Asset
         fields_mini = ['id', 'hostname', 'ip', 'platform', 'protocols']
@@ -111,7 +107,6 @@ class AssetSerializer(BulkOrgResourceModelSerializer):
         fields = super().get_fields()
 
         admin_user_field = fields.get('admin_user')
-        # 因为 mixin 中对 fields 有处理，可能不需要返回 admin_user
         if admin_user_field:
             admin_user_field.queryset = SystemUser.objects.filter(type=SystemUser.Type.admin)
         return fields
@@ -126,7 +121,6 @@ class AssetSerializer(BulkOrgResourceModelSerializer):
     def compatible_with_old_protocol(self, validated_data):
         protocols_data = validated_data.pop("protocols", [])
 
-        # 兼容老的api
         name = validated_data.get("protocol")
         port = validated_data.get("port")
         if not protocols_data and name and port:
@@ -178,7 +172,6 @@ class PlatformSerializer(serializers.ModelSerializer):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        # TODO 修复 drf SlugField RegexValidator bug，之后记得删除
         validators = self.fields['name'].validators
         if isinstance(validators[-1], RegexValidator):
             validators.pop()

@@ -21,18 +21,15 @@ except (ImportError, SyntaxError):
 if is_py2:
 
     def to_bytes(data):
-        """若输入为unicode， 则转为utf-8编码的bytes；其他则原样返回。"""
         if isinstance(data, unicode):
             return data.encode('utf-8')
         else:
             return data
 
     def to_string(data):
-        """把输入转换为str对象"""
         return to_bytes(data)
 
     def to_unicode(data):
-        """把输入转换为unicode，要求输入是unicode或者utf-8编码的bytes。"""
         if isinstance(data, bytes):
             return data.decode('utf-8')
         else:

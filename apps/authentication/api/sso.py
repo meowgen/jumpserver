@@ -46,7 +46,6 @@ class SSOViewSet(AuthMixin, JMSGenericViewSet):
         next_url = serializer.validated_data.get(NEXT_URL)
 
         operator = request.user.username
-        # TODO `created_by` 和 `created_by` 可以通过 `ThreadLocal` 统一处理
         token = SSOToken.objects.create(user=user, created_by=operator, updated_by=operator)
         query = {
             AUTH_KEY: token.authkey,
@@ -57,10 +56,6 @@ class SSOViewSet(AuthMixin, JMSGenericViewSet):
 
     @action(methods=[GET], detail=False, filter_backends=[AuthKeyQueryDeclaration], permission_classes=[AllowAny])
     def login(self, request: Request, *args, **kwargs):
-        """
-        此接口违反了 `Restful` 的规范
-        `GET` 应该是安全的方法，但此接口是不安全的
-        """
         request.META['HTTP_X_JMS_LOGIN_TYPE'] = 'W'
         authkey = request.query_params.get(AUTH_KEY)
         next_url = request.query_params.get(NEXT_URL)
@@ -70,14 +65,12 @@ class SSOViewSet(AuthMixin, JMSGenericViewSet):
         try:
             authkey = UUID(authkey)
             token = SSOToken.objects.get(authkey=authkey, expired=False)
-            # 先过期，只能访问这一次
             token.expired = True
             token.save()
         except (ValueError, SSOToken.DoesNotExist):
             self.send_auth_signal(success=False, reason='authkey_invalid')
             return HttpResponseRedirect(next_url)
 
-        # 判断是否过期
         if (utc_now().timestamp() - token.date_created.timestamp()) > settings.AUTH_SSO_AUTHKEY_TTL:
             self.send_auth_signal(success=False, reason='authkey_timeout')
             return HttpResponseRedirect(next_url)

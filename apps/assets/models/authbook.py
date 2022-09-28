@@ -103,7 +103,6 @@ class AuthBook(BaseUser, AbsConnectivity):
             i.public_key = self.public_key
             i.comment = 'Update triggered by account {}'.format(self.id)
 
-        # 不触发post_save信号
         self.__class__.objects.bulk_update(matched, fields=['password', 'private_key', 'public_key'])
 
     def remove_asset_admin_user_if_need(self):

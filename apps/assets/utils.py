@@ -80,8 +80,9 @@ class NodeAssetsInfo:
 class NodeAssetsUtil:
     def __init__(self, nodes, nodekey_assetsid_mapper):
         """
-        :param nodes: 节点
-        :param nodekey_assetsid_mapper:  节点直接资产id的映射 {"key1": set(), "key2": set()}
+        :param nodes: нода, узел
+        :param nodekey_assetsid_mapper: словарь сопоставлений ключ нод и идентификаторов 
+        ресурсов, относящихся к нему {"key1": set(), "key2": set()}
         """
         self.nodes = nodes
         # node_id --> set(asset_id1, asset_id2)
@@ -90,20 +91,17 @@ class NodeAssetsUtil:
 
     @timeit
     def generate(self):
-        # 准备排序好的资产信息数据
         infos = []
         for node in self.nodes:
             assets = self.nodekey_assetsid_mapper.get(node.key, set())
             info = NodeAssetsInfo(key=node.key, assets_amount=0, assets=assets)
             infos.append(info)
         infos = sorted(infos, key=lambda i: [int(i) for i in i.key.split(':')])
-        # 这个守卫需要添加一下，避免最后一个无法出栈
         guarder = NodeAssetsInfo(key='', assets_amount=0, assets=set())
         infos.append(guarder)
 
         stack = Stack()
         for info in infos:
-            # 如果栈顶的不是这个节点的父祖节点，那么可以出栈了，可以计算资产数量了
             while stack.top and not info.key.startswith(f'{stack.top.key}:'):
                 pop_info = stack.pop()
                 pop_info.assets_amount = len(pop_info.assets)

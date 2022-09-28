@@ -144,7 +144,6 @@ class LDAPUser(_LDAPUser):
         if results is not None and len(results) == 1:
             (user_dn, self._user_attrs) = next(iter(results))
         else:
-            # 解决直接配置DC域，用户认证失败的问题(库不能从整棵树中搜索)
             user_dn = self._search_for_user_dn_from_ldap_util()
             if user_dn is None:
                 self._user_dn = None

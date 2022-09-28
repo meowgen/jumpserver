@@ -35,11 +35,9 @@ node_assets_mapping_for_memory_pub_sub = NodeAssetsMappingForMemoryPubSub()
 
 
 def expire_node_assets_mapping_for_memory(org_id):
-    # 所有进程清除(自己的 memory 数据)
     org_id = str(org_id)
     root_org_id = Organization.ROOT_ID
 
-    # 当前进程清除(cache 数据)
     Node.expire_node_all_asset_ids_mapping_from_cache(org_id)
     Node.expire_node_all_asset_ids_mapping_from_cache(root_org_id)
 

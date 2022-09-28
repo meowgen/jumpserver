@@ -87,8 +87,6 @@ class CommandFilterRule(OrgModelMixin):
     content = models.TextField(verbose_name=_("Content"), help_text=_("One line one command"))
     ignore_case = models.BooleanField(default=True, verbose_name=_('Ignore case'))
     action = models.IntegerField(default=ActionChoices.deny, choices=ActionChoices.choices, verbose_name=_("Action"))
-    # 动作: 附加字段
-    # - confirm: 命令复核人
     reviewers = models.ManyToManyField(
         'users.User', related_name='review_cmd_filter_rules', blank=True,
         verbose_name=_("Reviewers")
@@ -120,7 +118,6 @@ class CommandFilterRule(OrgModelMixin):
             cmd = re.escape(cmd)
             cmd = cmd.replace('\\ ', '\s+')
 
-            # 有空格就不能 铆钉单词了
             if ' ' in _cmd:
                 regex.append(cmd)
                 continue
@@ -128,7 +125,6 @@ class CommandFilterRule(OrgModelMixin):
             if not cmd:
                 continue
 
-            # 如果是单个字符
             if cmd[-1].isalpha():
                 regex.append(r'\b{0}\b'.format(cmd))
             else:

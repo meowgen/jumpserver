@@ -23,7 +23,7 @@ class AccountBackupExecutionManager:
 
     def do_run(self):
         execution = self.execution
-        logger.info('\n\033[33m# 账号备份计划正在执行\033[0m')
+        logger.info('\n\033[33m# План выполнения резервного копирования учётной записи запущен\033[0m')
         handler = AccountBackupHandler(execution)
         handler.run()
 
@@ -36,9 +36,9 @@ class AccountBackupExecutionManager:
         self.date_end = timezone.now()
 
         logger.info('\n\n' + '-' * 80)
-        logger.info('计划执行结束 {}\n'.format(local_now_display()))
+        logger.info('Выполнение плана завершено: {}\n'.format(local_now_display()))
         self.timedelta = self.time_end - self.time_start
-        logger.info('用时: {}s'.format(self.timedelta))
+        logger.info('Заняло времени: {}s'.format(self.timedelta))
         self.execution.timedelta = self.timedelta
         self.execution.save()
 

@@ -24,9 +24,6 @@ logger = get_logger(__file__)
 @receiver(m2m_changed, sender=SystemUser.assets.through)
 @on_transaction_commit
 def on_system_user_assets_change(instance, action, model, pk_set, **kwargs):
-    """
-    当系统用户和资产关系发生变化时，应该重新推送系统用户到新添加的资产中
-    """
     logger.debug("System user assets change signal recv: {}".format(instance))
 
     if not instance:
@@ -42,7 +39,6 @@ def on_system_user_assets_change(instance, action, model, pk_set, **kwargs):
 
     org_id = instance.org_id
 
-    # 关联创建的 authbook 没有系统用户id
     with tmp_to_root_org():
         authbooks = AuthBook.objects.filter(
             asset_id__in=asset_ids,
@@ -73,9 +69,6 @@ def on_system_user_assets_change(instance, action, model, pk_set, **kwargs):
 @receiver(m2m_changed, sender=SystemUser.users.through)
 @on_transaction_commit
 def on_system_user_users_change(sender, instance: SystemUser, action, model, pk_set, reverse, **kwargs):
-    """
-    当系统用户和用户关系发生变化时，应该重新推送系统用户资产中
-    """
     if action != POST_ADD:
         return
 
@@ -95,9 +88,6 @@ def on_system_user_users_change(sender, instance: SystemUser, action, model, pk_
 @receiver(m2m_changed, sender=SystemUser.nodes.through)
 @on_transaction_commit
 def on_system_user_nodes_change(sender, instance=None, action=None, model=None, pk_set=None, **kwargs):
-    """
-    当系统用户和节点关系发生变化时，应该将节点下资产关联到新的系统用户上
-    """
     if action != POST_ADD:
         return
     logger.info("System user nodes update signal recv: {}".format(instance))
@@ -114,9 +104,6 @@ def on_system_user_nodes_change(sender, instance=None, action=None, model=None, 
 
 @receiver(m2m_changed, sender=SystemUser.groups.through)
 def on_system_user_groups_change(instance, action, pk_set, reverse, **kwargs):
-    """
-    当系统用户和用户组关系发生变化时，应该将组下用户关联到新的系统用户上
-    """
     if action != POST_ADD:
         return
     if reverse:
@@ -130,12 +117,6 @@ def on_system_user_groups_change(instance, action, pk_set, reverse, **kwargs):
 @receiver(post_save, sender=SystemUser, dispatch_uid="jms")
 @on_transaction_commit
 def on_system_user_update(instance: SystemUser, created, **kwargs):
-    """
-    当系统用户更新时，可能更新了密钥，用户名等，这时要自动推送系统用户到资产上,
-    其实应该当 用户名，密码，密钥 sudo等更新时再推送，这里偷个懒,
-    这里直接取了 instance.assets 因为nodes和系统用户发生变化时，会自动将nodes下的资产
-    关联到上面
-    """
     if instance and not created:
         logger.info("System user update signal recv: {}".format(instance))
         assets = instance.assets.all().valid()

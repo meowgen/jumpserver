@@ -16,19 +16,15 @@ def compute_parent_key(key):
 
 
 def migrate_default_node_key(apps, schema_editor):
-    """ 将已经存在的Default节点的key从0修改为1 """
-    # 1.4.3版本中Default节点的key为0
     print('')
     Node = apps.get_model('assets', 'Node')
     Asset = apps.get_model('assets', 'Asset')
 
-    # key为0的节点
     old_default_node = Node.objects.filter(key=old_default_node_key, value=default_node_value).first()
     if not old_default_node:
         print(f'Check old default node `key={old_default_node_key} value={default_node_value}` not exists')
         return
     print(f'Check old default node `key={old_default_node_key} value={default_node_value}` exists')
-    # key为1的节点
     new_default_node = Node.objects.filter(key=new_default_node_key, value=default_node_value).first()
     if new_default_node:
         print(f'Check new default node `key={new_default_node_key} value={default_node_value}` exists')
@@ -44,7 +40,6 @@ def migrate_default_node_key(apps, schema_editor):
             return
         print(f'Check new default node not has assets and children nodes, delete it.')
         new_default_node.delete()
-    # 执行修改
     print(f'Modify old default node `key` from `{old_default_node_key}` to `{new_default_node_key}`')
     nodes = Node.objects.filter(
         Q(key__istartswith=f'{old_default_node_key}:') | Q(key=old_default_node_key)
@@ -56,7 +51,6 @@ def migrate_default_node_key(apps, schema_editor):
         new_key = ':'.join(key_list)
         node.key = new_key
         node.parent_key = compute_parent_key(node.key)
-    # 批量更新
     print(f'Bulk update nodes `key` and `parent_key`, (count: {len(nodes)})')
     Node.objects.bulk_update(nodes, ['key', 'parent_key'])
 

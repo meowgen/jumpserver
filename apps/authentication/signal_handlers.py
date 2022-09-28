@@ -17,16 +17,13 @@ from .signals import post_auth_success, post_auth_failed
 
 @receiver(user_logged_in)
 def on_user_auth_login_success(sender, user, request, **kwargs):
-    # 失效 perms 缓存
     user.expire_rbac_perms_cache()
 
-    # 开启了 MFA，且没有校验过, 可以全局校验, middleware 中可以全局管理 oidc 等第三方认证的 MFA
     if settings.SECURITY_MFA_AUTH_ENABLED_FOR_THIRD_PARTY \
             and user.mfa_enabled \
             and not request.session.get('auth_mfa'):
         request.session['auth_mfa_required'] = 1
 
-    # 单点登录，超过了自动退出
     if settings.USER_LOGIN_SINGLE_MACHINE_ENABLED:
         lock_key = 'single_machine_login_' + str(user.id)
         session_key = cache.get(lock_key)
@@ -35,7 +32,6 @@ def on_user_auth_login_success(sender, user, request, **kwargs):
             session.delete()
         cache.set(lock_key, request.session.session_key, None)
 
-    # 标记登录，设置 cookie，前端可以控制刷新, Middleware 会拦截这个生成 cookie
     request.session['auth_session_expiration_required'] = 1
 
 

@@ -47,7 +47,7 @@ class UserLoginContextMixin:
                 'enabled': settings.AUTH_OPENID,
                 'url': reverse('authentication:openid:login'),
                 'logo': static('img/login_oidc_logo.png'),
-                'auto_redirect': True  # 是否支持自动重定向
+                'auto_redirect': True
             },
             {
                 'name': 'CAS',
@@ -70,7 +70,7 @@ class UserLoginContextMixin:
     def get_support_langs():
         langs = [
             {
-                'title': '中文(简体)',
+                'title': 'Китайский',
                 'code': 'zh-hans'
             },
             {
@@ -78,7 +78,7 @@ class UserLoginContextMixin:
                 'code': 'en'
             },
             {
-                'title': '日本語',
+                'title': 'Японский',
                 'code': 'ja'
             }
         ]
@@ -138,7 +138,6 @@ class UserLoginView(mixins.AuthMixin, UserLoginContextMixin, FormView):
         if not auth_types:
             return None
 
-        # 明确直接登录哪个
         login_to = settings.LOGIN_REDIRECT_TO_BACKEND.upper()
         if login_to == 'DIRECT':
             return None
@@ -232,7 +231,6 @@ class UserLoginGuardView(mixins.AuthMixin, RedirectView):
 
     def login_it(self, user):
         auth_login(self.request, user)
-        # 如果设置了自动登录，那需要设置 session_id cookie 的有效期
         if self.request.session.get('auto_login'):
             age = self.request.session.get_expiry_age()
             self.request.session.set_expiry(age)

@@ -52,7 +52,6 @@ class SystemUserViewSet(SuggestionMixin, OrgBulkModelViewSet):
 
     @action(methods=['get'], detail=False, url_path='su-from')
     def su_from(self, request, *args, **kwargs):
-        """ API 获取可选的 su_from 系统用户"""
         queryset = self.filter_queryset(self.get_queryset())
         queryset = queryset.filter(
             protocol=SystemUser.Protocol.ssh, login_mode=SystemUser.LOGIN_AUTO
@@ -61,7 +60,6 @@ class SystemUserViewSet(SuggestionMixin, OrgBulkModelViewSet):
 
     @action(methods=['get'], detail=True, url_path='su-to')
     def su_to(self, request, *args, **kwargs):
-        """ 获取系统用户的所有 su_to 系统用户 """
         pk = kwargs.get('pk')
         system_user = get_object_or_404(SystemUser, pk=pk)
         queryset = system_user.su_to.all()

@@ -30,20 +30,21 @@ def get_request_date_header(request):
 
 
 class AccessKeyAuthentication(authentication.BaseAuthentication):
-    """App使用Access key进行签名认证, 目前签名算法比较简单,
-    app注册或者手动建立后,会生成 access_key_id 和 access_key_secret,
-    然后使用 如下算法生成签名:
+    """Приложение использует ключ доступа для аутентификации подписи. В настоящее время алгоритм подписи 
+    относительно прост. После регистрации приложения или установки вручную будут 
+    сгенерированы access_key_id и access_key_secret,
+    Затем используйте следующий алгоритм для создания подписи:
     Signature = md5(access_key_secret + '\n' + Date)
     example: Signature = md5('d32d2b8b-9a10-4b8d-85bb-1a66976f6fdc' + '\n' +
                     'Thu, 12 Jan 2017 08:19:41 GMT')
-    请求时设置请求header
-    header['Authorization'] = 'Sign access_key_id:Signature' 如:
+    Установите заголовок запроса при запросе:
+    header['Authorization'] = 'Sign access_key_id:Signature', например:
     header['Authorization'] =
         'Sign d32d2b8b-9a10-4b8d-85bb-1a66976f6fdc:OKOlmdxgYPZ9+SddnUUDbQ=='
 
-    验证时根据相同算法进行验证, 取到access_key_id对应的access_key_id, 从request
-    headers取到Date, 然后进行md5, 判断得到的结果是否相同, 如果是认证通过, 否则 认证
-    失败
+    При проверке верифицируем по тому же алгоритму, получаем access_key_id соответствующий access_key_id, из запроса
+    Заголовки получают Date, а затем выполняют md5, чтобы определить, совпадают ли полученные результаты, пройдена ли аутентификация, иначе аутентификация
+    считается провалившейся.
     """
     keyword = 'Sign'
 

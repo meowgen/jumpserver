@@ -269,9 +269,6 @@ class Asset(AbsConnectivity, AbsHardwareInfo, ProtocolsMixin, NodesRelationMixin
 
     @lazyproperty
     def admin_user_username(self):
-        """求可连接性时，直接用用户名去取，避免再查一次admin user
-        serializer 中直接通过annotate方式返回了这个
-        """
         return self.admin_user.username
 
     def is_windows(self):

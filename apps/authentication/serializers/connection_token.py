@@ -34,7 +34,6 @@ class ConnectionTokenSerializer(OrgResourceModelSerializerMixin):
             'user', 'system_user', 'asset', 'application',
         ]
         read_only_fields = [
-            # 普通 Token 不支持指定 user
             'user', 'is_valid', 'expire_time',
             'type_display', 'user_display', 'system_user_display',
             'asset_display', 'application_display',

@@ -294,11 +294,10 @@
 <script type="text/javascript" src="/static/js/plugins/buffer/buffer.min.js"></script>
 <script>
     function doLogin() {
-        //公钥加密
-        var password = $('#password').val(); //明文密码
+        var password = $('#password').val(); 
         var passwordEncrypted = encryptPassword(password)
-        $('#password-hidden').val(passwordEncrypted); //返回给密码输入input
-        $('#login-form').submit(); //post提交
+        $('#password-hidden').val(passwordEncrypted); 
+        $('#login-form').submit();
     }
 </script>
 </html>

@@ -179,10 +179,10 @@ def get_push_windows_system_user_tasks(system_user: SystemUser, username=None, *
 
 def get_push_system_user_tasks(system_user, platform="unixlike", username=None, algorithm=None):
     """
-    获取推送系统用户的 ansible 命令，跟资产无关
+    Получить независимую команду пользователя системы push независимо от ресурса
     :param system_user:
     :param platform:
-    :param username: 当动态时，近推送某个
+    :param username:
     :return:
     """
     get_task_map = {
@@ -193,7 +193,6 @@ def get_push_system_user_tasks(system_user, platform="unixlike", username=None, 
     if not system_user.username_same_with_user:
         return get_tasks(system_user, algorithm=algorithm)
     tasks = []
-    # 仅推送这个username
     if username is not None:
         tasks.extend(get_tasks(system_user, username, algorithm=algorithm))
         return tasks
@@ -211,18 +210,15 @@ def push_system_user_util(system_user, assets, task_name, username=None):
     if not assets:
         return {}
 
-    # 资产按平台分类
     assets_sorted = sorted(assets, key=group_asset_by_platform)
     platform_hosts = groupby(assets_sorted, key=group_asset_by_platform)
 
     if system_user.username_same_with_user:
         if username is None:
-            # 动态系统用户，但是没有指定 username
             usernames = list(system_user.users.all().values_list('username', flat=True).distinct())
         else:
             usernames = [username]
     else:
-        # 非动态系统用户指定 username 无效
         assert username is None, 'Only Dynamic user can assign `username`'
         usernames = [system_user.username]
 
@@ -257,7 +253,7 @@ def push_system_user_util(system_user, assets, task_name, username=None):
 @tmp_to_root_org()
 def push_system_user_to_assets_manual(system_user, username=None):
     """
-    将系统用户推送到与它关联的所有资产上
+    Push системного пользователя ко всем связанным с ним ресурсам
     """
     system_user = get_object_if_need(SystemUser, system_user)
     assets = system_user.get_related_assets()
@@ -269,7 +265,7 @@ def push_system_user_to_assets_manual(system_user, username=None):
 @tmp_to_root_org()
 def push_system_user_a_asset_manual(system_user, asset, username=None):
     """
-    将系统用户推送到一个资产上
+    Push системных пользователей к ресурсу
     """
     # if username is None:
     #     username = system_user.username
@@ -290,7 +286,8 @@ def push_system_users_a_asset(system_users, asset):
 @tmp_to_root_org()
 def push_system_user_to_assets(system_user_id, asset_ids, username=None):
     """
-    推送系统用户到指定的若干资产上
+    Push системных пользователей к указанным ресурсам
+
     """
     system_user = SystemUser.objects.get(id=system_user_id)
     assets = get_objects(Asset, asset_ids)

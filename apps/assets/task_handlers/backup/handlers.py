@@ -88,7 +88,7 @@ class AssetAccountHandler(BaseAccountHandler):
                 data_map[sheet_name].append(list(row.keys()))
             data_map[sheet_name].append(list(row.values()))
 
-        logger.info('\n\033[33m- 共收集 {} 条资产账号\033[0m'.format(accounts.count()))
+        logger.info('\n\033[33m- Всего было собрано {} учётных записей ресурсов\033[0m'.format(accounts.count()))
         return data_map
 
 
@@ -112,7 +112,7 @@ class AppAccountHandler(BaseAccountHandler):
             if sheet_name not in data_map:
                 data_map[sheet_name].append(list(row.keys()))
             data_map[sheet_name].append(list(row.values()))
-        logger.info('\n\033[33m- 共收集{}条应用账号\033[0m'.format(accounts.count()))
+        logger.info('\n\033[33m- Всего собано {} учётных записей приложений\033[0m'.format(accounts.count()))
         return data_map
 
 
@@ -126,12 +126,12 @@ class AccountBackupHandler:
     def __init__(self, execution):
         self.execution = execution
         self.plan_name = self.execution.plan.name
-        self.is_frozen = False  # 任务状态冻结标志
+        self.is_frozen = False
 
     def create_excel(self):
         logger.info(
             '\n'
-            '\033[32m>>> 正在生成资产或应用相关备份信息文件\033[0m'
+            '\033[32m>>> Создаются файлы информации о резервных копиях, связанные с ресурсами или приложениями.\033[0m'
             ''
         )
         # Print task start date
@@ -156,7 +156,7 @@ class AccountBackupHandler:
             wb.save(filename)
             files.append(filename)
         timedelta = round((time.time() - time_start), 2)
-        logger.info('步骤完成: 用时 {}s'.format(timedelta))
+        logger.info('Действие завершено. Это заняло {} сек.'.format(timedelta))
         return files
 
     def send_backup_mail(self, files, recipients):
@@ -165,7 +165,7 @@ class AccountBackupHandler:
         recipients = User.objects.filter(id__in=list(recipients))
         logger.info(
             '\n'
-            '\033[32m>>> 发送备份邮件\033[0m'
+            '\033[32m>>> Отправить электронное письмо для получения резервной копии\033[0m'
             ''
         )
         plan_name = self.plan_name
@@ -178,7 +178,7 @@ class AccountBackupHandler:
                 encrypt_and_compress_zip_file(attachment, password, files)
                 attachment_list = [attachment, ]
             AccountBackupExecutionTaskMsg(plan_name, user).publish(attachment_list)
-            logger.info('邮件已发送至{}({})'.format(user, user.email))
+            logger.info('Электронное письмо было направлено пользователю {} на ({})'.format(user, user.email))
         for file in files:
             os.remove(file)
 
@@ -186,13 +186,13 @@ class AccountBackupHandler:
         self.execution.reason = reason[:1024]
         self.execution.is_success = is_success
         self.execution.save()
-        logger.info('已完成对任务状态的更新')
+        logger.info('Завершено обновление статуса задачи')
 
     def step_finished(self, is_success):
         if is_success:
-            logger.info('任务执行成功')
+            logger.info('Задача выполнена успешно')
         else:
-            logger.error('任务执行失败')
+            logger.error('Не удалось выполнить задачу')
 
     def _run(self):
         is_success = False
@@ -202,7 +202,7 @@ class AccountBackupHandler:
             if not recipients:
                 logger.info(
                     '\n'
-                    '\033[32m>>> 该备份任务未分配收件人\033[0m'
+                    '\033[32m>>> Для этой задачи резервного копирования не назначены получатели\033[0m'
                     ''
                 )
             else:
@@ -210,8 +210,8 @@ class AccountBackupHandler:
                 self.send_backup_mail(files, recipients)
         except Exception as e:
             self.is_frozen = True
-            logger.error('任务执行被异常中断')
-            logger.info('下面打印发生异常的 Traceback 信息 : ')
+            logger.error('Выполнение задачи было прервано аварийно')
+            logger.info('Traceback info: ')
             logger.error(e, exc_info=True)
             error = str(e)
         else:
@@ -222,15 +222,15 @@ class AccountBackupHandler:
             self.step_finished(is_success)
 
     def run(self):
-        logger.info('任务开始: {}'.format(local_now_display()))
+        logger.info('Выполнение задачи начинается: {}'.format(local_now_display()))
         time_start = time.time()
         try:
             self._run()
         except Exception as e:
-            logger.error('任务运行出现异常')
-            logger.error('下面显示异常 Traceback 信息: ')
+            logger.error('Выполнение задачи было прервано аварийно')
+            logger.error('Traceback info: ')
             logger.error(e, exc_info=True)
         finally:
-            logger.info('\n任务结束: {}'.format(local_now_display()))
+            logger.info('\Завершение выполнения задачи: {}'.format(local_now_display()))
             timedelta = round((time.time() - time_start), 2)
-            logger.info('用时: {}'.format(timedelta))
+            logger.info('Затраченное время: {}'.format(timedelta))

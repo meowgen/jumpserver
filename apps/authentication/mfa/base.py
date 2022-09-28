@@ -9,7 +9,6 @@ class BaseMFA(abc.ABC):
     def __init__(self, user):
         """
         :param user:  Authenticated user, Anonymous or None
-        因为首页登录时，可能没法获取到一些状态
         """
         self.user = user
 

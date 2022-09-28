@@ -5,9 +5,6 @@ from .system_user import SystemUserSerializer as SuS
 
 
 class AdminUserSerializer(SuS):
-    """
-    管理用户
-    """
 
     class Meta(SuS.Meta):
         fields = SuS.Meta.fields_mini + \
