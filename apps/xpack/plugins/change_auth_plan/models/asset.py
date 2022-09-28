@@ -174,8 +174,8 @@ class ChangeAuthPlanExecution(BaseChangeAuthPlanExecution):
         valid_assets = clean_ansible_task_hosts(assets)
         valid = len(valid_assets)
         invalid = len(assets) - len(valid_assets)
-        logger.info(f'\n提示: 获取到改密计划中待执行资产的数为: {valid} 台，'
-                    f'有 {invalid} 不符合条件(不支持ansible)')
+        logger.info(f'\Примечание: Количество активов, которые должны быть выполнены в полученном плане расшифровки:: {valid}, '
+                    f'{invalid} Не соответствует требованиям(не поддерживается ansible)')
         tasks = []
         for host in valid_assets:
             task = ChangeAuthPlanTask.objects.create(
@@ -271,6 +271,5 @@ class ChangeAuthPlanTask(BaseChangeAuthPlanTask):
         return error
 
     def retry_keep_auth_to_authbook(self):
-        """重新尝试将本任务的密码保存为最新的密码"""
         self.set_step(step=const.STEP_PERFORM_VERIFY_AUTH)
         self.start()

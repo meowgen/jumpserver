@@ -22,13 +22,13 @@ class AppExecutionManager(BaseExecutionManager):
         if len(apps) > 3:
             apps_display += ' ...'
 
-        logger.info('\n准备开始执行改密计划 ({})'.format(str(self.execution.plan)))
-        logger.info('提示: 即将变更改密计划中 {} {} 的认证信息'.format(
+        logger.info('\Подготовьтесь к началу реализации плана шифрования ({})'.format(str(self.execution.plan)))
+        logger.info('Примечание: О смене плана паролей {} {} информация аутентификации'.format(
             self.execution.plan.category, apps_display
         ))
 
     def on_per_task_pre_run(self, task, total, index):
-        logger.info('\n\033[33m# 改密计划正在更改: 第 {} 个，共 {} 个\033[0m'.format(index, total))
+        logger.info('\n\033[33m# План расшифровки меняется: Нет {} в общей сложности {} индивидуально\033[0m'.format(index, total))
 
     @property
     def task_back_up_serializer(self):

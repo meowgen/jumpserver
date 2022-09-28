@@ -9,7 +9,6 @@ from .base import BaseProvider
 
 class Client:
     def __init__(self, account_attr):
-        # 将oc和sc的账户和密码绑定到client实例上
         for name, value in account_attr.items():
             setattr(self, name, value)
         url_parse_result = urlparse(self.api_endpoint)
@@ -132,9 +131,6 @@ class Provider(BaseProvider):
         self.client = Client(self.account.attrs)
 
     def _is_valid(self):
-        # 这里有的时候没有调用成功，需再次验证
-        # 华为账号有两套(oc和sc), oc依赖region拿token，
-        # 可以获取到region即sc认证成功，再次获取oc token即可成功认证
         region = self.get_regions().popitem()
         self.client.set_region_id(region[0])
         self.client.get_oc_token()

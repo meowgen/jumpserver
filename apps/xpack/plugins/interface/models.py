@@ -62,10 +62,7 @@ class Interface(models.Model):
         interface = cls.objects.first()
         if not interface:
             return setting
-        # 覆盖一些默认值，如 使用白色 logo
         setting = cls.update_theme_setting_default(setting, interface)
-
-        # 使用数据库中的配置，覆盖默认的
         for k in setting:
             value = getattr(interface, k, '')
             if not value:

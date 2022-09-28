@@ -1,6 +1,3 @@
-"""
-执行改密计划的基类
-"""
 import time
 
 from django.utils import timezone
@@ -23,25 +20,23 @@ def step(_step, show_date=True):
             handler.current_step += 1
             logger.info(
                 '\n'
-                '\033[32m>>> 正在进行任务步骤 {}: {}\033[0m'
+                '\033[32m>>> Выполняется шаг задачи {}: {}\033[0m'
                 ''.format(
                     handler.current_step, const.STEP_DESCRIBE_MAP[_step]
                 )
             )
 
             if handler.is_frozen:
-                # 如果任务被冻结，就不设置任务的 step
                 logger.info(
-                    '改密任务已被冻结，改密任务的执行步骤不再更新 '
+                    'Задача шифрования заморожена, и этапы выполнения задачи шифрования больше не обновляются '
                     '(step={}, describe={})'.format(
                         handler.task.step,
                         const.STEP_DESCRIBE_MAP[handler.task.step]
                     )
                 )
             else:
-                # 实时设置任务的step字段（防止服务宕机）
                 logger.debug(
-                    '实时更新改密任务的执行步骤 (describe={}{})'
+                    'Действия по обновлению и шифрованию в реальном времени (describe={}{})'
                     ''.format(const.STEP_DESCRIBE_MAP[_step], _step)
                 )
                 handler.task.set_step(_step)
@@ -49,16 +44,15 @@ def step(_step, show_date=True):
             # Print task start date
             time_start = time.time()
             if show_date:
-                logger.info('步骤开始: {}'.format(local_now_display()))
+                logger.info('Пошаговое начало: {}'.format(local_now_display()))
 
             try:
-                # 执行步骤
                 return func(handler, *args, **kwargs)
             finally:
                 # Print task finished date
                 if show_date:
                     timedelta = round((time.time() - time_start), 2)
-                    logger.info('步骤完成: 用时 {}s'.format(timedelta))
+                    logger.info('Шаг завершен: время {}сек'.format(timedelta))
         return wrapper
     return decorator
 
@@ -69,7 +63,7 @@ class BaseChangePasswordHandler:
         self.conn = None
         self.retry_times = 3
         self.current_step = 0
-        self.is_frozen = False  # 任务状态冻结标志
+        self.is_frozen = False
         self.show_step_info = show_step_info
 
     @staticmethod
@@ -77,33 +71,18 @@ class BaseChangePasswordHandler:
         logger.error(wrapper_error(msg))
 
     def _step_perform_preflight_check(self):
-        """
-        执行改密前的条件检测
-        请在相应子类中重写相应功能函数逻辑
-        """
         raise NotImplementedError
 
     def _step_perform_change_auth(self):
-        """
-        执行改密
-        请在相应子类中重写相应功能函数逻辑
-        """
         raise NotImplementedError
 
     def _step_perform_verify_auth(self):
-        """
-        执行改密后对认证信息的校验
-        请在相应子类中重写相应功能函数逻辑
-        """
         raise NotImplementedError
 
     def show_task_steps_help_text(self):
         pass
 
     def _step_perform_keep_auth(self):
-        """
-        保存密码
-        """
         pass
 
     class PerformPreflightCheckErrorException(Exception):
@@ -123,13 +102,13 @@ class BaseChangePasswordHandler:
         self.task.is_success = is_success
         self.task.timedelta = time.time() - time_start
         self.task.save()
-        logger.info('已完成对任务状态的更新')
+        logger.info('Завершено обновление статуса задачи')
 
     def _step_finished(self, is_success, reason, *args):
         if is_success:
-            logger.info('任务执行成功')
+            logger.info('Задача выполнена успешно')
         else:
-            logger.error('任务执行失败')
+            logger.error('Не удалось выполнить задачу')
 
     @step(const.STEP_PERFORM_PREFLIGHT_CHECK)
     def step_perform_preflight_check(self):
@@ -186,7 +165,7 @@ class BaseChangePasswordHandler:
 
     @classmethod
     def display_all_steps_info(cls):
-        logger.info('说明: 改密任务执行的步骤如下:')
+        logger.info('Примечание. Шаги для выполнения задачи шифрования следующие:')
         self = cls(None)
         step_methods = self.get_all_steps()
 
@@ -219,7 +198,7 @@ class BaseChangePasswordHandler:
             step_methods = self.calculate_the_methods_of_step_to_be_performed()
 
             if self.show_step_info:
-                logger.info('当前改密任务即将执行的步骤如下:')
+                logger.info('Шаги, которые необходимо выполнить в текущей задаче шифрования, следующие::')
                 for index, step_method in enumerate(step_methods, 1):
                     logger.info('({}). {}'.format(
                         index, const.STEP_DESCRIBE_MAP[step_method['step']]
@@ -228,25 +207,25 @@ class BaseChangePasswordHandler:
                 step_method['method']()
         except self.PerformPreflightCheckErrorException as e:
             error = str(e)
-            logger.error(wrapper_error('改密任务执行提示: 执行改密前的条件检测不通过'))
+            logger.error(wrapper_error('Запрос на выполнение задачи шифрования: проверка условия перед выполнением модификации шифрования не удалась'))
         except self.PerformVerifyAuthErrorException as e:
             error = str(e)
-            logger.error(wrapper_error('改密任务执行提示: 执行对改密后的认证信息校验失败'))
+            logger.error(wrapper_error('Запрос на выполнение задачи шифрования: не удалось проверить данные аутентификации после шифрования'))
         except self.MultipleAttemptAfterErrorException:
             error = _('After many attempts to change the secret, it still failed')
-            logger.error(wrapper_error('改密任务执行提示: 多次尝试改密后, 依然失败'))
+            logger.error(wrapper_error('Запрос на выполнение задачи шифрования: после нескольких попыток изменить пароль по-прежнему не удается'))
         except self.InterruptException:
-            error = '任务执行被系统中断 (step={})'.format(self.task.step)
-            logger.error(wrapper_error('改密任务执行提示: 改密任务执行被系统主动中断'))
-            logger.error(wrapper_error('为了保证当前改密任务再次启动时能够继续执行，任务状态将被冻结'))
+            error = 'Выполнение задачи было прервано системой (step={})'.format(self.task.step)
+            logger.error(wrapper_error('Запрос на выполнение задачи шифрования: выполнение задачи шифрования было активно прервано системой'))
+            logger.error(wrapper_error('Чтобы гарантировать, что текущая задача шифрования может продолжать выполняться после ее перезапуска, статус задачи будет заморожен.'))
             self.is_frozen = True
         except Exception as e:
-            error = '任务执行被异常中断 (step={})'.format(self.task.step)
-            logger.error(wrapper_error('改密任务执行提示: 改密任务执行由于出现异常被中断'))
-            logger.error(wrapper_error('为了保证当前改密任务再次启动时能够继续执行，任务状态将被冻结'))
+            error = 'Выполнение задачи было прервано аварийно (step={})'.format(self.task.step)
+            logger.error(wrapper_error('Запрос на выполнение задачи шифрования: выполнение задачи шифрования было прервано из-за исключения'))
+            logger.error(wrapper_error('Чтобы гарантировать, что текущая задача шифрования может продолжать выполняться после ее перезапуска, статус задачи будет заморожен.'))
             self.is_frozen = True
-            logger.error(wrapper_error('改密任务执行提示: 执行过程中出现异常信息: '))
-            logger.info('下面打印发生异常的 Traceback 信息 : ')
+            logger.error(wrapper_error('Запрос на выполнение задачи шифрования: во время выполнения появилось сообщение об исключении:'))
+            logger.info('Следующее выводит информацию о трассировке исключения:')
             logger.error(e, exc_info=True)
         else:
             is_success = True
@@ -267,25 +246,24 @@ class BaseChangePasswordHandler:
 
     def run(self):
         lock_key = self.get_lock_key()
-        # 如果10分钟改密任务执行未完成，那么后续相同的任务进来，锁机制将失去意义
         lock = DistributedLock(lock_key, expire=10 * 60)
-        logger.info('改密任务开始: {}'.format(local_now_display()))
+        logger.info('Начинается задача расшифровки: {}'.format(local_now_display()))
 
         acquired = lock.acquire(timeout=10)
         if not acquired:
-            logger.error('改密任务退出: 锁获取失败')
+            logger.error('Выход из задачи шифрования: не удалось получить блокировку')
             return
 
         time_start = time.time()
         try:
             self._run()
         except Exception as e:
-            self.log_error('改密任务运行出现异常: {}'.format(e))
-            logger.error('下面显示异常 Traceback 信息: ')
+            self.log_error('Исключение возникает при выполнении задачи шифрования: {}'.format(e))
+            logger.error('Ниже показана информация об исключении Traceback.: ')
             logger.error(e, exc_info=True)
         finally:
-            logger.info('\n改密任务结束: {}'.format(local_now_display()))
+            logger.info('\nЗадача шифрования завершена: {}'.format(local_now_display()))
             timedelta = round((time.time() - time_start), 2)
-            logger.info('用时: {}'.format(timedelta))
+            logger.info('Время: {}'.format(timedelta))
             if lock.locked():
                 lock.release()

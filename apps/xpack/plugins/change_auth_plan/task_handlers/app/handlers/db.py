@@ -1,6 +1,3 @@
-"""
-改密计划：各类型数据库改密处理类
-"""
 
 from applications.models import Account
 from common.utils import get_logger
@@ -30,7 +27,7 @@ class DatabaseChangePasswordHandler(BaseChangePasswordHandler):
         if not created:
             account.password = self.task.password
             account.save()
-            logger.info('账号更新完成: id={}'.format(account.id))
+            logger.info('Обновление учётной записи завершено: id={}'.format(account.id))
         else:
-            logger.info('账号保存完成: id={}'.format(account.id))
+            logger.info('Сохранение учётной записи завершено: id={}'.format(account.id))
         return account

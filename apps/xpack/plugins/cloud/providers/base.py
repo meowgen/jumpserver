@@ -39,10 +39,6 @@ class BaseProvider:
             hostname = '{}-{}'.format(instance_name, asset_ip_last_two_bit)
         else:
             hostname = instance_name
-        # 如果主机名已存在但与当前资产的主机名不同, 则需要使用新的主机名, 防止创建时资产时主机名重复报错
-        # 场景如: AWS实例在释放的过程中, 执行同步任务, 实例能获取到, 实例名称相同(mx-server),
-        #        IP获取不到(0.0.0.0), 导致构建的主机名一致(mx-server-0.0), 多个释放的实例主机名重复，
-        #        创建/更新资产时报错
         if Asset.objects.exclude(id=asset_id).filter(hostname=hostname).exists():
             instance_id = self.get_instance_id(instance)
             instance_id_last_four_bit = instance_id[-4:]
@@ -114,7 +110,6 @@ class BaseProvider:
         return region_name
 
     def preset_instance_properties(self, instance, properties):
-        """ 预设实例不直接包含的属性值，方便后续获取 """
         if isinstance(instance, dict):
             for key, value in properties.items():
                 instance[key] = value

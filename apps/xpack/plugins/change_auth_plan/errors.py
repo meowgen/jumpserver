@@ -5,4 +5,4 @@
 class DBTestConnectFailedError(Exception):
 
     def __str__(self):
-        return '数据库连接失败'
+        return 'Ошибка подключения к базе данных'

@@ -43,7 +43,6 @@ class AzureAttrsSerializer(serializers.Serializer):
     )
 
     def validate(self, attrs):
-        # 如果不校验后台创建Azure Client时会500
         if self.parent.instance:
             return attrs
         errors_required_fields = []

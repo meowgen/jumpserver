@@ -12,8 +12,6 @@ django.setup()
 from django.apps import apps
 from django.db import connection
 
-# ========================== 添加到需要测试的 migrations 上方 ==========================
-
 
 from django.db import migrations
 
@@ -59,7 +57,6 @@ class Migration(migrations.Migration):
     ]
 
 
-# ================== 添加到下方 ======================
 def main():
     schema_editor = connection.schema_editor()
     migrate_system_role_binding(apps, schema_editor)

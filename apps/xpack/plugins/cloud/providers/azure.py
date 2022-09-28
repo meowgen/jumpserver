@@ -45,10 +45,10 @@ class Provider(BaseProvider):
     def get_regions(self):
         # TODO: Get regions by api
         regions = {
-            'chinanorth': '中国北部',
-            'chinanorth2': '中国北部 2',
-            'chinaeast': '中国东部',
-            'chinaeast2': '中国东部 2',
+            'chinanorth': 'Северный китай',
+            'chinanorth2': 'Северный китай 2',
+            'chinaeast': 'Восточный китай',
+            'chinaeast2': 'Восточный китай 2',
         }
         return regions
 

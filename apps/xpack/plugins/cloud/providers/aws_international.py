@@ -13,11 +13,9 @@ from .base import BaseProvider
 
 
 regions_mapping = {
-    # AWS 中国
     'cn-north-1': _('China (Beijing)'),
     'cn-northwest-1': _('China (Ningxia)'),
 
-    # AWS 国际
     'us-east-2': _('US East (Ohio)'),
     'us-east-1': _('US East (N. Virginia)'),
     'us-west-1': _('US West (N. California)'),

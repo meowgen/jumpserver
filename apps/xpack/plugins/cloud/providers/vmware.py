@@ -45,7 +45,7 @@ class Provider(BaseProvider):
         for vm in vms:
             datacenter = self._get_datacenter_about_vm(vm)
             if datacenter is None:
-                msg = '虚拟机({}) 未获取到 DataCenter, 将同步至任务云服务商节点'.format(vm.summary.config.name)
+                msg = 'Виртуальная машина ({}) не была получена в центре обработки данных и будет синхронизирована с узлом поставщика облачных служб задач.'.format(vm.summary.config.name)
                 colored_printer.red(msg)
                 instances.append(vm)
             elif datacenter.name != region_id:

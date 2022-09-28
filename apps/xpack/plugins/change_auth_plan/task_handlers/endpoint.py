@@ -10,9 +10,6 @@ from .app.handlers import (
 
 
 class ExecutionManager:
-    """
-    根据改密资产/应用类型选择不同处理类
-    """
     manager_type = {
         'asset': AssetExecutionManager,
         'app': AppExecutionManager,

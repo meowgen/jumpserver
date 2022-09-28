@@ -20,9 +20,7 @@ class Provider(BaseProvider):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.conn = connection.Connection(cloud='myhuaweicloud.com', ak=self.ak, sk=self.secret)
-        # 存放所有镜像id和platform的映射
         self.image_platform_mapping = {}
-        # 存放当前账户所有的 vpcs
         self.vpcs = []
         self.page_size = 20
 

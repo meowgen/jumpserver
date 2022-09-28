@@ -1,6 +1,3 @@
-"""
-改密计划：资产改密处理类
-"""
 import time
 
 from django.conf import settings
@@ -31,27 +28,27 @@ class AssetChangePasswordHandler(BaseChangePasswordHandler):
             msg = dark[self.task.asset.hostname][task_name]['msg']
         except Exception as e:
             logger.debug(e, exc_info=True)
-            logger.info('提取原因出现异常: {}'.format(str(e)))
+            logger.info('Неизвестная ошибка: {}'.format(str(e)))
             msg = 'Unknown ({})'.format(dark)
         return msg
 
     def _step_perform_preflight_check(self):
         asset = self.task.asset
-        logger.info('检测条件: 特权用户 {} 对资产 {} 的可连接性'.format(asset.admin_user, asset))
+        logger.info('Условие обнаружения: подключение к активу {} привилегированным пользователем {}'.format(asset.admin_user, asset))
         succeed, dark = test_asset_connectivity_manual(self.task.asset)
 
         if succeed:
-            logger.info('\n检测结果: 特权用户 {} 对资产 {} 可连接'.format(asset.admin_user, asset))
+            logger.info('\nРезультат обнаружения: привилегированный пользователь {} может подключиться к активу {}'.format(asset.admin_user, asset))
             return
         else:
-            self.log_error('\n检测结果: 特权用户 {} 对资产 {} 不可连接'.format(asset.admin_user, asset))
+            self.log_error('\nРезультат обнаружения: привилегированный пользователь {} не может подключиться к активу {}'.format(asset.admin_user, asset))
             msg = self.clean_dark_msg(dark, 'ping')
-            logger.error('原因: {}'.format(msg))
+            logger.error('Причина: {}'.format(msg))
             raise self.PerformPreflightCheckErrorException(msg)
 
     def construct_the_task_of_perform_change_ssh_auth(self, name, strategy):
         if not self.task.asset.is_unixlike():
-            logger.info("资产 {} 系统平台 {} 不支持推送ssh密钥的Ansible任务".format(
+            logger.info("Актив {} системная платформа {} не поддерживает задачи Ansible, которые push ключи ssh".format(
                 str(self.task.asset), self.task.asset.platform
             ))
             return []
@@ -89,7 +86,7 @@ class AssetChangePasswordHandler(BaseChangePasswordHandler):
             module = 'win_user'
             password = self.task.password
         else:
-            logger.info("资产 {} 系统平台 {} 不支持运行 Ansible 任务".format(
+            logger.info("Ресурс {}, его ОС {} не поддерживает выполнение задач Ansible.".format(
                 str(self.task.asset), self.task.asset.platform
             ))
             return []
@@ -106,7 +103,7 @@ class AssetChangePasswordHandler(BaseChangePasswordHandler):
         return tasks
 
     def _step_perform_change_auth(self):
-        logger.info('构造执行改密所需要的 Ansible 任务')
+        logger.info('Создать задачи Ansible, необходимые для выполнения шифрования.')
         tasks = list()
         execution = self.task.execution
 
@@ -122,7 +119,7 @@ class AssetChangePasswordHandler(BaseChangePasswordHandler):
             )
             tasks.extend(task)
 
-        logger.info('构造执行改密所需要的 Ansible 任务完成')
+        logger.info('Создать задачи Ansible, необходимые для завершения шифрования.')
 
         inventory = JMSInventory([self.task.asset], run_as_admin=True)
         play_name = "{}: ({})".format(
@@ -130,21 +127,22 @@ class AssetChangePasswordHandler(BaseChangePasswordHandler):
         )
 
         for i in range(self.retry_times):
-            logger.info('执行改密: 尝试第 ({}/{}) 次'
+            logger.info('Выполнить смену пароля: Попытка ({}/{}) раз'
                         ''.format(i + 1, self.retry_times))
             raw, summary = run_adhoc(play_name, tasks, inventory)
 
             dark = summary.get('dark')
             if not dark:
-                logger.info('执行改密结果: 成功')
+                logger.info('Выполнить результат шифрования: успех')
                 return
 
-            logger.info('执行改密结果: 失败')
+            logger.info('Выполнить результат шифрования: провал')
             msg = self.clean_dark_msg(dark, task_name)
-            logger.info('原因: {}'.format(msg))
-            logger.info('(注意: 结果虽然显示执行改密失败, 但也会存在执行改密成功的情况'
-                        ', 因为这一步骤由多个小步骤共同完成的)')
-            logger.info('所以改密任务的最终结果请以 <{}> 结果为准'.format(
+            logger.info('Причина: {}'.format(msg))
+            logger.info('(Примечание: несмотря на то, что результат показывает, что выполнение шифрования завершается ошибкой,\
+                также бывают случаи, когда модификация шифрования выполняется успешно.'
+                        ', потому что этот шаг завершается несколькими маленькими шагами вместе)')
+            logger.info('Таким образом, окончательный результат задачи шифрования см. в результате <{}>'.format(
                 const.STEP_DESCRIBE_MAP[const.STEP_PERFORM_VERIFY_AUTH])
             )
 
@@ -152,7 +150,6 @@ class AssetChangePasswordHandler(BaseChangePasswordHandler):
                 return
 
             if (i+1) == self.retry_times:
-                # 其他未知原因失败, 以校验密码结果为准
                 return
 
             time.sleep(1)
@@ -168,28 +165,28 @@ class AssetChangePasswordHandler(BaseChangePasswordHandler):
             'username': self.task.username, 'password': self.task.password,
             'private_key': self.task.private_key_file
         }
-        logger.info("(注意: 本步骤的执行结果为改密任务最终是否成功的标志)")
+        logger.info("(Примечание: результат выполнения этого шага является признаком того, успешно ли завершена задача шифрования)")
         for i in range(self.retry_times):
-            logger.info('执行改密后对认证信息的校验: 尝试第 ({}/{}) 次'
+            logger.info('Проверка аутентификационных данных после выполнения шифрования: Попытка ({}/{}) раз'
                         ''.format(i + 1, self.retry_times))
 
             raw, summary = test_user_connectivity(**data)
 
             dark = summary.get('dark')
             if not dark:
-                logger.info('执行改密后对认证信息的校验结果: 成功')
+                logger.info('Результат проверки аутентификационных данных после выполнения шифрования: успех')
                 return
 
-            logger.info('执行改密后对认证信息的校验结果: 失败')
+            logger.info('Результат проверки аутентификационных данных после выполнения шифрования: провал')
             msg = self.clean_dark_msg(dark, 'ping')
-            logger.info('原因: {}'.format(msg))
+            logger.info('Причина: {}'.format(msg))
 
             if msg.startswith('Invalid/incorrect password'):
                 raise self.PerformVerifyAuthErrorException(msg)
 
             time.sleep(1)
 
-        logger.info('(注意: 可能由于网络不可达或连接超时等原因导致认证信息校验失败)')
+        logger.info('(Примечание. Проверка информации для аутентификации может завершиться ошибкой из-за недоступности сети или тайм-аута соединения и т. д.)')
         raise self.InterruptException()
 
     def _step_perform_keep_auth(self):
@@ -205,7 +202,6 @@ class AssetChangePasswordHandler(BaseChangePasswordHandler):
             ids.extend(books.values_list('id', flat=True))
             books.update(**data)
 
-            # 为了触发信号
             book = books.first()
             for k, v in data.items():
                 setattr(book, k, v)
@@ -214,5 +210,5 @@ class AssetChangePasswordHandler(BaseChangePasswordHandler):
             book = AuthBook.objects.create(**data)
             ids.append(book.id)
 
-        logger.info('保存账号完成: ids={}'.format(ids))
+        logger.info('Сохранение учетных записей завершено: ids={}'.format(ids))
         return book

@@ -23,7 +23,7 @@ class Provider(BaseProvider):
         self.api_endpoint = self.account.attrs.get('api_endpoint')
         self.page_size = 20
         self.image_platform_map = {}
-        self.vpcs = []  # 存放当前账户所有的vpcs
+        self.vpcs = []
 
     def get_regions(self):
         regions = {
@@ -64,7 +64,6 @@ class Provider(BaseProvider):
             os_type = guest_os_version.split(':')[0].lower()
             return os_type
         except Exception as e:
-            # 没有安装ngt的机器无法拿到系统类型信息，默认为Linux
             print(f'Get platform error with instance {instance_id}: {e}')
             return 'linux'
 
@@ -91,7 +90,6 @@ class Provider(BaseProvider):
         return instance['region_id']
 
     def get_vpcs(self):
-        """ 获取当前账户所有的vpcs """
         if len(self.vpcs) == 0:
             self.vpcs = self.__post_pagination(self.api_endpoint + '/subnets/list')
         return self.vpcs

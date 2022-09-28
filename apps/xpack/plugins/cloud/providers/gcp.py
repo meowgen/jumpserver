@@ -97,8 +97,6 @@ class Provider(BaseProvider):
         return ips
 
     def get_instance_public_ip(self, instance):
-        # google 好像只支持外部 ipv6 地址，且对于外部 ipv6 的配置没有返回
-        # https://cloud.google.com/compute/docs/ip-addresses/configure-ipv6-address?hl=zh_cn#update-vm-ipv6
         ips = []
         network_interfaces = instance.network_interfaces
         for network_interface in network_interfaces:

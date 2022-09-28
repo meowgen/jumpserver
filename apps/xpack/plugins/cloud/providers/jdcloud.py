@@ -98,7 +98,6 @@ class JDCloudClient:
     def update_image_mapping(self):
         image_type = ['public', 'private', 'thirdparty', 'shared']
         for t in image_type:
-            # 初始化 total >= size 可变相实现 do...while
             page, size, total = 1, 100, 100
             while int(math.ceil(total/size)) >= page:
                 result = self.describe_images(page=page, size=size, image_source=t)
@@ -108,7 +107,6 @@ class JDCloudClient:
 
     def set_region(self, region_id):
         self.region = region_id
-        # 更新镜像映射
         self.update_image_mapping()
 
     def describe_instances(self, page=1, size=1):

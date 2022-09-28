@@ -20,7 +20,6 @@ target_node = Node.objects.get(key="2:1")
 
 def sync_node(src, target, cut=False):
     assets = src.get_assets()
-	# 同步本节点资产
     for asset in assets:
         if cut:
             src.assets.remove(asset)
@@ -35,7 +34,6 @@ def sync_node(src, target, cut=False):
                 asset.save()
                 new_asset = asset
         target.assets.add(new_asset)
-	# 同步子节点资产
     for child in src.get_children():
         node_new = target.create_child(child.value)
         node_new.org_id = target.org_id

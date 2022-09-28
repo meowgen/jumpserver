@@ -86,9 +86,9 @@ class BaseExecutionManager:
     def show_summary(self):
         split_line = '#' * 40
         summary = self.execution.result_summary
-        logger.info(f'\n{split_line} 改密计划执行结果汇总 {split_line}')
+        logger.info(f'\n{split_line} Сводка результатов выполнения плана шифрования {split_line}')
         logger.info(
-            '\n成功: {succeed}, 失败: {failed}, 总数: {total}\n'
+            '\nуспешные: {succeed}, провалившиеся: {failed}, общее количество: {total}\n'
             ''.format(**summary)
         )
 
@@ -97,9 +97,9 @@ class BaseExecutionManager:
         self.date_end = timezone.now()
 
         logger.info('\n\n' + '-' * 80)
-        logger.info('改密计划执行结束 {}\n'.format(local_now_display()))
+        logger.info('Реализация плана шифрования завершена {}\n'.format(local_now_display()))
         self.timedelta = int(self.time_end - self.time_start)
-        logger.info('用时: {}s'.format(self.timedelta))
+        logger.info('Время: {}сек'.format(self.timedelta))
         self.execution.timedelta = self.timedelta
         self.execution.save()
         self.show_summary()

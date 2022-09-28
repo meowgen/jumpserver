@@ -1,6 +1,3 @@
-"""
-改密计划：各类型数据库改密处理类
-"""
 import time
 import warnings
 import os
@@ -41,7 +38,7 @@ class OracleChangePasswordHandler(DatabaseChangePasswordHandler):
         return params_dict
 
     def _step_perform_preflight_check(self):
-        logger.info('检测条件: 应用用户 {} 对应用 {} 的可连接性'.format(
+        logger.info('Условие обнаружения: подключение системного пользователя {} к приложению {}'.format(
             self.task.system_user.username, self.task.app)
         )
         param_dict = self.make_params()
@@ -49,24 +46,24 @@ class OracleChangePasswordHandler(DatabaseChangePasswordHandler):
             conn = cx_Oracle.connect(**param_dict)
         except DatabaseError as e:
             self.log_error(
-                f'\n检测结果: 应用用户 {self.task.system_user.username}'
-                f' 对应用 {self.task.app} 不可连接'
+                f'\nРезультат теста: системный пользователь {self.task.system_user.username}'
+                f' к приложению {self.task.app} не подключаемый'
             )
-            self.log_error('原因: {}'.format(e))
+            self.log_error('Причина: {}'.format(e))
             raise self.PerformPreflightCheckErrorException(e)
         else:
-            logger.info('\n检测结果: 应用用户 {} 对应用 {} 可连接'.format(
+            logger.info('\nРезультат теста: системный пользователь {} к приложению {} подключаемый'.format(
                 self.task.system_user.username, self.task.app)
             )
             self.conn = conn
 
     def _step_perform_change_auth(self):
         if self.conn is None:
-            self.log_error('\n请先执行改密前的条件检测')
+            self.log_error('\nПожалуйста, выполните определение условий перед шифрованием')
         else:
             cursor = self.conn.cursor()
             for i in range(self.retry_times):
-                logger.info('执行改密: 尝试第 ({}/{}) 次'.format(i + 1, self.retry_times))
+                logger.info('Выполнить шифрование: ({}/{})'.format(i + 1, self.retry_times))
                 try:
                     cursor.execute(
                         f'alter user {self.task.system_user.username} '
@@ -75,13 +72,13 @@ class OracleChangePasswordHandler(DatabaseChangePasswordHandler):
                     self.task.system_user.password = self.task.password
                     self.task.system_user.save()
                 except DatabaseError as e:
-                    logger.info('执行改密结果: 失败')
-                    logger.info('原因: {}'.format(e))
+                    logger.info('Выполнить результат расшифровки: провал')
+                    logger.info('Причина: {}'.format(e))
                 except Exception as e:
-                    self.log_error(f'执行结果异常，原因: {e}')
+                    self.log_error(f'Результат выполнения ненормальный, причина: {e}')
                     break
                 else:
-                    logger.info('执行改密结果: 成功')
+                    logger.info('Выполнить результат расшифровки: успех')
                     cursor.close()
                     self.conn.close()
                     return
@@ -90,22 +87,22 @@ class OracleChangePasswordHandler(DatabaseChangePasswordHandler):
             raise self.MultipleAttemptAfterErrorException()
 
     def _step_perform_verify_auth(self):
-        logger.info("(注意: 本步骤的执行结果为改密任务最终是否成功的标志)")
+        logger.info("(Примечание: результат выполнения этого шага является признаком того, успешно ли завершена задача шифрования)")
         for i in range(self.retry_times):
-            logger.info('执行改密后对认证信息的校验: 尝试第 ({}/{}) 次'.format(i + 1, self.retry_times))
+            logger.info('Проверка аутентификационных данных после изменения шифрования: попытка ({}/{}) раз'.format(i + 1, self.retry_times))
             param_dict = self.make_params(has_changed=True)
             try:
                 conn = cx_Oracle.connect(**param_dict)
             except DatabaseError as e:
-                self.log_error('执行改密后对认证信息的校验结果: 失败')
-                self.log_error('原因: {}'.format(e))
+                self.log_error('Результат проверки аутентификационных данных после выполнения шифрования: провал')
+                self.log_error('Причина: {}'.format(e))
                 if e.args[0].code == 1017:
                     raise self.PerformVerifyAuthErrorException(e)
             else:
-                logger.info('执行改密后对认证信息的校验结果: 成功')
+                logger.info('Результат проверки аутентификационных данных после выполнения шифрования: успех')
                 conn.close()
                 return
 
             time.sleep(1)
-        logger.info('(注意: 可能由于网络不可达或连接超时等原因导致认证信息校验失败)')
+        logger.info('(Примечание: Проверка информации для аутентификации может завершиться ошибкой из-за недоступности сети или тайм-аута соединения.)')
         raise self.InterruptException()

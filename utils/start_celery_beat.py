@@ -49,7 +49,6 @@ def stop_beat_process(sig, frame):
 
 
 def main():
-    # 父进程结束通知子进程结束
     signal.signal(signal.SIGTERM, stop_beat_process)
 
     with redis_lock.Lock(redis, name="beat-distribute-start-lock", expire=60, auto_renewal=True):

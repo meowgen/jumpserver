@@ -43,18 +43,16 @@ class SyncTaskManager:
         self.task = execution.task
         self.account = execution.task.account
         self.provider = execution.task.account.provider_instance
-        # - -
         self.cloud_instance_ids = []
-        # 新增、 已同步、 未同步、 已释放
         self.result = {'new': [], 'sync': [], 'unsync': [], 'released': []}
 
     def run(self):
-        print("任务执行开始: {}\n".format(self.task))
+        print("Начинается выполнение задачи: {}\n".format(self.task))
         print("#"*50)
 
         self.account.check_update_validity()
         if self.account.validity:
-            colored_printer.green('账号有效.')
+            colored_printer.green('Учётная запись действительна.')
             try:
                 self.sync()
                 _reason = '-'
@@ -64,7 +62,7 @@ class SyncTaskManager:
                 _status = const.ExecutionStatusChoices.failed
                 _reason = str(e)
         else:
-            colored_printer.red('账号无效.')
+            colored_printer.red('Учётная запись недействительна.')
             _status = const.ExecutionStatusChoices.failed
             _reason = _('Account unavailable')
 
@@ -80,24 +78,24 @@ class SyncTaskManager:
 
         # show summary
         print("#"*50)
-        print("查看任务详细信息路径:\n")
-        print("XPack -> 云管中心 -> 任务列表 -> 任务详情(点击任务名称) -> 查看同步历史列表/实例列表\n")
-        print('\n总结: \n')
-        msg = "新增: {} 已同步: {} 未同步: {} 已释放: {}\n".format(
+        print("Посмотреть путь к сведениям о задаче:\n")
+        print("XPack -> Центр управления облаком -> Список задач -> Сведения о задаче (щелкните имя задачи) -> Просмотр списка истории синхронизации/списка экземпляров\n")
+        print('\nИтоги: \n')
+        msg = "Добавлено: {} Синхронизировано: {} Несинхронизировано: {} Выпущено {}\n".format(
             len(self.result['new']),
             len(self.result['sync']),
             len(self.result['unsync']),
             len(self.result['released'])
         )
         colored_printer.green(msg)
-        print("任务执行结束!\n")
+        print("Выполнение задачи заканчивается!\n")
 
     def sync(self):
         region_ids = self.task.regions
-        print("同步地域列表: {}\n".format(region_ids))
+        print("Список регионов синхронизации: {}\n".format(region_ids))
         for region_id in region_ids:
             print("\n{}".format("="*50))
-            print("地域: {}".format(region_id))
+            print("Регион: {}".format(region_id))
             self.sync_instances_of_region(region_id=region_id)
 
         released_instances = self._get_released_instances()
@@ -122,7 +120,6 @@ class SyncTaskManager:
             logger.error(error, exc_info=True)
             instances = []
         for instance in instances:
-            # 提前设置一些实例的前置属性
             properties = {'region_id': region_id}
             self.provider.preset_instance_properties(instance, properties)
 
@@ -138,7 +135,7 @@ class SyncTaskManager:
         try:
             print("{}".format("-" * 50))
             instance_id = self.provider.get_instance_id(instance)
-            print("实例: {}, 地域: {}".format(instance_id, region_id))
+            print("экземпляр: {}, регион: {}".format(instance_id, region_id))
             asset, created = self.create_or_update_asset(instance=instance)
             if created:
                 status = const.InstanceStatusChoices.sync
@@ -155,7 +152,7 @@ class SyncTaskManager:
                 instance_id = ''
             if instance_id is None:
                 instance_id = ''
-            colored_printer.red("同步实例失败! {} {}".format(instance_id, e))
+            colored_printer.red("Не удалось синхронизировать экземпляр! {} {}".format(instance_id, e))
             status = const.InstanceStatusChoices.unsync
             result_key = 'unsync'
             result = {'id': instance_id, 'region': region_id}
@@ -168,13 +165,11 @@ class SyncTaskManager:
         from .models import SyncInstanceDetail
         instance = SyncInstanceDetail.objects.filter(task=self.task, instance_id=instance_id).first()
         if not instance:
-            # 创建实例详情
             instance = SyncInstanceDetail.objects.create(
                 task=self.task, execution=self.execution, instance_id=instance_id, region=region_id,
                 asset=asset, status=status
             )
             return instance
-        # 更新实例详情
         if instance.status != status:
             instance.status = status
             instance.execution = self.execution
@@ -184,9 +179,6 @@ class SyncTaskManager:
 
     @staticmethod
     def get_asset(instance_uuid, asset_id):
-        # <v2.6版本Default org_id=''，asset_id=instance_id
-        # >v2.6版本Default org_id='uuid', asset_id = org_id + instance_id
-        # 导致创建重复的资产
         asset = get_object_or_none(Asset, id=instance_uuid)
         if not asset:
             asset = get_object_or_none(Asset, id=asset_id)
@@ -206,9 +198,7 @@ class SyncTaskManager:
         hostname = self.provider.build_asset_hostname(instance, self.task.hostname_strategy, ip)
         instance_uuid = self.provider.get_instance_uuid(instance)
         platform = self.provider.build_asset_platform(instance)
-        # 获取 资产
         asset = self.get_asset(instance_uuid, asset_id)
-        # 获取 管理用户
         platform = asset.platform if asset else platform
         admin_user = self.get_asset_admin_user(platform)
         attrs = {
@@ -218,33 +208,30 @@ class SyncTaskManager:
             'admin_user': admin_user,
             'created_by': 'System'
         }
-        # 更新资产
         if asset:
-            print("资产已经存在! 资产: {}".format(asset))
+            print("Ресурс уже существует! Ресурс: {}".format(asset))
             if not self.task.is_always_update:
                 return asset, False
-            # 更新资产信息
-            print("准备更新资产! 主机名称: {}".format(hostname))
+            print("Готово к обновлению ресурсов! Название хоста: {}".format(hostname))
             with transaction.atomic():
                 for attr, value in attrs.items():
                     setattr(asset, attr, value)
                 asset.save()
-            print("资产已经更新! 资产: {}".format(asset))
+            print("Ресурсы обновлены! Ресурс: {}".format(asset))
             return asset, False
 
-        # 创建资产
         attrs.update({
             'id': asset_id,
             'platform': platform,
             'protocols': self.task.protocols
         })
-        print("准备创建资产! 主机名称: {}".format(hostname))
+        print("Готово к созданию ресурсов! Название хоста: {}".format(hostname))
         with transaction.atomic():
             asset = Asset.objects.create(**attrs)
             with translation.override('en'):
                 self.set_asset_node(asset=asset, instance=instance)
                 self.set_asset_domain(asset=asset, instance=instance)
-        print("资产创建成功! 资产: {}".format(asset))
+        print("Ресурсы созданы! Ресурс: {}".format(asset))
         return asset, True
 
     def set_asset_node(self, asset, instance):
@@ -252,16 +239,11 @@ class SyncTaskManager:
         :params asset: Asset instance
         :params instance: EC2 instance
         """
-        # 创建节点
         nodes_name = self.provider.build_asset_nodes_name(instance=instance)
         node = self.task.node
         for node_name in nodes_name:
             node, created = node.get_or_create_child(node_name)
-        # 设置节点
-        print("添加资产到节点: {}".format(node.full_value))
-        # 先添加目标节点，再从当前组织根节点中移除
-        # 如果使用asset.nodes.set()方法进行操作，类似于先remove再add，最终资产还是会同时存在于目标节点和组织根节点中
-        # 因为在资产-节点移除信号中，如果发现资产不属于任何节点会添加到组织根节点中
+        print("Добавить ноды к ресурсам: {}".format(node.full_value))
         asset.nodes.add(node)
         org_root = Node.org_root()
         asset.nodes.remove(org_root)
@@ -271,12 +253,10 @@ class SyncTaskManager:
         :params asset: Asset instance
         :instance: EC2 instance
         """
-        # 创建网域
         domain_id = self.provider.build_asset_domain_id(instance)
         domain_name = self.provider.build_asset_domain_name(instance)
         defaults = {'id': domain_id, 'name': domain_name, 'comment': domain_name}
         domain, created = Domain.objects.get_or_create(id=domain_id, defaults=defaults)
-        # 添加网域
-        print('添加资产到网域: {}'.format(domain))
+        print('Добавить домен к ресурсу: {}'.format(domain))
         asset.domain = domain
         asset.save()
