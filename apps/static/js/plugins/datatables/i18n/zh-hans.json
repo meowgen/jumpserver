@@ -1,24 +1,24 @@
 {
-	"sProcessing":   "处理中...",
-	"sLengthMenu":   "显示 _MENU_ 项结果",
-	"sZeroRecords":  "没有匹配结果",
-	"sInfo":         "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
-	"sInfoEmpty":    "显示第 0 至 0 项结果，共 0 项",
-	"sInfoFiltered": "(由 _MAX_ 项结果过滤)",
+	"sProcessing":   "Обработка...",
+	"sLengthMenu":   "Показать _MENU_ результаты",
+	"sZeroRecords":  "Нет совпадений",
+	"sInfo":         "Показаны результаты с _START_ по _END_ из _TOTAL_",
+	"sInfoEmpty":    "Показаны результаты от 0 до 0 из 0",
+	"sInfoFiltered": "(отфильтровано по результатам _MAX_)",
 	"sInfoPostFix":  "",
-	"sSearch":       "搜索:",
+	"sSearch":       "Поиск:",
 	"sUrl":          "",
-	"sEmptyTable":     "表中数据为空",
-	"sLoadingRecords": "载入中...",
+	"sEmptyTable":     "Данные в таблице пусты",
+	"sLoadingRecords": "Загрузка...",
 	"sInfoThousands":  ",",
 	"oPaginate": {
-		"sFirst":    "首页",
-		"sPrevious": "上页",
-		"sNext":     "下页",
-		"sLast":     "末页"
+		"sFirst":    "Первая страница",
+		"sPrevious": "Предыдущая страница",
+		"sNext":     "Следующая страница",
+		"sLast":     "Последняя страница"
 	},
 	"oAria": {
-		"sSortAscending":  ": 以升序排列此列",
-		"sSortDescending": ": 以降序排列此列"
+		"sSortAscending":  ": Отсортировать этот столбец в порядке возрастания",
+		"sSortDescending": ": Отсортировать этот столбец в порядке убывания"
 	}
 }

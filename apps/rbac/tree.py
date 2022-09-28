@@ -12,7 +12,6 @@ from django.db.models import F, Count
 from common.tree import TreeNode
 from .models import Permission, ContentType
 
-# 根节点
 root_node_data = {
     'id': '$ROOT$',
     'name': _('All permissions'),
@@ -20,7 +19,6 @@ root_node_data = {
     'pId': '',
 }
 
-# 第二层 view 节点，手动创建的
 view_nodes_data = [
     {'id': 'view_console', 'name': _('Console view')},
     {'id': 'view_workbench', 'name': _('Workbench view')},
@@ -29,7 +27,6 @@ view_nodes_data = [
     {'id': 'view_other', 'name': _('Other')},
 ]
 
-# 第三层 app 节点，手动创建
 app_nodes_data = [
     {'id': 'users', 'view': 'view_console'},
     {'id': 'assets', 'view': 'view_console'},
@@ -46,7 +43,6 @@ app_nodes_data = [
     {'id': 'authentication', 'view': 'view_other'},
 ]
 
-# 额外其他节点，可以在不同的层次，需要指定父节点，可以将一些 model 归类到这个节点下面
 extra_nodes_data = [
     {"id": "cloud_import", "name": _("Cloud import"), "pId": "assets"},
     {"id": "backup_account_node", "name": _("Backup account"), "pId": "accounts"},
@@ -58,7 +54,6 @@ extra_nodes_data = [
     {'id': "my_apps", "name": _("My apps"), "pId": "view_workbench"},
 ]
 
-# 将 model 放到其它节点下，而不是本来的 app 中
 special_pid_mapper = {
     'common.permission': 'view_other',
     "assets.authbook": "accounts",
@@ -291,12 +286,10 @@ class PermissionTreeUtil:
             if not self._check_model_xpack(model_id):
                 continue
 
-            # 获取 pid
             app = ct.app_label
             if model_id in special_pid_mapper:
                 app = special_pid_mapper[model_id]
 
-            # 获取 name
             name = f'{ct.name}'
             if model_id in verbose_name_mapper:
                 name = verbose_name_mapper[model_id]
@@ -319,16 +312,14 @@ class PermissionTreeUtil:
         app_model = '%s.%s' % (p.content_type.app_label, resource)
         if self.lang == 'en':
             name = p.name
-        # 因为默认的权限位是没有翻译的，所以我们要用 action + resource name 去拼
         elif action in self.action_mapper and app_model in content_types_name_mapper:
             action_name = self.action_mapper[action]
             resource_name = content_types_name_mapper[app_model]
             sep = ''
             name = '{}{}{}'.format(action_name, sep, resource_name)
-        # 手动创建的 permission
         else:
             name = gettext(p.name)
-        name = name.replace('Can ', '').replace('可以', '').capitalize()
+        name = name.replace('Can ', '').replace('Можно', '').capitalize()
         return name, icon
 
     def _create_perms_nodes(self):
@@ -345,13 +336,11 @@ class PermissionTreeUtil:
             if not settings.XPACK_ENABLED and title in xpack_nodes:
                 continue
 
-            # name 要特殊处理，解决 i18n 问题
             name, icon = self._get_permission_name_icon(p, content_types_name_mapper)
             if settings.DEBUG_DEV:
                 name += '[{}]'.format(p.app_label_codename)
 
             pid = model_id
-            # perm node 的特殊设置用的是 title，因为 id 是数字，不一致
             if title in special_pid_mapper:
                 pid = special_pid_mapper[title]
 

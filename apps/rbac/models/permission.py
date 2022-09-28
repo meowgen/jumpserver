@@ -20,7 +20,6 @@ class ContentType(DjangoContentType):
 
 
 class Permission(DjangoPermission):
-    """ 权限类 """
     class Meta:
         proxy = True
         verbose_name = _('Permission')

@@ -55,7 +55,6 @@ class PublicSettingApi(OpenPublicSettingApi):
         for name in field_names:
             if name in values:
                 continue
-            # 提前把异常爆出来
             values[name] = getattr(settings, name)
         return values
 

@@ -9,7 +9,6 @@ __all__ = [
 
 
 class CommonSettingSerializer(serializers.Serializer):
-    # OpenID 公有配置参数 (version <= 1.5.8 或 version >= 1.5.8)
     BASE_SITE_URL = serializers.CharField(
         required=False, allow_null=True, allow_blank=True,
         max_length=1024, label=_('Base site url')
@@ -40,7 +39,6 @@ class CommonSettingSerializer(serializers.Serializer):
 
 
 class KeycloakSettingSerializer(CommonSettingSerializer):
-    # OpenID 旧配置参数 (version <= 1.5.8 (discarded))
     AUTH_OPENID_KEYCLOAK = serializers.BooleanField(
         label=_("Use Keycloak"), required=False, default=False
     )
@@ -53,7 +51,6 @@ class KeycloakSettingSerializer(CommonSettingSerializer):
 
 
 class OIDCSettingSerializer(KeycloakSettingSerializer):
-    # OpenID 新配置参数 (version >= 1.5.9)
     AUTH_OPENID = serializers.BooleanField(required=False, label=_('Enable OPENID Auth'))
     AUTH_OPENID_PROVIDER_ENDPOINT = serializers.CharField(
         required=False, max_length=1024, label=_('Provider endpoint')

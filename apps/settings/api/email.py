@@ -26,7 +26,6 @@ class MailTestingAPI(APIView):
         serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
 
-        # 测试邮件时，邮件服务器信息从配置中获取
         email_host = settings.EMAIL_HOST
         email_port = settings.EMAIL_PORT
         email_host_user = settings.EMAIL_HOST_USER
@@ -36,7 +35,6 @@ class MailTestingAPI(APIView):
         email_use_tls = settings.EMAIL_USE_TLS
         email_recipient = serializer.validated_data.get('EMAIL_RECIPIENT')
 
-        # 设置 settings 的值，会导致动态配置在当前进程失效
         # for k, v in serializer.validated_data.items():
         #     if k.startswith('EMAIL'):
         #         setattr(settings, k, v)

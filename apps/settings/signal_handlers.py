@@ -39,9 +39,7 @@ def refresh_settings_on_changed(sender, instance=None, **kwargs):
 
     setting_pub_sub.publish(instance.name)
 
-    # 配置变化: PERM_SINGLE_ASSET_TO_UNGROUP_NODE
     if instance.name == 'PERM_SINGLE_ASSET_TO_UNGROUP_NODE':
-        # 清除所有用户授权树已构建的标记，下次访问重新生成
         logger.debug('Clean ALL User perm tree built mark')
         from perms.utils.asset import UserGrantedTreeRefreshController
         UserGrantedTreeRefreshController.clean_all_user_tree_built_mark()
@@ -93,7 +91,6 @@ def subscribe_settings_change(sender, **kwargs):
 def monkey_patch_settings(sender, **kwargs):
     def monkey_patch_getattr(self, name):
         val = getattr(self._wrapped, name)
-        # 只解析 defaults 中的 callable
         if callable(val) and val.__module__.endswith('jumpserver.conf'):
             val = val()
         return val

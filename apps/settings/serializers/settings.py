@@ -31,5 +31,5 @@ class SettingsSerializer(
     RadiusSettingSerializer,
     CleaningSerializer,
 ):
-    # encrypt_fields 现在使用 write_only 来判断了
+    # encrypt_fields теперь используют write_only для определения
     pass

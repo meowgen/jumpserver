@@ -1,4 +1,3 @@
-/*公共样式*/
 *{
 	margin:0;
 	padding: 0;
@@ -20,7 +19,6 @@ button{
     text-align: center;
 }
 
-/*header样式*/
 header{
 	overflow:hidden ;
 	background: #dedede;
@@ -44,7 +42,6 @@ header div:nth-child(2) a:hover{
 	color:var(--primary-color);
 }
 
-/*article样式*/
 article{
 	padding-top: 50px;
 	padding:50px 370px
@@ -107,7 +104,6 @@ article ul li:last-child{
 	background: grey;
 }
 
-/*输入框样式*/
 .form-input{
     text-align: center;
     margin: 20px auto;
@@ -118,8 +114,6 @@ article ul li:last-child{
     padding-left: 10px;
 	outline: none;
 }
-/*身份验证*/
-/*安装应用*/
 .verify div{
 	display: inline-block;
 }
@@ -140,9 +134,7 @@ article ul li:last-child{
 .next:hover {
 	color: white;
 }
-/*绑定TOTP*/
 
-/*版权信息*/
 footer{
     text-align:center;
 	font-size: 14px;

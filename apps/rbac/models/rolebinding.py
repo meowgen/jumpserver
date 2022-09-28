@@ -32,7 +32,6 @@ class RoleBindingManager(models.Manager):
 
 class RoleBinding(JMSModel):
     Scope = Scope
-    """ 定义 用户-角色 关系 """
     scope = models.CharField(
         max_length=128, choices=Scope.choices, default=Scope.system,
         verbose_name=_('Scope')
@@ -110,7 +109,6 @@ class RoleBinding(JMSModel):
             bindings = list(cls.objects.root_all().filter(role__in=roles, user=user))
 
         system_bindings = [b for b in bindings if b.scope == Role.Scope.system.value]
-        # 工作台仅限于自己加入的组织
         if perm == 'rbac.view_workbench':
             all_orgs = user.orgs.all().distinct()
         else:
@@ -119,7 +117,6 @@ class RoleBinding(JMSModel):
         if not settings.XPACK_ENABLED:
             all_orgs = all_orgs.filter(id=Organization.DEFAULT_ID)
 
-        # 有系统级别的绑定，就代表在所有组织有这个权限
         if system_bindings:
             orgs = all_orgs
         else:
@@ -127,12 +124,10 @@ class RoleBinding(JMSModel):
             orgs = all_orgs.filter(id__in=org_ids)
 
         workbench_perm = 'rbac.view_workbench'
-        # 全局组织
         if orgs and perm != workbench_perm and user.has_perm('orgs.view_rootorg'):
             root_org = Organization.root()
             orgs = [root_org, *list(orgs)]
         elif orgs and perm == workbench_perm and user.has_perm('orgs.view_alljoinedorg'):
-            # Todo: 先复用组织
             root_org = Organization.root()
             root_org.name = _("All organizations")
             orgs = [root_org, *list(orgs)]

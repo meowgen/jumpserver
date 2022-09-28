@@ -40,10 +40,6 @@ class CommandAlertMixin:
 
     @classmethod
     def post_insert_to_db(cls, subscription: SystemMsgSubscription):
-        """
-        兼容操作，试图用 `settings.SECURITY_INSECURE_COMMAND_EMAIL_RECEIVER` 的邮件地址
-        assets_systemuser_assets找到用户，把用户设置为默认接收者
-        """
         from settings.models import Setting
         db_setting = Setting.objects.filter(
             name='SECURITY_INSECURE_COMMAND_EMAIL_RECEIVER'

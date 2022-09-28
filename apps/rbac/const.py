@@ -8,7 +8,7 @@ class Scope(models.TextChoices):
 
 
 exclude_permissions = (
-    # ('App', 'Model', 'Action', 'Resource') Model 和 Resource 可能不同
+    # ('App', 'Model', 'Action', 'Resource') Модель и ресурс могут отличаться
     # users.add_user
     ('auth', '*', '*', '*'),
     ('captcha', '*', '*', '*'),
@@ -40,7 +40,7 @@ exclude_permissions = (
     ('assets', 'gathereduser', 'add,delete,change', 'gathereduser'),
     ('assets', 'accountbackupplanexecution', 'delete,change', 'accountbackupplanexecution'),
     ('assets', 'authbook', 'change', 'authbook'),
-    # TODO 暂时去掉历史账号的权限
+    
     ('assets', 'authbook', '*', 'assethistoryaccount'),
     ('assets', 'authbook', '*', 'assethistoryaccountsecret'),
 

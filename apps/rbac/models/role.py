@@ -23,7 +23,6 @@ class OrgRoleManager(models.Manager):
 
 
 class Role(JMSModel):
-    """ 定义 角色 ｜ 角色-权限 关系 """
     Scope = const.Scope
 
     name = models.CharField(max_length=128, verbose_name=_('Name'))

@@ -98,12 +98,6 @@ class RBACPermission(permissions.DjangoModelPermissions):
         return model_cls
 
     def get_require_perms(self, request, view):
-        """
-        获取 request, view 需要的 perms
-        :param request:
-        :param view:
-        :return:
-        """
         model_cls = self.get_model_cls(view)
         action = getattr(view, 'action', None)
         if not action:

@@ -4,7 +4,6 @@ from authentication.backends.base import JMSBaseAuthBackend
 
 
 class RBACBackend(JMSBaseAuthBackend):
-    """ 只做权限校验 """
     @staticmethod
     def is_enabled():
         return True

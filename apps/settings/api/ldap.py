@@ -142,7 +142,6 @@ class LDAPUserListApi(generics.ListAPIView):
 
     def list(self, request, *args, **kwargs):
         cache_police = self.request.query_params.get('cache_police', True)
-        # 不是用缓存
         if cache_police not in LDAP_USE_CACHE_FLAGS:
             return super().list(request, *args, **kwargs)
 
@@ -152,24 +151,19 @@ class LDAPUserListApi(generics.ListAPIView):
             data = {'error': str(e)}
             return Response(data=data, status=400)
 
-        # 缓存有数据
         if queryset is not None:
             return super().list(request, *args, **kwargs)
 
         sync_util = LDAPSyncUtil()
-        # 还没有同步任务
         if sync_util.task_no_start:
-            # 任务外部设置 task running 状态
             sync_util.set_task_status(sync_util.TASK_STATUS_IS_RUNNING)
             t = threading.Thread(target=sync_ldap_user)
             t.start()
             data = {'msg': _('Synchronization start, please wait.')}
             return Response(data=data, status=409)
-        # 同步任务正在执行
         if sync_util.task_is_running:
             data = {'msg': _('Synchronization is running, please wait.')}
             return Response(data=data, status=409)
-        # 同步任务执行结束
         if sync_util.task_is_over:
             msg = sync_util.get_task_error_msg()
             data = {'error': _('Synchronization error: {}'.format(msg))}

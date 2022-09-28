@@ -40,7 +40,6 @@ class OtherSettingSerializer(serializers.Serializer):
         help_text=_('default: http://www.jumpserver.org/support/')
     )
 
-    # 准备废弃
     # PERIOD_TASK_ENABLED = serializers.BooleanField(
     #     required=False, label=_("Enable period task")
     # )
