@@ -119,7 +119,7 @@ class CommandExecution(OrgModelMixin):
             allow_assets = self.allow_assets
             deny_assets = set(list(self.hosts.all())) - set(list(allow_assets))
             for asset in deny_assets:
-                print(f'资产{asset}: 命令{self.command}不允许执行')
+                print(f'Ресурс {asset}: команду {self.command} не разрешено выполнять')
             if not allow_assets:
                 self.result = {
                     "error": 'There are currently no assets that can be executed'

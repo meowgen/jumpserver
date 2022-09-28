@@ -102,7 +102,6 @@ def clean_celery_tasks_period():
 @shared_task
 @after_app_ready_start
 def clean_celery_periodic_tasks():
-    """清除celery定时任务"""
     need_cleaned_tasks = [
         'handle_be_interrupted_change_auth_task_periodic',
     ]

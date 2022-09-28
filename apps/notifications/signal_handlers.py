@@ -88,7 +88,6 @@ def on_user_post_save(sender, instance, created, **kwargs):
     if not created:
         return
     receive_backends = []
-    # Todo: IDE 识别不了 get_account
     for backend in BACKEND:
         if backend.get_account(instance):
             receive_backends.append(backend)

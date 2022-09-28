@@ -26,9 +26,6 @@ logger = get_logger(__file__)
 @atomic()
 @tmp_to_root_org()
 def check_asset_permission_expired():
-    """
-    这里的任务要足够短，不要影响周期任务
-    """
     from settings.models import Setting
 
     setting_name = 'last_asset_perm_expired_check'
@@ -76,13 +73,11 @@ def check_asset_permission_will_expired():
         remain_days = (date_expired - start).days
 
         org = asset_perm.org
-        # 资产授权按照组织分类
         if org in org_perm_remain_day_mapper[remain_days]:
             org_perm_remain_day_mapper[remain_days][org].add(asset_perm)
         else:
             org_perm_remain_day_mapper[remain_days][org] = {asset_perm, }
 
-        # 计算每个用户即将过期的资产
         users = asset_perm.get_all_users()
         assets = asset_perm.get_all_assets()
 

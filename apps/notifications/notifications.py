@@ -50,12 +50,6 @@ def publish_task(msg):
 
 
 class Message(metaclass=MessageType):
-    """
-    这里封装了什么？
-        封装不同消息的模板，提供统一的发送消息的接口
-        - publish 该方法的实现与消息订阅的表结构有关
-        - send_msg
-    """
     message_type_label: str
     category: str
     category_label: str
@@ -77,7 +71,7 @@ class Message(metaclass=MessageType):
 
     def send_msg(self, users: Iterable, backends: Iterable = BACKEND):
         backends = set(backends)
-        backends.add(BACKEND.SITE_MSG)  # 站内信必须发
+        backends.add(BACKEND.SITE_MSG)
 
         for backend in backends:
             try:
@@ -212,7 +206,6 @@ class SystemMessage(Message):
             message_type=self.get_message_type()
         )
 
-        # 只发送当前有效后端
         receive_backends = subscription.receive_backends
         receive_backends = BACKEND.filter_enable_backends(receive_backends)
 
@@ -238,9 +231,6 @@ class UserMessage(Message):
         self.user = user
 
     def publish(self):
-        """
-        发送消息到每个用户配置的接收方式上
-        """
         sub = UserMsgSubscription.objects.get(user=self.user)
         self.send_msg([self.user], sub.receive_backends)
 

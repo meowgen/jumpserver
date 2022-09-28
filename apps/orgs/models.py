@@ -107,7 +107,6 @@ class Organization(OrgRoleMixin, models.Model):
 
         org = cls.orgs_mapping.get(str(id_or_name))
         if not org:
-            # 内存失效速度慢于读取速度(on_org_create_or_update)
             cls.orgs_mapping = cls.construct_orgs_mapping()
 
         org = cls.orgs_mapping.get(str(id_or_name))
@@ -123,7 +122,7 @@ class Organization(OrgRoleMixin, models.Model):
         orgs_mapping.update({
             root_org.id: root_org,
             'GLOBAL': root_org,
-            '全局组织': root_org
+            'ГЛОБАЛЬНАЯ ОРГАНИЗАЦИЯ': root_org
         })
         return orgs_mapping
 
@@ -209,7 +208,7 @@ class Organization(OrgRoleMixin, models.Model):
 
 class OrganizationMember(models.Model):
     """
-    注意：直接调用该 `Model.delete` `Model.objects.delete` 不会触发清理该用户的信号
+    Примечание: прямой вызов `Model.delete` `Model.objects.delete` не приведет к срабатыванию сигнала для очистки пользователя.
     """
 
     id = models.UUIDField(default=uuid.uuid4, primary_key=True)

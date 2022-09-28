@@ -73,12 +73,6 @@ class JMSInventory(JMSBaseInventory):
     user_info  is obtained from admin_user or asset_user
     """
     def __init__(self, assets, run_as_admin=False, run_as=None, become_info=None, system_user=None):
-        """
-        :param assets: assets
-        :param run_as_admin: True 是否使用管理用户去执行, 每台服务器的管理用户可能不同
-        :param run_as: 用户名(添加了统一的资产用户管理器之后AssetUserManager加上之后修改为username)
-        :param become_info: 是否become成某个用户去执行
-        """
         self.assets = assets
         self.using_admin = run_as_admin
         self.run_as = run_as

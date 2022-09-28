@@ -26,7 +26,6 @@ from common.utils import get_logger
 logger = get_logger(__file__)
 
 
-# 部分 org 相关的 model，需要清空这些数据之后才能删除该组织
 org_related_models = [
     User, UserGroup, Asset, Label, Domain, Gateway, Node, SystemUser, Label,
     CommandFilter, CommandFilterRule, GatheredUser,
@@ -55,7 +54,6 @@ class OrgViewSet(BulkModelViewSet):
         if model == User:
             data = model.get_org_users(org=org)
         elif model == Node:
-            # 根节点不能手动删除，所以排除检查
             data = model.objects.filter(org_id=org.id).exclude(parent_key='', key__regex=r'^[0-9]+$')
         else:
             data = model.objects.filter(org_id=org.id)

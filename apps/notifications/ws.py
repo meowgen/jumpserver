@@ -46,7 +46,6 @@ class SiteMsgWebsocket(JsonWebsocketConsumer):
         ws = self
         user_id = str(self.scope["user"].id)
 
-        # 先发一个消息再说
         with safe_db_connection():
             self.send_unread_msg_count()
 

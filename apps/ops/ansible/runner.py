@@ -61,7 +61,7 @@ def get_default_options():
 # JumpServer not use playbook
 class PlayBookRunner:
     """
-    用于执行AnsiblePlaybook的接口.简化Playbook对象的使用.
+    Интерфейс для выполнения AnsiblePlaybooks.Упрощает использование объектов Playbook.
     """
 
     # Default results callback
@@ -116,7 +116,7 @@ class PlayBookRunner:
 
 class AdHocRunner:
     """
-    ADHoc Runner接口
+    Интерфейс ADHoc Runner
     """
     results_callback_class = AdHocResultCallback
     results_callback = None

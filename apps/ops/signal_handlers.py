@@ -19,10 +19,8 @@ def before_task_publish(headers=None, **kwargs):
 
 @task_prerun.connect()
 def on_celery_task_pre_run(task_id='', **kwargs):
-    # 关闭之前的数据库连接
     close_old_connections()
 
-    # 保存 Lang context
     key = TASK_LANG_CACHE_KEY.format(task_id)
     task_lang = cache.get(key)
     if task_lang:

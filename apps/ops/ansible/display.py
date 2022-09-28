@@ -30,7 +30,6 @@ class AdHocDisplay(Display, metaclass=UnSingleton):
         self.log_file.close()
 
     def set_cowsay_info(self):
-        # 中断 cowsay 的测试，会频繁开启子进程
         return
 
     def _write_to_screen(self, msg, stderr):
@@ -50,7 +49,6 @@ class AdHocDisplay(Display, metaclass=UnSingleton):
                 raise
 
     def _write_to_log_file(self, msg):
-        # 这里先不 flush，log 文件不需要那么及时。
         self.log_file.write(msg)
 
     def display(self,  msg, color=None, stderr=False, screen_only=False, log_only=False, newline=True):

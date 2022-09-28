@@ -98,8 +98,8 @@ def get_all_test_messages(request):
     from django.shortcuts import HttpResponse
 
     msgs_cls = Message.get_all_sub_messages()
-    html_data = '<h3>HTML 格式 </h3>'
-    text_data = '<h3>Text 格式</h3>'
+    html_data = '<h3>HTML формат</h3>'
+    text_data = '<h3>Text формат</h3>'
 
     for msg_cls in msgs_cls:
         try:
@@ -109,7 +109,7 @@ def get_all_test_messages(request):
             msg_html = msg.html_msg_with_sign['message']
             msg_text = msg.text_msg_with_sign['message']
         except NotImplementedError:
-            msg_html = msg_text = '没有实现方法'
+            msg_html = msg_text = 'Не реализовано'
         except Exception as e:
             msg_html = msg_text = 'Error: ' + str(e)
 

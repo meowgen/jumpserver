@@ -13,7 +13,7 @@ __all__ = [
 class BaseHost(Host):
     def __init__(self, host_data):
         """
-        初始化
+        Инициализация
         :param host_data:  {
             "hostname": "",
             "ip": "",
@@ -46,13 +46,11 @@ class BaseHost(Host):
         if host_data.get('username'):
             self.set_variable('ansible_user', host_data['username'])
 
-        # 添加密码和密钥
         if host_data.get('password'):
             self.set_variable('ansible_ssh_pass', host_data['password'])
         if host_data.get('private_key'):
             self.set_variable('ansible_ssh_private_key_file', host_data['private_key'])
 
-        # 添加become支持
         become = host_data.get("become", False)
         if become:
             self.set_variable("ansible_become", True)
@@ -72,7 +70,7 @@ class BaseHost(Host):
 
 class BaseInventory(InventoryManager):
     """
-    提供生成Ansible inventory对象的方法
+    Предоставляет метод для создания объектов инвентаризации Ansible.
     """
     loader_class = DataLoader
     variable_manager_class = VariableManager
@@ -80,7 +78,6 @@ class BaseInventory(InventoryManager):
 
     def __init__(self, host_list=None, group_list=None):
         """
-        用于生成动态构建Ansible Inventory. super().__init__ 会自动调用
         host_list: [{
             "hostname": "",
             "ip": "",

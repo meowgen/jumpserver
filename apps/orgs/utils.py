@@ -11,16 +11,12 @@ from .models import Organization
 
 
 def get_org_from_request(request):
-    # query中优先级最高
     oid = request.GET.get("oid")
 
-    # 其次header
     if not oid:
         oid = request.META.get("HTTP_X_JMS_ORG")
-    # 其次cookie
     if not oid:
         oid = request.COOKIES.get('X-JMS-ORG')
-    # 其次session
     if not oid:
         oid = request.session.get("oid")
 
@@ -114,10 +110,6 @@ def filter_org_queryset(queryset):
 
 
 def org_aware_func(org_arg_name):
-    """
-    :param org_arg_name: 函数中包含org_id的对象是哪个参数
-    :return:
-    """
     def decorate(func):
         @wraps(func)
         def wrapper(*args, **kwargs):
