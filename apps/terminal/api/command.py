@@ -48,7 +48,6 @@ class CommandQueryMixin:
         return None
 
     def get_queryset(self):
-        # 解决访问 /docs/ 问题
         if hasattr(self, 'swagger_fake_view'):
             return self.command_store.model.objects.none()
         date_from, date_to = self.get_date_range()
@@ -63,7 +62,6 @@ class CommandQueryMixin:
         return queryset
 
     def filter_queryset(self, queryset):
-        # 解决es存储命令时，父类根据filter_fields过滤出现异常的问题，返回的queryset类型list
         return queryset
 
     def get_date_range(self):
@@ -87,7 +85,7 @@ class CommandQueryMixin:
 
 
 class CommandViewSet(JMSBulkModelViewSet):
-    """接受app发送来的command log, 格式如下
+    """
     {
         "user": "admin",
         "asset": "localhost",
@@ -97,7 +95,6 @@ class CommandViewSet(JMSBulkModelViewSet):
         "output": "d2hvbWFp",  # base64.b64encode(s)
         "timestamp": 1485238673.0
     }
-
     """
     command_store = get_command_storage()
     serializer_class = SessionCommandSerializer
@@ -116,7 +113,7 @@ class CommandViewSet(JMSBulkModelViewSet):
 
             qs = storage.get_command_queryset()
             commands = self.filter_queryset(qs)
-            merged_commands.extend(commands[:])  # ES 默认只取 10 条数据
+            merged_commands.extend(commands[:])
         order = self.request.query_params.get('order', None)
         if order == 'timestamp':
             merged_commands.sort(key=lambda command: command.timestamp)
@@ -135,7 +132,6 @@ class CommandViewSet(JMSBulkModelViewSet):
         session_id = self.request.query_params.get('session_id')
 
         if session_id and not command_storage_id:
-            # 会话里的命令列表肯定会提供 session_id，这里防止 merge 的时候取全量的数据
             return self.merge_all_storage_list(request, *args, **kwargs)
 
         queryset = self.filter_queryset(self.get_queryset())
@@ -146,7 +142,6 @@ class CommandViewSet(JMSBulkModelViewSet):
             serializer = self.get_serializer(page, many=True)
             return self.get_paginated_response(serializer.data)
 
-        # 适配像 ES 这种没有指定分页只返回少量数据的情况
         queryset = queryset[:]
 
         queryset = self.load_remote_addr(queryset)

@@ -68,7 +68,6 @@ class BaseHandler:
         if self.ticket.type not in [TicketType.apply_asset, TicketType.apply_application]:
             return diff_context
 
-        # 企业微信，钉钉审批不做diff
         if not hasattr(self.ticket, 'old_rel_snapshot'):
             return diff_context
 
@@ -85,7 +84,6 @@ class BaseHandler:
         return {'headers': headers, 'content': content}
 
     def _create_state_change_comment(self, state):
-        # 打开或关闭工单，备注显示是自己，其他是受理人
         if state in [TicketState.reopen, TicketState.pending, TicketState.closed]:
             user = self.ticket.applicant
         else:

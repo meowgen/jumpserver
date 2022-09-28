@@ -14,7 +14,6 @@ def fill_ticket_serial_number(apps, schema_editor):
 
     print(f'\nFill ticket serial number ... ', end='')
     for ticket in tickets:
-        # 跑这个脚本的时候，所有 ticket.serial_num == null
         date_created = as_current_tz(ticket.date_created)
         date_str = date_created.strftime('%Y%m%d')
         if date_str != curr_day:

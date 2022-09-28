@@ -68,7 +68,6 @@ class UserViewSet(CommonApiMixin, UserQuerysetMixin, SuggestionMixin, BulkModelV
 
     @staticmethod
     def set_users_roles_for_cache(queryset):
-        # Todo: 未来有机会用 SQL 实现
         queryset_list = queryset
         user_ids = [u.id for u in queryset_list]
         role_bindings = RoleBinding.objects.filter(user__in=user_ids) \

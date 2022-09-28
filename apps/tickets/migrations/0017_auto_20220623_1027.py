@@ -68,7 +68,6 @@ def apply_asset_migrate(apps, *args):
         org_id = instance.org_id
         apply_actions = meta.get('apply_actions')
 
-        # 数据库中数据结构有问题，可能是 list，可能是 int
         if isinstance(apply_actions, list):
             apply_actions = Action.choices_to_value(value=apply_actions)
         elif isinstance(apply_actions, int):

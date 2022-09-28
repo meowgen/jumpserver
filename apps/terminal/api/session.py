@@ -100,8 +100,6 @@ class SessionViewSet(OrgBulkModelViewSet):
 
         response = FileResponse(file)
         response['Content-Type'] = 'application/octet-stream'
-        # 这里要注意哦，网上查到的方法都是response['Content-Disposition']='attachment;filename="filename.py"',
-        # 但是如果文件名是英文名没问题，如果文件名包含中文，下载下来的文件名会被改为url中的path。
         filename = escape_uri_path('{}.tar'.format(session.id))
         disposition = "attachment; filename*=UTF-8''{}".format(filename)
         response["Content-Disposition"] = disposition
@@ -114,7 +112,6 @@ class SessionViewSet(OrgBulkModelViewSet):
 
     def filter_queryset(self, queryset):
         queryset = super().filter_queryset(queryset)
-        # 解决guacamole更新session时并发导致幽灵会话的问题，暂不处理
         if self.request.method in ('PATCH',):
             queryset = queryset.select_for_update()
         return queryset
@@ -141,7 +138,6 @@ class SessionReplayViewSet(AsyncApiMixin, viewsets.ViewSet):
 
         if serializer.is_valid():
             file = serializer.validated_data['file']
-            # 兼容旧版本 API 未指定 version 为 2 的情况
             version = serializer.validated_data.get('version', 2)
             name, err = session.save_replay_to_storage_with_version(file, version)
             if not name:
@@ -159,7 +155,6 @@ class SessionReplayViewSet(AsyncApiMixin, viewsets.ViewSet):
     def get_replay_data(session, url):
         tp = 'json'
         if session.protocol in ('rdp', 'vnc'):
-            # 需要考虑录像播放和离线播放器的约定，暂时不处理
             tp = 'guacamole'
         if url.endswith('.cast.gz'):
             tp = 'asciicast'
@@ -194,9 +189,6 @@ class SessionReplayViewSet(AsyncApiMixin, viewsets.ViewSet):
 
 
 class SessionJoinValidateAPI(views.APIView):
-    """
-    监控用
-    """
     serializer_class = serializers.SessionJoinValidateSerializer
     rbac_perms = {
         'POST': 'terminal.validate_sessionactionperm'

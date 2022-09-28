@@ -167,7 +167,6 @@ class StatusMixin:
     def _finish_or_next(self, current_step, state):
         next_step = current_step.next()
 
-        # 提前结束，或者最后一步
         if state in [TicketState.rejected, TicketState.closed] or not next_step:
             self.state = state
             self.status = Ticket.Status.closed
@@ -280,7 +279,6 @@ class Ticket(StatusMixin, CommonModelMixin):
         max_length=16, choices=TicketStatus.choices,
         default=TicketStatus.open, verbose_name=_('Status')
     )
-    # 申请人
     applicant = models.ForeignKey(
         'users.User', related_name='applied_tickets', on_delete=models.SET_NULL,
         null=True, verbose_name=_("Applicant")
@@ -312,7 +310,6 @@ class Ticket(StatusMixin, CommonModelMixin):
         attr = self.type.replace('_', '') + 'ticket'
         return getattr(self, attr)
 
-    # TODO 先单独处理一下
     @property
     def org_name(self):
         org = Organization.get_instance(self.org_id)
@@ -385,8 +382,6 @@ class Ticket(StatusMixin, CommonModelMixin):
             self.save(update_fields=('serial_num',))
         except IntegrityError as e:
             if e.args[0] == 1062:
-                # 虽然做了 `select_for_update` 但是每天的第一条工单仍可能造成冲突
-                # 但概率小，这里只报错，用户重新提交即可
                 raise JMSException(detail=_('Please try again'), code='please_try_again')
             raise e
 

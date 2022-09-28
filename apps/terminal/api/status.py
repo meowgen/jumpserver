@@ -57,7 +57,6 @@ class StatusViewSet(viewsets.ModelViewSet):
 
 
 class ComponentsMetricsAPIView(generics.GenericAPIView):
-    """ 返回汇总组件指标数据 """
     rbac_perms = {
         'GET': 'terminal.view_terminal'
     }

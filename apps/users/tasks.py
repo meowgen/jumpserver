@@ -89,7 +89,6 @@ def import_ldap_user():
         org_id = settings.AUTH_LDAP_SYNC_ORG_ID
         default_org = None
     else:
-        # 社区版默认导入Default组织
         org_id = Organization.DEFAULT_ID
         default_org = Organization.default()
     org = Organization.get_instance(org_id, default=default_org)
@@ -117,7 +116,6 @@ def import_ldap_user_periodic():
         interval = None
     crontab = settings.AUTH_LDAP_SYNC_CRONTAB
     if crontab:
-        # 优先使用 crontab
         interval = None
     tasks = {
         task_name: {

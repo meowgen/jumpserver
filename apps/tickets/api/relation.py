@@ -15,7 +15,6 @@ class TicketSessionRelationViewSet(CreateModelMixin, JMSGenericViewSet):
     serializer_class = TicketSessionRelationSerializer
 
 
-# Todo: 放到上面的 ViewSet 中
 class TicketSessionApi(views.APIView):
     perm_model = TicketSession
     rbac_perms = {

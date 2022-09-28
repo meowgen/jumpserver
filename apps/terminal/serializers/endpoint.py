@@ -8,7 +8,6 @@ __all__ = ['EndpointSerializer', 'EndpointRuleSerializer']
 
 
 class EndpointSerializer(BulkModelSerializer):
-    # 解决 luna 处理繁琐的问题，oracle_port 返回匹配到的端口
     oracle_port = serializers.SerializerMethodField(label=_('Oracle port'))
 
     class Meta:

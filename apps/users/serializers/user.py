@@ -64,7 +64,6 @@ class RolesSerializerMixin(serializers.Serializer):
             perms = RBACPermission.parse_action_model_perms(action, model_cls)
             if request.user.has_perms(perms):
                 continue
-            # 没有权限就去掉
             for field_name in fields_names:
                 fields.pop(field_name, None)
         return fields
@@ -93,7 +92,6 @@ class UserSerializer(RolesSerializerMixin, CommonBulkSerializerMixin, serializer
     password = EncryptedField(
         label=_('Password'), required=False, allow_blank=True, allow_null=True, max_length=1024
     )
-    # Todo: 这里看看该怎么搞
     # can_update = serializers.SerializerMethodField(label=_('Can update'))
     # can_delete = serializers.SerializerMethodField(label=_('Can delete'))
     custom_m2m_fields = {
@@ -103,34 +101,27 @@ class UserSerializer(RolesSerializerMixin, CommonBulkSerializerMixin, serializer
 
     class Meta:
         model = User
-        # mini 是指能识别对象的最小单元
         fields_mini = ['id', 'name', 'username']
-        # 只能写的字段, 这个虽然无法在框架上生效，但是更多对我们是提醒
         fields_write_only = [
             'password', 'public_key',
         ]
-        # small 指的是 不需要计算的直接能从一张表中获取到的数据
         fields_small = fields_mini + fields_write_only + [
             'email', 'phone', 'mfa_level', 'source', 'source_display',
             'can_public_key_auth', 'need_update_password',
-            'mfa_enabled', 'is_service_account', 'is_valid', 'is_expired', 'is_active',  # 布尔字段
-            'date_expired', 'date_joined', 'last_login',  # 日期字段
-            'created_by', 'comment',  # 通用字段
+            'mfa_enabled', 'is_service_account', 'is_valid', 'is_expired', 'is_active',  
+            'date_expired', 'date_joined', 'last_login',  
+            'created_by', 'comment', 
             'is_otp_secret_key_bound',
         ]
-        # 包含不太常用的字段，可以没有
         fields_verbose = fields_small + [
             'mfa_level_display', 'mfa_force_enabled', 'is_first_login',
             'date_password_last_updated', 'avatar_url',
         ]
-        # 外键的字段
         fields_fk = []
-        # 多对多字段
         fields_m2m = [
             'groups', 'groups_display', 'system_roles', 'org_roles',
             'system_roles_display', 'org_roles_display'
         ]
-        # 在serializer 上定义的字段
         fields_custom = ['login_blocked', 'password_strategy']
         fields = fields_verbose + fields_fk + fields_m2m + fields_custom
 
@@ -162,10 +153,8 @@ class UserSerializer(RolesSerializerMixin, CommonBulkSerializerMixin, serializer
     def validate_password(self, password):
         password_strategy = self.initial_data.get('password_strategy')
         if self.instance is None and password_strategy != PasswordStrategy.custom:
-            # 创建用户，使用邮件设置密码
             return
         if self.instance and not password:
-            # 更新用户, 未设置密码
             return
         return password
 
@@ -195,7 +184,6 @@ class UserSerializer(RolesSerializerMixin, CommonBulkSerializerMixin, serializer
         disallow_fields = set(list(attrs.keys())) & set(self.Meta.disallow_self_update_fields)
         if not disallow_fields:
             return attrs
-        # 用户自己不能更新自己的一些字段
         logger.debug('Disallow update self fields: %s', disallow_fields)
         for field in disallow_fields:
             attrs.pop(field, None)

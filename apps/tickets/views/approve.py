@@ -62,7 +62,6 @@ class TicketDirectApproveView(TemplateView):
         cache.delete(token)
 
     def get_context_data(self, **kwargs):
-        # 放入工单信息
         token = kwargs.get('token')
         content = cache.get(token, {}).get('content', [])
         if self.request.user.is_authenticated:

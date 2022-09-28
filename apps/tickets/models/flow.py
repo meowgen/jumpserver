@@ -24,7 +24,6 @@ class ApprovalRule(CommonModelMixin):
         choices=TicketApprovalStrategy.choices,
         verbose_name=_('Approve strategy')
     )
-    # 受理人列表
     assignees = models.ManyToManyField(
         'users.User', related_name='assigned_ticket_flow_approval_rule',
         verbose_name=_("Assignees")

@@ -80,17 +80,14 @@ class CommandStore(object):
             raise NotSupportElasticsearch8
 
         try:
-            # 获取索引信息，如果没有定义，直接返回
             data = self.es.indices.get_mapping(self.index)
         except NotFoundError:
             return False
 
         try:
             if version == '6':
-                # 检测索引是不是新的类型 es6
                 properties = data[self.index]['mappings']['data']['properties']
             else:
-                # 检测索引是不是新的类型 es7 default index type: _doc
                 properties = data[self.index]['mappings']['properties']
             if properties['session']['type'] == 'keyword' \
                     and properties['org_id']['type'] == 'keyword':
@@ -162,9 +159,6 @@ class CommandStore(object):
         return bulk(self.es, actions, index=self.index, raise_on_error=raise_on_error)
 
     def save(self, command):
-        """
-        保存命令到数据库
-        """
         data = self.make_data(command)
         return self.es.index(index=self.index, doc_type=self.doc_type, body=data)
 
@@ -192,7 +186,6 @@ class CommandStore(object):
         return getattr(self.es, item)
 
     def all(self):
-        """返回所有数据"""
         raise NotImplementedError("Not support")
 
     def ping(self, timeout=None):
@@ -224,7 +217,6 @@ class CommandStore(object):
             elif k in match_fields:
                 match[k] = v
 
-        # 处理时间
         timestamp__gte = kwargs.get('timestamp__gte')
         timestamp__lte = kwargs.get('timestamp__lte')
         timestamp_range = {}
@@ -234,7 +226,6 @@ class CommandStore(object):
         if timestamp__lte:
             timestamp_range['lte'] = timestamp__lte
 
-        # 处理组织
         should = []
         org_id = match.get('org_id')
 
@@ -255,7 +246,6 @@ class CommandStore(object):
             })
             should.append({'match': {'org_id': real_default_org_id}})
 
-        # 构建 body
         body = {
             'query': {
                 'bool': {
@@ -297,7 +287,6 @@ class QuerySet(DJQuerySet):
         self._command_store_config = command_store_config
         self._storage = CommandStore(command_store_config)
 
-        # 命令列表模糊搜索时报错
         super().__init__()
 
     @lazyproperty

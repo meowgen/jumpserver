@@ -121,6 +121,5 @@ class EndpointRule(JMSModel):
         else:
             endpoint = Endpoint.get_or_create_default(request)
         if not endpoint.host and request:
-            # 动态添加 current request host
             endpoint.host = request.get_host().split(':')[0]
         return endpoint

@@ -49,7 +49,6 @@ def redirect_user_first_login_or_index(request, redirect_field_name):
     url = request.POST.get(redirect_field_name)
     if not url:
         url = request.GET.get(redirect_field_name)
-    # 防止 next 地址为 None
     if not url or url.lower() in ['none']:
         url = reverse('index')
     return url
@@ -159,7 +158,6 @@ class BlockUtilBase:
     def unblock_user(cls, username):
         key_limit = cls.LIMIT_KEY_TMPL.format(username, '*')
         key_block = cls.BLOCK_KEY_TMPL.format(username)
-        # Redis 尽量不要用通配
         cache.delete_pattern(key_limit)
         cache.delete(key_block)
 

@@ -363,9 +363,6 @@ class RoleMixin:
 
     @property
     def is_superuser(self):
-        """
-        由于这里用了 cache ，所以不能改成 self.system_roles.filter().exists() 会查询的
-        """
         if self._is_superuser is not None:
             return self._is_superuser
 
@@ -572,7 +569,6 @@ class MFAMixin:
         force_level = settings.SECURITY_MFA_AUTH
         if force_level in [True, 1]:
             return True
-        # 2 管理员强制开启
         if force_level == 2 and self.is_org_admin:
             return True
         return self.mfa_level == 2

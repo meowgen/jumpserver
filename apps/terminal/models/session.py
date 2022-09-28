@@ -63,52 +63,25 @@ class Session(OrgModelMixin):
     SUFFIX_MAP = {1: '.gz', 2: '.replay.gz', 3: '.cast.gz'}
     DEFAULT_SUFFIXES = ['.replay.gz', '.cast.gz', '.gz']
 
-    # Todo: 将来干掉 local_path, 使用 default storage 实现
     def get_all_possible_local_path(self):
-        """
-        获取所有可能的本地存储录像文件路径
-        :return:
-        """
         return [self.get_local_storage_path_by_suffix(suffix)
                 for suffix in self.SUFFIX_MAP.values()]
 
     def get_all_possible_relative_path(self):
-        """
-        获取所有可能的外部存储录像文件路径
-        :return:
-        """
         return [self.get_relative_path_by_suffix(suffix)
                 for suffix in self.SUFFIX_MAP.values()]
 
     def get_local_storage_path_by_suffix(self, suffix='.cast.gz'):
-        """
-        local_path: replay/2021-12-08/session_id.cast.gz
-        通过后缀名获取本地存储的录像文件路径
-        :param suffix: .cast.gz | '.replay.gz' | '.gz'
-        :return:
-        """
         rel_path = self.get_relative_path_by_suffix(suffix)
         if suffix == '.gz':
-            # 兼容 v1 的版本
             return rel_path
         return os.path.join(self.upload_to, rel_path)
 
     def get_relative_path_by_suffix(self, suffix='.cast.gz'):
-        """
-        relative_path: 2021-12-08/session_id.cast.gz
-        通过后缀名获取外部存储录像文件路径
-        :param suffix: .cast.gz | '.replay.gz' | '.gz'
-        :return:
-        """
         date = self.date_start.strftime('%Y-%m-%d')
         return os.path.join(date, str(self.id) + suffix)
 
     def get_local_path_by_relative_path(self, rel_path):
-        """
-        2021-12-08/session_id.cast.gz
-        :param rel_path:
-        :return: replay/2021-12-08/session_id.cast.gz
-        """
         return '{}/{}'.format(self.upload_to, rel_path)
 
     def get_relative_path_by_local_path(self, local_path):
