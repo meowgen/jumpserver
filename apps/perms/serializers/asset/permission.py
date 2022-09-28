@@ -61,7 +61,6 @@ class AssetPermissionSerializer(BasePermissionSerializer):
 
     def to_internal_value(self, data):
         if 'system_users_display' in data:
-            # system_users_display 转化为 system_users
             system_users = data.get('system_users', [])
             system_users_display = data.pop('system_users_display')
 
@@ -74,24 +73,20 @@ class AssetPermissionSerializer(BasePermissionSerializer):
 
     @staticmethod
     def perform_display_create(instance, **kwargs):
-        # 用户
         users_to_set = User.objects.filter(
             Q(name__in=kwargs.get('users_display')) |
             Q(username__in=kwargs.get('users_display'))
         ).distinct()
         instance.users.add(*users_to_set)
-        # 用户组
         user_groups_to_set = UserGroup.objects.filter(
             name__in=kwargs.get('user_groups_display')
         ).distinct()
         instance.user_groups.add(*user_groups_to_set)
-        # 资产
         assets_to_set = Asset.objects.filter(
             Q(ip__in=kwargs.get('assets_display')) |
             Q(hostname__in=kwargs.get('assets_display'))
         ).distinct()
         instance.assets.add(*assets_to_set)
-        # 节点
         nodes_to_set = Node.objects.filter(
             full_value__in=kwargs.get('nodes_display')
         ).distinct()

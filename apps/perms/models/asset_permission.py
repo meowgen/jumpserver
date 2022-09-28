@@ -15,7 +15,6 @@ __all__ = [
     'AssetPermission', 'PermNode', 'UserAssetGrantedTreeNodeRelation',
 ]
 
-# 使用场景
 logger = logging.getLogger(__name__)
 
 
@@ -129,7 +128,6 @@ class PermNode(Node):
         proxy = True
         ordering = []
 
-    # 特殊节点
     UNGROUPED_NODE_KEY = 'ungrouped'
     UNGROUPED_NODE_VALUE = _('Ungrouped')
     FAVORITE_NODE_KEY = 'favorite'
@@ -173,7 +171,6 @@ class PermNode(Node):
         return status
 
     def save(self):
-        # 这是个只读 Model
         raise NotImplementedError
 
 

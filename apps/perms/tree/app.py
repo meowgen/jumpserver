@@ -86,12 +86,10 @@ class GrantedAppTreeUtil:
             tree_id = urlencode({'org_id': str(org.id)})
             apps = applications.filter(org_id=org.id)
 
-            # 组织节点
             org_node = org.as_tree_node(oid=tree_id, pid=root_node.id)
             org_node.name += '({})'.format(apps.count())
             tree_nodes.append(org_node)
 
-            # 类别节点
             category_type_nodes = Application.create_category_type_tree_nodes(
                 apps, tree_id, show_empty=False
             )

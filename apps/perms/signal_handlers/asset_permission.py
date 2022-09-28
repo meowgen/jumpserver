@@ -18,20 +18,15 @@ logger = get_logger(__file__)
 @receiver(m2m_changed, sender=User.groups.through)
 @on_transaction_commit
 def on_user_groups_change(sender, instance, action, reverse, pk_set, **kwargs):
-    """
-    UserGroup 增加 User 时，增加的 User 需要与 UserGroup 关联的动态系统用户相关联
-    """
     user: User
 
     if action != POST_ADD:
         return
 
     if not reverse:
-        # 一个用户添加了多个用户组
         user_ids = [instance.id]
         system_users = SystemUser.objects.filter(groups__id__in=pk_set).distinct()
     else:
-        # 一个用户组添加了多个用户
         user_ids = pk_set
         system_users = SystemUser.objects.filter(groups__id=instance.pk).distinct()
 
@@ -51,7 +46,6 @@ def on_permission_nodes_changed(instance, action, reverse, pk_set, model, **kwar
     nodes = model.objects.filter(pk__in=pk_set)
     system_users = instance.system_users.all()
 
-    # TODO 待优化
     for system_user in system_users:
         system_user.nodes.add(*nodes)
 
@@ -67,7 +61,6 @@ def on_permission_assets_changed(instance, action, reverse, pk_set, model, **kwa
     logger.debug("Asset permission assets change signal received")
     assets = model.objects.filter(pk__in=pk_set)
 
-    # TODO 待优化
     system_users = instance.system_users.all()
     for system_user in system_users:
         system_user: SystemUser
@@ -91,7 +84,6 @@ def on_asset_permission_system_users_changed(instance, action, reverse, **kwargs
         system_user.nodes.add(*tuple(nodes))
         system_user.add_related_assets(assets)
 
-        # 动态系统用户，需要关联用户和用户组了
         if system_user.username_same_with_user:
             users = instance.users.all().values_list('id', flat=True)
             groups = instance.user_groups.all().values_list('id', flat=True)
@@ -111,7 +103,6 @@ def on_asset_permission_users_changed(instance, action, reverse, pk_set, model, 
     users = model.objects.filter(pk__in=pk_set)
     system_users = instance.system_users.all()
 
-    # TODO 待优化
     for system_user in system_users:
         if system_user.username_same_with_user:
             system_user.users.add(*tuple(users))
@@ -129,7 +120,6 @@ def on_asset_permission_user_groups_changed(instance, action, pk_set, model, rev
     groups = model.objects.filter(pk__in=pk_set)
     system_users = instance.system_users.all()
 
-    # TODO 待优化
     for system_user in system_users:
         if system_user.username_same_with_user:
             system_user.groups.add(*tuple(groups))

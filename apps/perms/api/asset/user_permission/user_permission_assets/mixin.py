@@ -12,7 +12,6 @@ from perms.utils.asset.user_permission import UserGrantedAssetsQueryUtils
 logger = get_logger(__name__)
 
 
-# 获取数据的 ------------------------------------------------------------
 
 class UserDirectGrantedAssetsQuerysetMixin:
     only_fields = serializers.AssetGrantedSerializer.Meta.only_fields
@@ -78,7 +77,6 @@ class UserGrantedNodeAssetsMixin:
         return assets
 
 
-# 控制格式的 ----------------------------------------------------
 
 
 class AssetsSerializerFormatMixin:
@@ -88,9 +86,6 @@ class AssetsSerializerFormatMixin:
 
 
 class AssetsTreeFormatMixin(SerializeToTreeNodeMixin):
-    """
-    将 资产 序列化成树的结构返回
-    """
     filterset_fields = ['hostname', 'ip', 'id', 'comment']
     search_fields = ['hostname', 'ip', 'comment']
 
@@ -98,8 +93,6 @@ class AssetsTreeFormatMixin(SerializeToTreeNodeMixin):
         queryset = self.filter_queryset(self.get_queryset())
 
         if request.query_params.get('search'):
-            # 如果用户搜索的条件不精准，会导致返回大量的无意义数据。
-            # 这里限制一下返回数据的最大条数
             queryset = queryset[:999]
             queryset = sorted(queryset, key=lambda asset: asset.hostname)
         data = self.serialize_assets(queryset, None)

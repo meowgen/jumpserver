@@ -19,9 +19,6 @@ __all__ = [
 
 
 class AssetSystemUserSerializer(serializers.ModelSerializer):
-    """
-    查看授权的资产系统用户的数据结构，这个和AssetSerializer不同，字段少
-    """
     actions = ActionsField(read_only=True)
 
     class Meta:
@@ -35,9 +32,6 @@ class AssetSystemUserSerializer(serializers.ModelSerializer):
 
 
 class AssetGrantedSerializer(serializers.ModelSerializer):
-    """
-    被授权资产的数据结构
-    """
     protocols = ProtocolsField(label=_('Protocols'), required=False, read_only=True)
     platform = serializers.SlugRelatedField(
         slug_field='name', queryset=Platform.objects.all(), label=_("Platform")
@@ -66,7 +60,6 @@ class ActionsSerializer(serializers.Serializer):
     actions = ActionsField(read_only=True)
 
 
-# TODO: 删除
 class RemoteAppSystemUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = SystemUser

@@ -51,7 +51,6 @@ def on_user_groups_change(sender, instance, action, reverse, pk_set, **kwargs):
 
 @receiver([pre_delete], sender=AssetPermission)
 def on_asset_perm_pre_delete(sender, instance, **kwargs):
-    # 授权删除之前，查出所有相关用户
     with tmp_to_org(instance.org):
         UserGrantedTreeRefreshController.add_need_refresh_by_asset_perm_ids([instance.id])
 

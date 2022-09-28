@@ -14,9 +14,6 @@ __all__ = [
 
 
 class ApplicationSystemUserSerializer(serializers.ModelSerializer):
-    """
-    查看授权的应用系统用户的数据结构，这个和SystemUserSerializer不同，字段少
-    """
     class Meta:
         model = SystemUser
         only_fields = (
@@ -27,9 +24,6 @@ class ApplicationSystemUserSerializer(serializers.ModelSerializer):
 
 
 class AppGrantedSerializer(AppSerializerMixin, serializers.ModelSerializer):
-    """
-    被授权应用的数据结构
-    """
     category_display = serializers.ReadOnlyField(source='get_category_display', label=_('Category'))
     type_display = serializers.ReadOnlyField(source='get_type_display', label=_('Type'))
 

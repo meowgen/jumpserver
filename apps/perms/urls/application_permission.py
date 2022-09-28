@@ -31,11 +31,9 @@ user_group_permission_urlpatterns = [
 ]
 
 permission_urlpatterns = [
-    # 授权规则中授权的用户和应用
     path('<uuid:pk>/applications/all/', api.ApplicationPermissionAllApplicationListApi.as_view(), name='application-permission-all-applications'),
     path('<uuid:pk>/users/all/', api.ApplicationPermissionAllUserListApi.as_view(), name='application-permission-all-users'),
 
-    # 验证用户是否有某个应用的权限
     path('user/validate/', api.ValidateUserApplicationPermissionApi.as_view(), name='validate-user-application-permission'),
 ]
 

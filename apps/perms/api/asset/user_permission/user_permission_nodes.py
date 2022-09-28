@@ -37,8 +37,6 @@ class _GrantedNodeStructApi(ListAPIView, metaclass=abc.ABCMeta):
         raise NotImplementedError
 
     def get_nodes(self):
-        # 不使用 `get_queryset` 单独定义 `get_nodes` 的原因是
-        # `get_nodes` 返回的不一定是 `queryset`
         raise NotImplementedError
 
 
@@ -87,9 +85,6 @@ class UserGrantedNodeChildrenMixin:
 
 
 class UserGrantedNodesMixin:
-    """
-    查询用户授权的所有节点 直接授权节点 + 授权资产关联的节点
-    """
     user: User
 
     def get_nodes(self):
@@ -98,8 +93,6 @@ class UserGrantedNodesMixin:
         return nodes
 
 
-# ------------------------------------------
-# 最终的 api
 class UserGrantedNodeChildrenForAdminApi(AssetRoleAdminMixin, UserGrantedNodeChildrenMixin, BaseNodeChildrenApi):
     pass
 

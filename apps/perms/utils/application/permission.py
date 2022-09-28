@@ -63,7 +63,6 @@ def validate_permission(user, application, system_user, action='connect'):
         actions = []
         expire_at = time.time()
 
-    # TODO: 组件改造API完成后统一通过actions判断has_perm
     has_perm = action in actions
     return has_perm, actions, expire_at
 
