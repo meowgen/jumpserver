@@ -28,7 +28,6 @@ class MethodSerializer(serializers.Serializer):
         super().__init__(**kwargs)
 
     class Meta:
-        # 生成swagger时使用
         ref_name = None
 
     def bind(self, field_name, parent):
@@ -42,17 +41,11 @@ class MethodSerializer(serializers.Serializer):
     def serializer(self) -> serializers.Serializer:
         method = getattr(self.parent, self.method_name)
         _serializer = method()
-        # 设置serializer的parent值，否则在serializer实例中获取parent会出现断层
         setattr(_serializer, 'parent', self.parent)
         return _serializer
 
     @cached_property
     def fields(self):
-        """
-        重写此方法因为在 BindingDict 中要设置每一个 field 的 parent 为 `serializer`,
-        这样在调用 field.parent 时, 才会达到预期的结果，
-        比如: serializers.SerializerMethodField
-        """
         return self.serializer.fields
 
     def run_validation(self, data=serializers.empty):
@@ -86,8 +79,6 @@ class CeleryTaskSerializer(serializers.Serializer):
 
 
 class SecretReadableMixin(serializers.Serializer):
-    """ 加密字段 (EncryptedField) 可读性 """
-
     def __init__(self, *args, **kwargs):
         super(SecretReadableMixin, self).__init__(*args, **kwargs)
         if not hasattr(self, 'Meta') or not hasattr(self.Meta, 'extra_kwargs'):

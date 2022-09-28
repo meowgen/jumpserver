@@ -18,20 +18,18 @@ def to_unixtime(time_string, format_string):
 
 
 def http_date(timeval=None):
-    """返回符合HTTP标准的GMT时间字符串，用strftime的格式表示就是"%a, %d %b %Y %H:%M:%S GMT"。
-    但不能使用strftime，因为strftime的结果是和locale相关的。
-    """
+    """Возвращает строку времени по Гринвичу, соответствующую стандарту HTTP, которая выражается в формате strftime как "%a, %d %b %Y %H:%M:%S GMT".
+     Но strftime использовать нельзя, потому что результат strftime зависит от локали."""
     return formatdate(timeval, usegmt=True)
 
 
 def http_to_unixtime(time_string):
-    """把HTTP Date格式的字符串转换为UNIX时间（自1970年1月1日UTC零点的秒数）。
-
-    HTTP Date形如 `Sat, 05 Dec 2015 11:10:29 GMT` 。
-    """
+    """Преобразует строку в формате даты HTTP во время UNIX (секунды с 1 января 1970 года в полночь UTC).
+     Формат даты: «Sat, 05 Dec 2015 11:10:29 GMT».
+     """
     return to_unixtime(time_string, _GMT_FORMAT)
 
 
 def iso8601_to_unixtime(time_string):
-    """把ISO8601时间字符串（形如，2012-02-24T06:07:48.000Z）转换为UNIX时间，精确到秒。"""
+    """Преобразование строки времени ISO8601 (например, 2012-02-24T06:07:48.000Z) во время UNIX с точностью до секунд"""
     return to_unixtime(time_string, _ISO8601_FORMAT)

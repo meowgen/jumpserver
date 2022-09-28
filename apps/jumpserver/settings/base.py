@@ -86,7 +86,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.forms',
-    'simple_history',  # 这个要放到最后，别特么瞎改顺序
+    'simple_history',  # Должно быть в конце
 ]
 
 MIDDLEWARE = [
@@ -142,8 +142,8 @@ LOGIN_URL = reverse_lazy('authentication:login')
 SESSION_COOKIE_DOMAIN = CONFIG.SESSION_COOKIE_DOMAIN
 CSRF_COOKIE_DOMAIN = CONFIG.SESSION_COOKIE_DOMAIN
 
-# 设置 SESSION_COOKIE_NAME_PREFIX_KEY
-# 解决 不同域 session csrf cookie 获取混乱问题
+# установить SESSION_COOKIE_NAME_PREFIX_KEY
+# Решить проблему путаницы при получении файлов cookie сеанса csrf в разных доменах.
 SESSION_COOKIE_NAME_PREFIX_KEY = 'SESSION_COOKIE_NAME_PREFIX'
 SESSION_COOKIE_NAME_PREFIX = CONFIG.SESSION_COOKIE_NAME_PREFIX
 if SESSION_COOKIE_NAME_PREFIX is not None:
@@ -157,7 +157,8 @@ SESSION_COOKIE_NAME = '{}sessionid'.format(SESSION_COOKIE_NAME_PREFIX)
 
 SESSION_COOKIE_AGE = CONFIG.SESSION_COOKIE_AGE
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
-# 自定义的配置，SESSION_EXPIRE_AT_BROWSER_CLOSE 始终为 True, 下面这个来控制是否强制关闭后过期 cookie
+# Пользовательская конфигурация, SESSION_EXPIRE_AT_BROWSER_CLOSE всегда имеет значение True, 
+# следующее предназначено для управления принудительным закрытием файла cookie с истекшим сроком действия.
 SESSION_EXPIRE_AT_BROWSER_CLOSE_FORCE = CONFIG.SESSION_EXPIRE_AT_BROWSER_CLOSE_FORCE
 SESSION_SAVE_EVERY_REQUEST = CONFIG.SESSION_SAVE_EVERY_REQUEST
 SESSION_ENGINE = "django.contrib.sessions.backends.{}".format(CONFIG.SESSION_ENGINE)

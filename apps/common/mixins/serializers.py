@@ -38,13 +38,6 @@ class BulkSerializerMixin(object):
         return ret
 
     def run_validation(self, data=empty):
-        """
-        批量创建时，获取到的self.initial_data是list，
-        所以想用一个属性来存放当前操作的数据集，在validate_field中使用
-        :param data:
-        :return:
-        """
-        # 只有批量创建的时候，才需要重写 initial_data
         if self.parent:
             self.initial_data = data
         return super().run_validation(data)
@@ -263,7 +256,7 @@ class DefaultValueFieldsMixin:
 
 class DynamicFieldsMixin:
     """
-    可以控制显示不同的字段，mini 最少，small 不包含关系
+    Может управлять отображением различных полей, mini, small
     """
     dynamic_fields_plugins = [QueryFieldsMixin, SizedModelFieldsMixin]
 

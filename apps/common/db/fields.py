@@ -110,7 +110,7 @@ class JsonTextField(JsonMixin, models.TextField):
 
 class EncryptMixin:
     """
-    EncryptMixin要放在最前面
+    EncryptMixin должен быть размещён выше по иерархии
     """
 
     def decrypt_from_signer(self, value):
@@ -123,11 +123,9 @@ class EncryptMixin:
 
         plain_value = crypto.decrypt(value)
 
-        # 如果没有解开，使用原来的signer解密
         if not plain_value:
             plain_value = self.decrypt_from_signer(value)
 
-        # 可能和Json mix，所以要先解密，再json
         sp = super()
         if hasattr(sp, 'from_db_value'):
             plain_value = sp.from_db_value(plain_value, expression, connection, context)
@@ -137,12 +135,10 @@ class EncryptMixin:
         if value is None:
             return value
 
-        # 先 json 再解密
         sp = super()
         if hasattr(sp, 'get_prep_value'):
             value = sp.get_prep_value(value)
         value = force_text(value)
-        # 替换新的加密方式
         return crypto.encrypt(value)
 
 

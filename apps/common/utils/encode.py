@@ -39,8 +39,6 @@ class Singleton(type):
 
 
 class Signer(metaclass=Singleton):
-    """用来加密,解密,和基于时间戳的方式验证token"""
-
     def __init__(self, secret_key=None):
         self.secret_key = secret_key
 
@@ -162,10 +160,6 @@ def validate_ssh_public_key(text):
 
 
 def content_md5(data):
-    """计算data的MD5值，经过Base64编码并返回str类型。
-
-    返回值可以直接作为HTTP Content-Type头部的值
-    """
     if isinstance(data, str):
         data = hashlib.md5(data.encode('utf-8'))
     value = base64.b64encode(data.hexdigest().encode('utf-8'))

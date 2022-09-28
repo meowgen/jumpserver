@@ -162,7 +162,6 @@ class DatesLoginMetricMixin:
     def dates_total_count_disabled_assets(self):
         return Asset.objects.filter(is_active=False).count()
 
-    # 以下是从week中而来
     def get_dates_login_times_top5_users(self):
         users = self.sessions_queryset.values_list('user_id', flat=True)
         users = [

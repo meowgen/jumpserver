@@ -3,7 +3,7 @@
 # 
 
 """
-兼容Python版本
+Совместимая версия Python
 """
 
 import sys
@@ -53,21 +53,18 @@ if is_py2:
 elif is_py3:
 
     def to_bytes(data):
-        """若输入为str（即unicode），则转为utf-8编码的bytes；其他则原样返回"""
         if isinstance(data, str):
             return data.encode(encoding='utf-8')
         else:
             return data
 
     def to_string(data):
-        """若输入为bytes，则认为是utf-8编码，并返回str"""
         if isinstance(data, bytes):
             return data.decode('utf-8')
         else:
             return data
 
     def to_unicode(data):
-        """把输入转换为unicode，要求输入是unicode或者utf-8编码的bytes。"""
         return to_string(data)
 
     def stringify(input):

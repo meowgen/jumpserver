@@ -75,14 +75,9 @@ class BaseFileParser(BaseParser):
 
     @classmethod
     def process_row(cls, row):
-        """
-        构建json数据前的行处理
-        """
         new_row = []
         for col in row:
-            # 转换中文引号
             col = cls._replace_chinese_quote(col)
-            # 列表/字典转换
             if isinstance(col, str) and (
                     (col.startswith('[') and col.endswith(']'))
                     or
@@ -93,17 +88,12 @@ class BaseFileParser(BaseParser):
         return new_row
 
     def process_row_data(self, row_data):
-        """
-        构建json数据后的行数据处理
-        """
         new_row_data = {}
         serializer_fields = self.serializer_fields
         for k, v in row_data.items():
             if type(v) in [list, dict, int, bool] or (isinstance(v, str) and k.strip() and v.strip()):
-                # 处理类似disk_info为字符串的'{}'的问题
                 if not isinstance(v, str) and isinstance(serializer_fields[k], serializers.CharField):
                     v = str(v)
-                # 处理 BooleanField 的问题, 导出是 'True', 'False'
                 if isinstance(v, str) and v.strip().lower() == 'true':
                     v = True
                 elif isinstance(v, str) and v.strip().lower() == 'false':
@@ -115,7 +105,6 @@ class BaseFileParser(BaseParser):
     def generate_data(self, fields_name, rows):
         data = []
         for row in rows:
-            # 空行不处理
             if not any(row):
                 continue
             row = self.process_row(row)
@@ -146,7 +135,6 @@ class BaseFileParser(BaseParser):
             column_titles = self.get_column_titles(rows)
             field_names = self.convert_to_field_names(column_titles)
 
-            # 给 `common.mixins.api.RenderToJsonMixin` 提供，暂时只能耦合
             column_title_field_pairs = list(zip(column_titles, field_names))
             if not hasattr(request, 'jms_context'):
                 request.jms_context = {}

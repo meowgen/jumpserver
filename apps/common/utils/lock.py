@@ -28,22 +28,6 @@ class LockHasTimeOut(RuntimeError):
 class DistributedLock(RedisLock):
     def __init__(self, name, *, expire=None, release_on_transaction_commit=False,
                  reentrant=False, release_raise_exc=False, auto_renewal_seconds=60):
-        """
-        使用 redis 构造的分布式锁
-
-        :param name:
-            锁的名字，要全局唯一
-        :param expire:
-            锁的过期时间
-        :param release_on_transaction_commit:
-            是否在当前事务结束后再释放锁
-        :param release_raise_exc:
-            释放锁时，如果没有持有锁是否抛异常或静默
-        :param auto_renewal_seconds:
-            当持有一个无限期锁的时候，刷新锁的时间，具体参考 `redis_lock.Lock#auto_renewal`
-        :param reentrant:
-            是否可重入
-        """
         self.kwargs_copy = copy_function_args(self.__init__, locals())
         redis = get_redis_client()
 
@@ -73,7 +57,6 @@ class DistributedLock(RedisLock):
     def __call__(self, func):
         @wraps(func)
         def inner(*args, **kwds):
-            # 要创建一个新的锁对象
             with self.__class__(**self.kwargs_copy):
                 return func(*args, **kwds)
 
@@ -151,21 +134,16 @@ class DistributedLock(RedisLock):
         if id != self.id:
             raise PermissionError(f'Reentrant-lock is not locked by me: lock_id={self.id} owner_id={self.get_owner_id()} lock={self.name} thread={self._thread_id}')
         try:
-            # 这里要保证先删除 thread_local 的标记，
             delattr(thread_local, self.name)
         except AttributeError:
             pass
         finally:
             try:
-                # 这里处理的是边界情况，
-                # 判断锁是我的 -> 锁超时 -> 释放锁报错
-                # 此时的报错应该被静默
                 self._release_redis_lock()
             except NotAcquired:
                 pass
 
     def _release_redis_lock(self):
-        # 最底层 api
         super().release()
 
     def _release(self):
@@ -179,7 +157,6 @@ class DistributedLock(RedisLock):
     def release(self):
         _release = self._release
 
-        # 处理可重入锁
         if self._reentrant:
             if self.locked_by_current_thread():
                 if self.locked_by_me():
@@ -190,7 +167,6 @@ class DistributedLock(RedisLock):
                 self._raise_exc_with_log(
                     f'Reentrant-lock is not acquired: lock_id={self.id} lock={self.name} thread={self._thread_id}')
 
-        # 处理是否在事务提交时才释放锁
         if self._release_on_transaction_commit:
             logger.debug(
                 f'Release lock on transaction commit ... :lock_id={self.id} lock={self.name} thread={self._thread_id}')

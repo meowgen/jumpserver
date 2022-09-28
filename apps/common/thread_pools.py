@@ -3,7 +3,7 @@ from concurrent.futures import ThreadPoolExecutor
 
 class SingletonThreadPoolExecutor(ThreadPoolExecutor):
     """
-    该类不要直接实例化
+    Не создавайте экземпляр этого класса напрямую
     """
 
     def __new__(cls, max_workers=None, thread_name_prefix=None):

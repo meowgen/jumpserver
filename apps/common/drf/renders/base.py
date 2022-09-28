@@ -9,7 +9,6 @@ logger = get_logger(__file__)
 
 
 class BaseFileRenderer(BaseRenderer):
-    # 渲染模版标识, 导入、导出、更新模版: ['import', 'update', 'export']
     template = 'export'
     serializer = None
 
@@ -61,9 +60,7 @@ class BaseFileRenderer(BaseRenderer):
             results = [results[0]] if results else results
 
         else:
-            # 限制数据数量
             results = results[:10000]
-        # 会将一些 UUID 字段转化为 string
         results = json.loads(json.dumps(results, cls=encoders.JSONEncoder))
         return results
 

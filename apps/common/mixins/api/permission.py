@@ -11,9 +11,6 @@ __all__ = ['AllowBulkDestroyMixin', 'RoleAdminMixin', 'RoleUserMixin']
 
 class AllowBulkDestroyMixin:
     def allow_bulk_destroy(self, qs, filtered):
-        """
-        我们规定，批量删除的情况必须用 `id` 指定要删除的数据。
-        """
         query = str(filtered.query)
         return '`id` IN (' in query or '`id` =' in query
 

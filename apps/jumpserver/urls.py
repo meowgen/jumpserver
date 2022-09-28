@@ -63,16 +63,13 @@ urlpatterns = [
     path('ui/', views.UIView.as_view()),
 ]
 
-# 静态文件处理路由
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) \
             + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
-# js i18n 路由文件
 urlpatterns += [
     path('core/jsi18n/', JavaScriptCatalog.as_view(), name='javascript-catalog'),
 ]
 
-# docs 路由
 urlpatterns += [
     re_path('^api/swagger(?P<format>\.json|\.yaml)$',
             views.get_swagger_view().without_ui(cache_timeout=1), name='schema-json'),
@@ -86,7 +83,6 @@ if os.environ.get('DEBUG_TOOLBAR', False):
     ]
 
 
-# 兼容之前的
 old_app_pattern = '|'.join(apps)
 old_app_pattern = r'^{}'.format(old_app_pattern)
 urlpatterns += [re_path(old_app_pattern, views.redirect_old_apps_view)]

@@ -2,10 +2,10 @@
 # -*- coding: utf-8 -*-
 #
 """
-配置分类：
-1. Django使用的配置文件，写到settings中
-2. 程序需要, 用户不需要更改的写到settings中
-3. 程序需要, 用户需要更改的写到本config中
+Классификация конфигурации:
+1. Конфигурационный файл, используемый Django, прописанный в настройках
+2. Программа нужна, пользователю ничего не нужно менять и писать в настройки
+3. Программе нужно, пользователю нужно изменить и записать в этот конфиг
 """
 import os
 import re
@@ -45,7 +45,6 @@ def import_string(dotted_path):
 
 
 def is_absolute_uri(uri):
-    """ 判断一个uri是否是绝对地址 """
     if not isinstance(uri, str):
         return False
 
@@ -57,7 +56,6 @@ def is_absolute_uri(uri):
 
 
 def build_absolute_uri(base, uri):
-    """ 构建绝对uri地址 """
     if uri is None:
         return base
 
@@ -184,8 +182,8 @@ class Config(dict):
         'AUTH_LDAP_USER_LOGIN_ONLY_IN_USERS': False,
         'AUTH_LDAP_OPTIONS_OPT_REFERRALS': -1,
 
-        # OpenID 配置参数
-        # OpenID 公有配置参数 (version <= 1.5.8 或 version >= 1.5.8)
+        # Параметры конфигурации OpenID
+        # Общедоступные параметры конфигурации OpenID (версия <= 1.5.8 или версия >= 1.5.8)
         'AUTH_OPENID': False,
         'BASE_SITE_URL': None,
         'AUTH_OPENID_CLIENT_ID': 'client-id',
@@ -198,7 +196,7 @@ class Config(dict):
             'name': 'name', 'username': 'preferred_username', 'email': 'email'
         },
 
-        # OpenID 新配置参数 (version >= 1.5.9)
+        # Новые параметры конфигурации OpenID (версия >= 1.5.9)
         'AUTH_OPENID_PROVIDER_ENDPOINT': 'https://oidc.example.com/',
         'AUTH_OPENID_PROVIDER_AUTHORIZATION_ENDPOINT': 'https://oidc.example.com/authorize',
         'AUTH_OPENID_PROVIDER_TOKEN_ENDPOINT': 'https://oidc.example.com/token',
@@ -214,12 +212,12 @@ class Config(dict):
         'AUTH_OPENID_USE_NONCE': True,
         'AUTH_OPENID_ALWAYS_UPDATE_USER': True,
 
-        # Keycloak 旧配置参数 (version <= 1.5.8 (discarded))
+        # Keycloak (старые параметры конфигурации) (версия <= 1.5.8 (заброшена))
         'AUTH_OPENID_KEYCLOAK': True,
         'AUTH_OPENID_SERVER_URL': 'https://keycloak.example.com',
         'AUTH_OPENID_REALM_NAME': None,
 
-        # Raidus 认证
+        # Raidus аутентификация
         'AUTH_RADIUS': False,
         'RADIUS_SERVER': 'localhost',
         'RADIUS_PORT': 1812,
@@ -227,7 +225,7 @@ class Config(dict):
         'RADIUS_ENCRYPT_PASSWORD': True,
         'OTP_IN_RADIUS': False,
 
-        # Cas 认证
+        # Cas аутентификация
         'AUTH_CAS': False,
         'CAS_SERVER_URL': "https://example.com/cas/",
         'CAS_ROOT_PROXIED_AS': 'https://example.com',
@@ -241,7 +239,7 @@ class Config(dict):
         'AUTH_SSO': False,
         'AUTH_SSO_AUTHKEY_TTL': 60 * 15,
 
-        # SAML2 认证
+        # SAML2 аутентификация
         'AUTH_SAML2': False,
         'SAML2_LOGOUT_COMPLETELY': True,
         'AUTH_SAML2_ALWAYS_UPDATE_USER': True,
@@ -279,7 +277,7 @@ class Config(dict):
         'OTP_ISSUER_NAME': 'JumpServer',
         'EMAIL_SUFFIX': 'example.com',
 
-        # Terminal配置
+        # Конфигурация терминала
         'TERMINAL_PASSWORD_AUTH': True,
         'TERMINAL_PUBLIC_KEY_AUTH': True,
         'TERMINAL_HEARTBEAT_INTERVAL': 20,
@@ -289,16 +287,16 @@ class Config(dict):
         'TERMINAL_HOST_KEY': '',
         'TERMINAL_TELNET_REGEX': '',
         'TERMINAL_COMMAND_STORAGE': {},
-        # 未来废弃(目前迁移会用)
+        # Устарело в будущем (в настоящее время используется для миграции)
         'TERMINAL_RDP_ADDR': '',
-        # 保留(Luna还在用)
+        # Зарезервировано (Луна все еще используется)
         'TERMINAL_MAGNUS_ENABLED': True,
         'TERMINAL_KOKO_SSH_ENABLED': True,
         'TERMINAL_RAZOR_ENABLED': True,
         'TERMINAL_OMNIDB_ENABLED': True,
 
-        # 安全配置
-        'SECURITY_MFA_AUTH': 0,  # 0 不开启 1 全局开启 2 管理员开启
+        # Конфигурация безопасности
+        'SECURITY_MFA_AUTH': 0,  # 0 отключить 1 глобально включить 2 включить для администраторов
         'SECURITY_MFA_AUTH_ENABLED_FOR_THIRD_PARTY': True,
         'SECURITY_COMMAND_EXECUTION': True,
         'SECURITY_SERVICE_ACCOUNT_REGISTRATION': True,
@@ -327,20 +325,20 @@ class Config(dict):
         'USER_LOGIN_SINGLE_MACHINE_ENABLED': False,
         'ONLY_ALLOW_EXIST_USER_AUTH': False,
         'ONLY_ALLOW_AUTH_FROM_SOURCE': False,
-        # 用户登录限制的规则
+        # Правила ограничения входа пользователей
         'SECURITY_LOGIN_LIMIT_COUNT': 7,
         'SECURITY_LOGIN_LIMIT_TIME': 30,
-        # 登录IP限制的规则
+        # Правила ограничения IP-адреса входа
         'SECURITY_LOGIN_IP_BLACK_LIST': [],
         'SECURITY_LOGIN_IP_WHITE_LIST': [],
         'SECURITY_LOGIN_IP_LIMIT_COUNT': 99999,
         'SECURITY_LOGIN_IP_LIMIT_TIME': 30,
 
-        # 启动前
+        # Перед запуском
         'HTTP_BIND_HOST': '0.0.0.0',
         'HTTP_LISTEN_PORT': 8080,
         'WS_LISTEN_PORT': 8070,
-        'SYSLOG_ADDR': '',  # '192.168.0.1:514'
+        'SYSLOG_ADDR': '',
         'SYSLOG_FACILITY': 'user',
         'SYSLOG_SOCKTYPE': 2,
         'PERM_EXPIRED_CHECK_PERIODIC': 60 * 60,
@@ -357,7 +355,7 @@ class Config(dict):
         'SERVER_REPLAY_STORAGE': {},
         'SECURITY_DATA_CRYPTO_ALGO': 'aes',
 
-        # 记录清理清理
+        # Хранение логов
         'LOGIN_LOG_KEEP_DAYS': 200,
         'TASK_LOG_KEEP_DAYS': 90,
         'OPERATE_LOG_KEEP_DAYS': 200,
@@ -366,7 +364,7 @@ class Config(dict):
 
         'TICKETS_ENABLED': True,
 
-        # 废弃的
+        # Legacy
         'DEFAULT_ORG_SHOW_ALL_USERS': True,
         'ORG_CHANGE_TO_URL': '',
         'WINDOWS_SKIP_ALL_MANUAL_PASSWORD': False,
@@ -376,7 +374,7 @@ class Config(dict):
         'WINDOWS_SSH_DEFAULT_SHELL': 'cmd',
         'PERIOD_TASK_ENABLED': True,
 
-        # 导航栏 帮助
+        # Справка в панели навигации
         'HELP_DOCUMENT_URL': 'http://docs.jumpserver.org',
         'HELP_SUPPORT_URL': 'http://www.jumpserver.org/support/',
 
@@ -387,11 +385,11 @@ class Config(dict):
     @staticmethod
     def convert_keycloak_to_openid(keycloak_config):
         """
-        兼容OpenID旧配置 (即 version <= 1.5.8)
-        因为旧配置只支持OpenID协议的Keycloak实现,
-        所以只需要根据旧配置和Keycloak的Endpoint说明文档，
-        构造出新配置中标准OpenID协议中所需的Endpoint即可
-        (Keycloak说明文档参考: https://www.keycloak.org/docs/latest/securing_apps/)
+        Совместимость с устаревшей конфигурацией OpenID (т.е. версия <= 1.5.8)
+        Поскольку старая конфигурация поддерживает только реализацию Keycloak протокола OpenID,
+        Так что просто следуйте старой конфигурации и документации Keycloak Endpoint,
+        Создайте конечную точку, требуемую в стандартном протоколе OpenID, в новой конфигурации.
+        (Ссылка на документацию Keycloak: https://www.keycloak.org/docs/latest/securing_apps/)
         """
 
         openid_config = copy.deepcopy(keycloak_config)
@@ -404,7 +402,6 @@ class Config(dict):
             return
 
         if auth_openid and not auth_openid_realm_name:
-            # 开启的是标准 OpenID 配置，关掉 Keycloak 配置
             openid_config.update({
                 'AUTH_OPENID_KEYCLOAK': False
             })
@@ -431,14 +428,12 @@ class Config(dict):
             openid_config[key] = value
 
         # # convert value # #
-        """ 兼容值的绝对路径、相对路径 (key 为 AUTH_OPENID_PROVIDER_*_ENDPOINT 的配置) """
         base = openid_config.get('AUTH_OPENID_PROVIDER_ENDPOINT')
         for key, value in openid_config.items():
             result = re.match(r'^AUTH_OPENID_PROVIDER_.*_ENDPOINT$', key)
             if result is None:
                 continue
             if value is None:
-                # None 在 url 中有特殊含义 (比如对于: end_session_endpoint)
                 continue
 
             value = build_absolute_uri(base, value)
@@ -468,14 +463,13 @@ class Config(dict):
 
     def compatible(self):
         """
-        对配置做兼容处理
-        1. 对`key`的兼容 (例如：版本升级)
-        2. 对`value`做兼容 (例如：True、true、1 => True)
+        Совместимость с конфигурацией
+        1. Совместимость с `ключом` (например, обновление версии)
+        2. Совместим со значением (например: True, true, 1 => True)
 
-        处理顺序要保持先对key做处理, 再对value做处理,
-        因为处理value的时候，只根据最新版本支持的key进行
+        Порядок обработки должен сначала сохранять ключ, затем значение,
+        Потому что когда значение обрабатывается, оно выполняется только в соответствии с ключом, поддерживаемым последней версией.
         """
-        # 兼容 OpenID 配置
         self.compatible_auth_openid()
 
     def convert_type(self, k, v):
@@ -483,7 +477,6 @@ class Config(dict):
         if default_value is None:
             return v
         tp = type(default_value)
-        # 对bool特殊处理
         if tp is bool and isinstance(v, str):
             if v.lower() in ("true", "1"):
                 return True
@@ -522,11 +515,9 @@ class Config(dict):
         return value
 
     def get(self, item):
-        # 再从配置文件中获取
         value = self.get_from_config(item)
         if value is not None:
             return value
-        # 其次从环境变量来
         value = self.get_from_env(item)
         if value is not None:
             return value
@@ -713,6 +704,5 @@ class ConfigManager:
             """
             raise ImportError(msg)
 
-        # 对config进行兼容处理
         config.compatible()
         return config

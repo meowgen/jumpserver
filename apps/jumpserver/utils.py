@@ -34,7 +34,7 @@ def get_xpack_license_info() -> dict:
         corporation = info.get('corporation', '')
     else:
         current_year = datetime.now().year
-        corporation = f'Copyright - FIT2CLOUD 飞致云 © 2014-{current_year}'
+        corporation = f'Copyright - FIT2CLOUD © 2014-{current_year}'
     info = {
         'corporation': corporation
     }

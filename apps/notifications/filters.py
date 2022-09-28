@@ -5,7 +5,7 @@ from .models import SiteMessage
 
 
 class SiteMsgFilter(BaseFilterSet):
-    # 不用 Django 的关联表过滤，有个小bug，会重复关联相同表
+    # Без фильтрации таблицы ассоциаций Django есть небольшая ошибка, которая будет повторно связывать одну и ту же таблицу
     # SELECT DISTINCT * FROM `notifications_sitemessage`
     #   INNER JOIN `notifications_sitemessageusers` ON (`notifications_sitemessage`.`id` = `notifications_sitemessageusers`.`sitemessage_id`)
     #   INNER JOIN `notifications_sitemessageusers` T4 ON (`notifications_sitemessage`.`id` = T4.`sitemessage_id`)

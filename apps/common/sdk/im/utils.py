@@ -33,7 +33,6 @@ class DictWrapper:
         self.raw_data = data
 
     def __getitem__(self, item):
-        # 网络请求返回的数据，不能完全信任，所以字典操作包在异常里
         try:
             return self.raw_data[item]
         except KeyError as e:

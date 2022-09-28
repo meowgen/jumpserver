@@ -14,9 +14,6 @@ __all__ = ['InterceptMixin', 'AsyncApiMixin']
 
 
 class InterceptMixin:
-    """
-    Hack默认的dispatch, 让用户可以实现 self.do
-    """
     def dispatch(self, request, *args, **kwargs):
         self.args = args
         self.kwargs = kwargs

@@ -84,8 +84,7 @@ def get_ip_city(ip):
         city = info.get('city', _("Unknown"))
         country = info.get('country')
 
-        # 国内城市 并且 语言是中文就使用国内
         is_zh = settings.LANGUAGE_CODE.startswith('zh')
-        if country == '中国' and is_zh:
+        if country == 'Китай' and is_zh:
             return city
     return get_ip_city_by_geoip(ip)

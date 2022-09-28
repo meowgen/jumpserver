@@ -51,7 +51,6 @@ class RelationMixin:
         self.through = getattr(self.m2m_field.model, self.m2m_field.attname).through
 
     def get_queryset(self):
-        # 注意，此处拦截了 `get_queryset` 没有 `super`
         queryset = self.through.objects.all()
         return queryset
 
@@ -63,7 +62,6 @@ class RelationMixin:
 
         for i in instances:
             to_id = getattr(i, self.to_field).id
-            # TODO 优化，不应该每次都查询数据库
             from_obj = getattr(i, self.from_field)
             from_to_mapper[from_obj].append(to_id)
 

@@ -12,8 +12,6 @@ lazy_type = type(_('gettext_lazy'))
 
 
 class ModelJSONFieldEncoder(json.JSONEncoder):
-    """ 解决一些类型的字段不能序列化的问题 """
-
     def default(self, obj):
         str_cls = (models.Model, lazy_type, models.ImageField, uuid.UUID)
         if isinstance(obj, str_cls):

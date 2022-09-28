@@ -12,9 +12,6 @@ from django.core.exceptions import ImproperlyConfigured
 
 
 def process_key(key):
-    """
-    返回32 bytes 的key
-    """
     if not isinstance(key, bytes):
         key = bytes(key, encoding='utf-8')
 
@@ -60,15 +57,6 @@ class GMSM4EcbCrypto(BaseCrypto):
 
 
 class AESCrypto:
-    """
-    AES
-    除了MODE_SIV模式key长度为：32, 48, or 64,
-    其余key长度为16, 24 or 32
-    详细见AES内部文档
-    CBC模式传入iv参数
-    本例使用常用的ECB模式
-    """
-
     def __init__(self, key):
         if len(key) > 32:
             key = key[:32]
@@ -76,23 +64,18 @@ class AESCrypto:
 
     @staticmethod
     def to_16(key):
-        """
-        转为16倍数的bytes数据
-        :param key:
-        :return:
-        """
         key = bytes(key, encoding="utf8")
         while len(key) % 16 != 0:
             key += b'\0'
-        return key  # 返回bytes
+        return key  
 
     def aes(self):
-        return AES.new(self.key, AES.MODE_ECB)  # 初始化加密器
+        return AES.new(self.key, AES.MODE_ECB) 
 
     def encrypt(self, text):
         aes = self.aes()
         cipher = base64.encodebytes(aes.encrypt(self.to_16(text)))
-        return str(cipher, encoding='utf8').replace('\n', '')  # 加密
+        return str(cipher, encoding='utf8').replace('\n', '')
 
     def decrypt(self, text):
         aes = self.aes()
@@ -100,18 +83,11 @@ class AESCrypto:
         return str(aes.decrypt(text_decoded).rstrip(b'\0').decode("utf8"))
 
 class AESCryptoGCM:
-    """
-    使用AES GCM模式
-    """
 
     def __init__(self, key):
         self.key = process_key(key)
 
     def encrypt(self, text):
-        """
-        加密text，并将 header, nonce, tag (3*16 bytes, base64后变为 3*24 bytes)
-        附在密文前。解密时要用到。
-        """
         header = get_random_bytes(16)
         cipher = AES.new(self.key, AES.MODE_GCM)
         cipher.update(header)
@@ -124,9 +100,6 @@ class AESCryptoGCM:
         return ''.join(result)
 
     def decrypt(self, text):
-        """
-        提取header, nonce, tag并解密text。
-        """
         metadata = text[:72]
         header = base64.b64decode(metadata[:24])
         nonce = base64.b64decode(metadata[24:48])
@@ -190,16 +163,12 @@ class Crypto:
             try:
                 origin_text = decryptor.decrypt(text)
                 if origin_text:
-                    # 有时不同算法解密不报错，但是返回空字符串
                     return origin_text
             except (TypeError, ValueError, UnicodeDecodeError, IndexError):
                 continue
 
 
 def gen_key_pair(length=1024):
-    """ 生成加密key
-    用于登录页面提交用户名/密码时，对密码进行加密（前端）/解密（后端）
-    """
     random_generator = Random.new().read
     rsa = RSA.generate(length, random_generator)
     rsa_private_key = rsa.exportKey().decode()
@@ -208,7 +177,6 @@ def gen_key_pair(length=1024):
 
 
 def rsa_encrypt(message, rsa_public_key):
-    """ 加密登录密码 """
     key = RSA.importKey(rsa_public_key)
     cipher = PKCS1_v1_5.new(key)
     cipher_text = base64.b64encode(cipher.encrypt(message.encode())).decode()
@@ -216,15 +184,12 @@ def rsa_encrypt(message, rsa_public_key):
 
 
 def rsa_decrypt(cipher_text, rsa_private_key=None):
-    """ 解密登录密码 """
     if rsa_private_key is None:
-        # rsa_private_key 为 None，可以能是API请求认证，不需要解密
         return cipher_text
 
     key = RSA.importKey(rsa_private_key)
     cipher = PKCS1_v1_5.new(key)
     cipher_decoded = base64.b64decode(cipher_text.encode())
-    # Todo: 弄明白为何要以下这么写，https://xbuba.com/questions/57035263
     if len(cipher_decoded) == 127:
         hex_fixed = '00' + cipher_decoded.hex()
         cipher_decoded = base64.b16decode(hex_fixed.upper())

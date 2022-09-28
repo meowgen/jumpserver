@@ -15,7 +15,7 @@ __all__ = ["PermissionsMixin", "RecordViewLogMixin", "UserConfirmRequiredExcepti
 
 class UserConfirmRequiredExceptionMixin:
     """
-    异常处理
+    Обработка исключений
     """
     def dispatch(self, request, *args, **kwargs):
         try:

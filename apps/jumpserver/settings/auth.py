@@ -48,8 +48,7 @@ AUTH_LDAP_USER_LOGIN_ONLY_IN_USERS = CONFIG.AUTH_LDAP_USER_LOGIN_ONLY_IN_USERS
 
 
 # ==============================================================================
-# 认证 OpenID 配置参数
-# 参考: https://django-oidc-rp.readthedocs.io/en/stable/settings.html
+# Параметры конфигурации аутентификации OpenID https://django-oidc-rp.readthedocs.io/en/stable/settings.html
 # ==============================================================================
 AUTH_OPENID = CONFIG.AUTH_OPENID
 BASE_SITE_URL = CONFIG.BASE_SITE_URL
@@ -126,7 +125,7 @@ SAML2_SP_ADVANCED_SETTINGS = CONFIG.SAML2_SP_ADVANCED_SETTINGS
 SAML2_LOGIN_URL_NAME = "authentication:saml2:saml2-login"
 SAML2_LOGOUT_URL_NAME = "authentication:saml2:saml2-logout"
 
-# 临时 token
+# Временный токен
 AUTH_TEMP_TOKEN = CONFIG.AUTH_TEMP_TOKEN
 
 # Other setting
@@ -135,7 +134,7 @@ OTP_IN_RADIUS = CONFIG.OTP_IN_RADIUS
 # Connection token
 CONNECTION_TOKEN_EXPIRATION = CONFIG.CONNECTION_TOKEN_EXPIRATION
 if CONNECTION_TOKEN_EXPIRATION < 5 * 60:
-    # 最少5分钟
+    # Минимум 5 минут
     CONNECTION_TOKEN_EXPIRATION = 5 * 60
 
 
@@ -154,13 +153,13 @@ AUTH_BACKEND_TEMP_TOKEN = 'authentication.backends.token.TempTokenAuthBackend'
 
 
 AUTHENTICATION_BACKENDS = [
-    # 只做权限校验
+    # Только проверка разрешений
     RBAC_BACKEND,
-    # 密码形式
+    # Бэкэнды пароля
     AUTH_BACKEND_MODEL,  AUTH_BACKEND_PUBKEY, AUTH_BACKEND_LDAP, AUTH_BACKEND_RADIUS,
-    # 跳转形式
+    # Бэкэнды внешней аутентификации 
     AUTH_BACKEND_CAS, AUTH_BACKEND_OIDC_PASSWORD, AUTH_BACKEND_OIDC_CODE, AUTH_BACKEND_SAML2,
-    # Token模式
+    # Бэкэнды токена
     AUTH_BACKEND_AUTH_TOKEN, AUTH_BACKEND_SSO, AUTH_BACKEND_TEMP_TOKEN
 ]
 

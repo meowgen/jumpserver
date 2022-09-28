@@ -10,7 +10,7 @@ __all__ = ['FlashMessageUtil']
 
 class FlashMessageUtil:
     """
-    跳转到通用msg页面
+    Перейти на общую страницу сообщений
     message_data: {
         'title': '',
         'message': '',

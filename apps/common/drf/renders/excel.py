@@ -21,7 +21,6 @@ class ExcelFileRenderer(BaseFileRenderer):
         self.row_count += 1
         column_count = 0
         for cell_value in row:
-            # 处理非法字符
             column_count += 1
             cell_value = ILLEGAL_CHARACTERS_RE.sub(r'', cell_value)
             self.ws.cell(row=self.row_count, column=column_count, value=cell_value)

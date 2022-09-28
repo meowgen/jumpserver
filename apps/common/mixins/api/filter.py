@@ -11,9 +11,6 @@ __all__ = ['ExtraFilterFieldsMixin']
 
 
 class ExtraFilterFieldsMixin:
-    """
-    额外的 api filter
-    """
     default_added_filters = [CustomFilter, IDSpmFilter, IDInFilter]
     filter_backends = api_settings.DEFAULT_FILTER_BACKENDS
     extra_filter_fields = []
