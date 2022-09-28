@@ -4,7 +4,7 @@ from django.conf import settings
 from django.db import migrations, models, transaction
 from acls.models import LoginACL
 
-LOGIN_CONFIRM_ZH = '登录复核'
+LOGIN_CONFIRM_ZH = 'Login confirm'
 LOGIN_CONFIRM_EN = 'Login confirm'
 
 DEFAULT_TIME_PERIODS = [{'id': i, 'value': '00:00~00:00'} for i in range(7)]

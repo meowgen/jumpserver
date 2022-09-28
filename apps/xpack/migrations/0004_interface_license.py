@@ -15,18 +15,18 @@ class Migration(migrations.Migration):
             name='Interface',
             fields=[
                 ('id', models.UUIDField(default=uuid.uuid4, primary_key=True, serialize=False)),
-                ('login_title', models.CharField(blank=True, max_length=1024, null=True, verbose_name='登录页面标题')),
-                ('login_image', models.ImageField(blank=True, max_length=128, null=True, upload_to='xpack/logo/', verbose_name='登录页面图片')),
-                ('favicon', models.ImageField(blank=True, max_length=128, null=True, upload_to='xpack/logo/', verbose_name='网站图标')),
-                ('logo_index', models.ImageField(blank=True, max_length=128, null=True, upload_to='xpack/logo/', verbose_name='管理页面logo')),
-                ('logo_logout', models.ImageField(blank=True, max_length=128, null=True, upload_to='xpack/logo/', verbose_name='退出页面logo')),
+                ('login_title', models.CharField(blank=True, max_length=1024, null=True, verbose_name='Заголовок страницы входа')),
+                ('login_image', models.ImageField(blank=True, max_length=128, null=True, upload_to='xpack/logo/', verbose_name='Изображение страницы входа')),
+                ('favicon', models.ImageField(blank=True, max_length=128, null=True, upload_to='xpack/logo/', verbose_name='Иконка')),
+                ('logo_index', models.ImageField(blank=True, max_length=128, null=True, upload_to='xpack/logo/', verbose_name='Логотип главной страницы')),
+                ('logo_logout', models.ImageField(blank=True, max_length=128, null=True, upload_to='xpack/logo/', verbose_name='Логотип страницы выхода')),
             ],
         ),
         migrations.CreateModel(
             name='License',
             fields=[
                 ('id', models.UUIDField(default=uuid.uuid4, primary_key=True, serialize=False)),
-                ('content', models.TextField(verbose_name='内容')),
+                ('content', models.TextField(verbose_name='Содержимое')),
             ],
         ),
     ]

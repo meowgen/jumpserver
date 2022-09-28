@@ -13,6 +13,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='account',
             name='validity',
-            field=models.BooleanField(choices=[(True, '有效'), (False, '无效')], default=False, max_length=2, verbose_name='有效'),
+            field=models.BooleanField(choices=[(True, 'Валидный'), (False, 'Невалидный')], default=False, max_length=2, verbose_name='Валидность'),
         ),
     ]

@@ -13,11 +13,11 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='account',
             name='provider',
-            field=models.CharField(choices=[('aliyun', '阿里云'), ('qcloud', '腾讯云'), ('aws_china', 'AWS (中国)'), ('aws_international', 'AWS (国际)')], default='aliyun', max_length=128, verbose_name='云服务商'),
+            field=models.CharField(choices=[('aliyun', 'Ali Cloud'), ('qcloud', 'Tencent Cloud'), ('aws_china', 'AWS (Китай)'), ('aws_international', 'AWS (Международный)')], default='aliyun', max_length=128, verbose_name='Провайдер'),
         ),
         migrations.AlterField(
             model_name='syncinstancetaskhistory',
             name='result',
-            field=models.TextField(blank=True, default='', verbose_name='结果'),
+            field=models.TextField(blank=True, default='', verbose_name='Результат'),
         ),
     ]

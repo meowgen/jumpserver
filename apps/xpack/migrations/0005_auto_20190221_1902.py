@@ -16,6 +16,6 @@ class Migration(migrations.Migration):
         ),
         migrations.AlterModelOptions(
             name='license',
-            options={'verbose_name': '许可证'},
+            options={'verbose_name': 'Лицензия'},
         ),
     ]
