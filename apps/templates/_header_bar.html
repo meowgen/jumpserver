@@ -35,17 +35,11 @@
                     {% ifequal request.COOKIES.django_language 'en' %}
                         <span class="m-r-sm text-muted welcome-message">English<b class="caret"></b></span>
                     {% else %}
-                        <span class="m-r-sm text-muted welcome-message">Китайский<b class="caret"></b></span>
+                        <span class="m-r-sm text-muted welcome-message">Русский<b class="caret"></b></span>
                     {% endifequal %}
                 </a>
 
                 <ul class="dropdown-menu animated fadeInRight m-t-xs profile-dropdown">
-                    <li>
-                        <a id="switch_cn" href="{% url 'i18n-switch' lang='zh-hans' %}">
-                            <i class="fa fa-flag"></i>
-                            <span> Китайский</span>
-                        </a>
-                    </li>
                     <li>
                         <a id="switch_en" href="{% url 'i18n-switch' lang='en' %}">
                             <i class="fa fa-flag-checkered"></i>
@@ -53,9 +47,9 @@
                         </a>
                     </li>
                      <li>
-                        <a id="switch_ja" href="{% url 'i18n-switch' lang='ja' %}">
+                        <a id="switch_ru" href="{% url 'i18n-switch' lang='ru' %}">
                             <i class="fa fa-flag-checkered"></i>
-                            <span> Японский</span>
+                            <span> Русский</span>
                         </a>
                     </li>
                 </ul>

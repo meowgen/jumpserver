@@ -70,17 +70,13 @@ class UserLoginContextMixin:
     def get_support_langs():
         langs = [
             {
-                'title': 'Китайский',
-                'code': 'zh-hans'
+                'title': 'Русский',
+                'code': 'ru'
             },
             {
                 'title': 'English',
                 'code': 'en'
             },
-            {
-                'title': 'Японский',
-                'code': 'ja'
-            }
         ]
         return langs
 
